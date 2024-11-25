@@ -29,14 +29,14 @@ public class PaymentController {
 		log.debug(TeamColor.JIN + paymentList + TeamColor.RESET);
 		model.addAttribute("paymentList", paymentList); // 결제리스트 model에 추가.
 		
-		// paging setters.
+		// efgh
 		Page page = new Page();
 		page.setCurrentPage(currentPage);
 		page.setRowPerPage(rowPerPage);
 		page.setNumPerPage(10);
 		page.setCountTotalRow(paymentService.countPaymentList());
 
-		// paging getters.
+		// abcd
 		model.addAttribute("currentPage", page.getCurrentPage());
 		model.addAttribute("lastPage", page.countLastPage());
 		model.addAttribute("beginPagingNum", page.countBeginPaingNum());
