@@ -15,7 +15,11 @@ import lombok.extern.slf4j.Slf4j;
 public class LoginController {
 	@GetMapping("/on/staff/test")
 	public String getMethodName() {
-		log.debug(TeamColor.KIM + "test" + TeamColor.JIN);
+		log.debug("testttttttttttttttttttt");
+		log.debug(TeamColor.KIM + "test" + TeamColor.RESET);
+		log.debug(TeamColor.JIN + "test" + TeamColor.RESET);
+		log.debug(TeamColor.PARK + "test" + TeamColor.RESET);
+		log.debug("dddd");
 		
 		return "on/staff/test";
 	}
