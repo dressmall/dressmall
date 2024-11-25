@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/aos.css">
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-    <title>Insert title here</title>
+    <title>customer login</title>
 </head>
 <body>
 	
