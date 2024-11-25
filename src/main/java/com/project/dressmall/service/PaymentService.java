@@ -1,5 +1,6 @@
 package com.project.dressmall.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,8 +17,21 @@ public class PaymentService {
 	@Autowired PaymentMapper paymentMapper;
 	
 	// /on/staff/paymentList - 관리자페이지에서 결제리스트 출력.
-	public List<Map<String, Object>> getPaymentList() {
-		return paymentMapper.selectPaymentList();
+	public List<Map<String, Object>> getPaymentList(Integer currentPage, Integer rowPerPage) {
+		// 페이징 연산.
+		Integer beginRow = (currentPage - 1) * rowPerPage;
+		
+		// 페이징에 필요한 정보를 Map에 저장.
+		Map<String, Object> param = new HashMap<>();
+		param.put("beginRow", beginRow);
+		param.put("rowPerPage", rowPerPage);
+		
+		return paymentMapper.selectPaymentList(param);
+	}
+	
+	// /on/staff/paymentList - 관리자페이지에서 결제리스트 카운트.
+	public Integer countPaymentList() {
+		return paymentMapper.countPaymentList();
 	}
 	
 	// /on/staff/updatePayment - 관리자페이지에서 배송중으로 업데이트.

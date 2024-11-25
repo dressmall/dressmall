@@ -74,9 +74,9 @@
 	                                  <th>번호</th>
 	                                  <th>이메일</th>
 	                                  <th>주소</th>
-	                                  <th>배송상태</th>
 	                                  <th>가격</th>
 	                                  <th>결제수단</th>
+	                                  <th>배송상태</th>
 	                                  <th>완료여부</th>
 	                              </tr>
 	                          </thead>
@@ -101,6 +101,24 @@
 	                          	</c:forEach>
 	                          </tbody>
                           </table>
+                          	<!-- 페이징 -->
+							<div class="text-center">
+								<c:if test="${currentPage > numPerPage}">
+									<a href="${pageContext.request.contextPath}/on/staff/paymentList?currentPage=${beginPagingNum - numPerPage}">이전</a>
+								</c:if>
+								<c:forEach var="num" begin="${beginPagingNum}" end="${endPagingNum}">
+									<c:if test="${num==currentPage}">
+										${num}&nbsp;
+									</c:if>
+									<c:if test="${num!=currentPage}">
+										<a href="${pageContext.request.contextPath}/on/staff/paymentList?currentPage=${num}">${num}</a>
+										&nbsp;
+									</c:if>
+								</c:forEach>
+								<c:if test="${currentPage < lastPage - numPerPage }">
+									<a href="${pageContext.request.contextPath}/on/staff/paymentList?currentPage=${beginPagingNum + numPerPage}">다음</a>
+								</c:if>
+							</div>
                     </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
