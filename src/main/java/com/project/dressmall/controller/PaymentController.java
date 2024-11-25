@@ -24,26 +24,26 @@ public class PaymentController {
 	
 	@GetMapping("/on/staff/paymentList")
 	public String paymentList(HttpSession session, Model model, @RequestParam(defaultValue = "1") Integer currentPage, @RequestParam(defaultValue = "10") Integer rowPerPage) {
-		// 결제리스트 로드.
+		// 결제리스트 로드..
 		List<Map<String, Object>> paymentList = paymentService.getPaymentList(currentPage, rowPerPage); // DB에서 결제리스트 가져옴.
 		log.debug(TeamColor.JIN + paymentList + TeamColor.RESET);
 		model.addAttribute("paymentList", paymentList); // 결제리스트 model에 추가.
 		
-		// 페이징 관련 setter.
+		// 페이징 관련 setter..
 		Page page = new Page();
 		page.setCurrentPage(currentPage);
 		page.setRowPerPage(rowPerPage);
 		page.setNumPerPage(10);
 		page.setCountTotalRow(paymentService.countPaymentList());
 		
-		// 페이징 관련 getter.
+		// 페이징 관련 getter..
 		model.addAttribute("currentPage", page.getCurrentPage());
 		model.addAttribute("lastPage", page.countLastPage());
 		model.addAttribute("beginPagingNum", page.countBeginPaingNum());
 		model.addAttribute("endPagingNum", page.countEndPagingNum());
 		model.addAttribute("numPerPage", page.getNumPerPage());
 		
-		// paymentList.jsp 호출.
+		// paymentList.jsp 호출..
 		model.addAttribute("loginStaff", session.getAttribute("loginStaff")); // 로그인정보 model 추가.
 		log.debug(TeamColor.JIN + "paymentList.jsp 호출" + TeamColor.RESET);
 		return "on/staff/paymentList";
