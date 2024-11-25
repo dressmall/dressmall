@@ -5,6 +5,11 @@ body {
   font-weight: 300;
   font-size: 16px; }
 
+/* 메인 버튼 css*/
+.btn-main {
+	background-color: #7971EA;
+	border-radius: 4px;
+}
 ::-moz-selection {
   background: #000;
   color: #fff; }

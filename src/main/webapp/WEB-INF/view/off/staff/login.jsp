@@ -19,9 +19,22 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/aos.css">
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-    <title>customer login</title>
+    <!-- 로그인 .css 추가 -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
+    <title>staff login</title>
 </head>
 <body>
-	
+	<form id="formStaffLogin" action="${pageContext.request.contextPath}" method="post">
+		<button>관리자</button>
+		<a href="${pageContext.request.contextPath}/customer/login">일반 회원</a>
+		<div class="idBox">
+			<label id="staffId" >Email</label>
+			<input id="staffId" type="text" name="staffId" placeholder="ex) abc@naver.com" > 
+		</div>
+		<div class="pwBox">
+			<label id="staffId" >Email</label>
+			<input type="text" id="staffPw" name="staffPw"> 
+		</div>
+	</form>
 </body>
 </html>
