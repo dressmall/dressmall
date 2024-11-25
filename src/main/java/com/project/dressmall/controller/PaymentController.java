@@ -35,15 +35,12 @@ public class PaymentController {
 		page.setNumPerPage(10);
 		page.setCountTotalRow(paymentService.countPaymentList());
 		
-		
 		// paging getter.
 		model.addAttribute("currentPage", page.getCurrentPage());
 		model.addAttribute("lastPage", page.countLastPage());
 		model.addAttribute("beginPagingNum", page.countBeginPaingNum());
 		model.addAttribute("endPagingNum", page.countEndPagingNum());
 		model.addAttribute("numPerPage", page.getNumPerPage());
-		
-		
 		
 		// paymentList.jsp load.
 		model.addAttribute("loginStaff", session.getAttribute("loginStaff")); // login information model add.
