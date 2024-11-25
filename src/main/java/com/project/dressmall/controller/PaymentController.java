@@ -27,7 +27,7 @@ public class PaymentController {
 		// paymentList load.
 		List<Map<String, Object>> paymentList = paymentService.getPaymentList(currentPage, rowPerPage); // DB에서 결제리스트 가져옴.
 		log.debug(TeamColor.JIN + paymentList + TeamColor.RESET);
-		model.addAttribute("paymentList", paymentList); // 결제리스트 model에 추가.
+		model.addAttribute("paymentList", paymentList); // paymentList model add.
 		
 		// efgh
 		Page page = new Page();
@@ -35,7 +35,7 @@ public class PaymentController {
 		page.setRowPerPage(rowPerPage);
 		page.setNumPerPage(10);
 		page.setCountTotalRow(paymentService.countPaymentList());
-
+		
 		// abcd
 		model.addAttribute("currentPage", page.getCurrentPage());
 		model.addAttribute("lastPage", page.countLastPage());
@@ -47,9 +47,8 @@ public class PaymentController {
 		model.addAttribute("currentPage", page.getCurrentPage());
 		model.addAttribute("lastPage", page.countLastPage());
 		model.addAttribute("beginPagingNum", page.countBeginPaingNum());
-		
-		// paymentList.jsp loads.
-		model.addAttribute("loginStaff", session.getAttribute("loginStaff")); // 로그인정보 model 추가.
+		// paymentList.jsp load....
+		model.addAttribute("loginStaff", session.getAttribute("loginStaff")); // login information model add.
 		log.debug(TeamColor.JIN + "paymentList.jsp 호출" + TeamColor.RESET);
 		return "on/staff/paymentList";
 	}
