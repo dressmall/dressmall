@@ -5,10 +5,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class TestController {
-	// test
-	// test3
-	// test4
-
-	// team11
+	// 테스트
 
 }
