@@ -29,12 +29,14 @@ public class PaymentController {
 		log.debug(TeamColor.JIN + paymentList + TeamColor.RESET);
 		model.addAttribute("paymentList", paymentList); // 결제리스트 model에 추가.
 		
+		
 		// 페이징 관련 setter.
 		Page page = new Page();
 		page.setCurrentPage(currentPage);
 		page.setRowPerPage(rowPerPage);
 		page.setNumPerPage(10);
 		page.setCountTotalRow(paymentService.countPaymentList());
+		
 		
 		// 페이징 관련 getter.
 		model.addAttribute("currentPage", page.getCurrentPage());
@@ -48,6 +50,7 @@ public class PaymentController {
 		log.debug(TeamColor.JIN + "paymentList.jsp 호출" + TeamColor.RESET);
 		return "on/staff/paymentList";
 	}
+	
 	
 	@GetMapping("/on/staff/updatePayment")
 	public String paymentUpdate(Integer paymentNo) {
