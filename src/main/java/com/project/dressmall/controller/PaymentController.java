@@ -29,21 +29,26 @@ public class PaymentController {
 		log.debug(TeamColor.JIN + paymentList + TeamColor.RESET);
 		model.addAttribute("paymentList", paymentList); // 결제리스트 model에 추가.
 		
-		// paging setter.
+		// paging setters.
 		Page page = new Page();
 		page.setCurrentPage(currentPage);
 		page.setRowPerPage(rowPerPage);
 		page.setNumPerPage(10);
 		page.setCountTotalRow(paymentService.countPaymentList());
 
-		// paging getter.
+		// paging getters.
 		model.addAttribute("currentPage", page.getCurrentPage());
 		model.addAttribute("lastPage", page.countLastPage());
 		model.addAttribute("beginPagingNum", page.countBeginPaingNum());
 		model.addAttribute("endPagingNum", page.countEndPagingNum());
 		model.addAttribute("numPerPage", page.getNumPerPage());
 		
-		// paymentList.jsp load.
+		// paging getter.
+		model.addAttribute("currentPage", page.getCurrentPage());
+		model.addAttribute("lastPage", page.countLastPage());
+		model.addAttribute("beginPagingNum", page.countBeginPaingNum());
+		
+		// paymentList.jsp loads.
 		model.addAttribute("loginStaff", session.getAttribute("loginStaff")); // 로그인정보 model 추가.
 		log.debug(TeamColor.JIN + "paymentList.jsp 호출" + TeamColor.RESET);
 		return "on/staff/paymentList";
