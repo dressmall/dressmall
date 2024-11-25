@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.dressmall.mapper.CategoryMapper">
+	
+	<!-- /on/staff/categoryrList : 카테고리 리스트 출력 -->
+	<select id="selectCategoryList" resultType="com.project.dressmall.vo.Category">
+		SELECT 
+			category_no categoryNo
+			, category_title categoryTitle
+			, update_date updateDate
+			, create_date createDate
+		FROM category;
+	</select>
+</mapper>
