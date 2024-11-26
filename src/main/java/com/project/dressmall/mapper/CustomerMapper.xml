@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.dressmall.mapper.CustomerMapper">
+
+<!-- /on/staff/customerList : 관리자페이지에서 고객리스트 출력 -->
+<select id="selectCustomerList" parameterType="map" resultType="com.project.dressmall.vo.Customer">
+	SELECT 
+		customer_mail customerMail
+		, customer_pw customerPw
+		, customer_birth customerBirth
+		, customer_gender customerGender
+		, update_date updateDate
+		, create_date createDate
+	FROM customer
+	ORDER BY createDate DESC
+	LIMIT #{beginRow}, #{rowPerPage};
+</select>
+
+<!-- /on/staff/customerList : 관리자페이지에서 고객리스트 카운트 -->
+<select id="countCustomerList" resultType="Integer">
+	SELECT COUNT(*)
+	FROM customer;
+</select>
+
+<!-- /on/staff/deleteCustomer : 관리자페이지에서 배송중으로 업데이트 -->
+<delete id="deleteCustomer" parameterType="String">
+	DELETE FROM customer WHERE customer_mail = #{customerMail};
+</delete>
+
+</mapper>

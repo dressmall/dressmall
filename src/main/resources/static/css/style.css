@@ -10,6 +10,16 @@ body {
 	background-color: #7971EA;
 	border-radius: 4px;
 }
+/* 에러 메세지 css*/
+.msg {
+	font-size: 0.875rem;
+	color: #FF0000;
+}
+/* input css */
+input {
+	border-radius: 4px;
+}
+
 ::-moz-selection {
   background: #000;
   color: #fff; }

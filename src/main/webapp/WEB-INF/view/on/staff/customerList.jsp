@@ -66,36 +66,29 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-5">
-                        <h1 class="mt-5">주문 관리</h1>
+                        <h1 class="mt-5">고객 관리</h1>
                         <!-- 테이블 -->
                          <table class="table table-bordered">
 	                          <thead style="background-color:#f0f0f0;">
 	                              <tr>
-	                                  <th>번호</th>
 	                                  <th>이메일</th>
-	                                  <th>주소</th>
-	                                  <th>가격</th>
-	                                  <th>결제수단</th>
-	                                  <th>배송상태</th>
-	                                  <th>완료여부</th>
+	                                  <th>생년월일</th>
+	                                  <th>성별</th>
+	                                  <th>수정날짜</th>
+	                                  <th>가입날짜</th>
+	                                  <th>탈퇴처리</th>
 	                              </tr>
 	                          </thead>
 	                          <tbody>
-	                          	<c:forEach var="p" items="${paymentList}">
+	                          	<c:forEach var="c" items="${customerList}">
 	                          		<tr>
-	                                  <td>${p.paymentNo}</td>
-	                                  <td>${p.customerMail}</td>
-	                                  <td>${p.addressDetail}</td>
-	                                  <td>${p.paymentPrice}</td>
-	                                  <td>${p.paymentMethod}</td>
-	                                  <td>${p.paymentState}</td>
+	                                  <td>${c.customerMail}</td>
+	                                  <td>${c.customerBirth}</td>
+	                                  <td>${c.customerGender}</td>
+	                                  <td>${c.updateDate}</td>
+	                                  <td>${c.createDate}</td>
 	                                  <td>
-	                                  	<c:if test="${p.paymentState.equals('배송중')}">
-	                                  		<button class="btn btn-secondary" disabled>완료처리</button>
-	                                  	</c:if>
-	                                  	<c:if test="${p.paymentState.equals('결제완료')}">
-	                                  		<a class="btn btn-main" href="${pageContext.request.contextPath}/on/staff/updatePayment?paymentNo=${p.paymentNo}&currentPage=${currentPage}">완료처리</a>
-	                                  	</c:if>
+	                                  	<a class="btn btn-main" href="${pageContext.request.contextPath}/on/staff/deleteCustomer?customerMail=${c.customerMail}&currentPage=${currentPage}">탈퇴</a>
 	                                  </td>
 	                             	 </tr>
 	                          	</c:forEach>
@@ -104,19 +97,19 @@
                           	<!-- 페이징 -->
 							<div class="text-center">
 								<c:if test="${currentPage > numPerPage}">
-									<a href="${pageContext.request.contextPath}/on/staff/paymentList?currentPage=${beginPagingNum - numPerPage}">이전</a>
+									<a href="${pageContext.request.contextPath}/on/staff/customerList?currentPage=${beginPagingNum - numPerPage}">이전</a>
 								</c:if>
 								<c:forEach var="num" begin="${beginPagingNum}" end="${endPagingNum}">
 									<c:if test="${num==currentPage}">
 										${num}&nbsp;
 									</c:if>
 									<c:if test="${num!=currentPage}">
-										<a href="${pageContext.request.contextPath}/on/staff/paymentList?currentPage=${num}">${num}</a>
+										<a href="${pageContext.request.contextPath}/on/staff/customerList?currentPage=${num}">${num}</a>
 										&nbsp;
 									</c:if>
 								</c:forEach>
 								<c:if test="${currentPage < lastPage - numPerPage }">
-									<a href="${pageContext.request.contextPath}/on/staff/paymentList?currentPage=${beginPagingNum + numPerPage}">다음</a>
+									<a href="${pageContext.request.contextPath}/on/staff/customerList?currentPage=${beginPagingNum + numPerPage}">다음</a>
 								</c:if>
 							</div>
                     </div>

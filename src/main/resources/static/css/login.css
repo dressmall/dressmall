@@ -6,3 +6,83 @@ body {
 	width: 100%;
 	height: 100vh;
 }
+/* login */
+.loginBtnBox {
+	display:flex;
+	justify-content:center;
+	align-items: center;
+	width: 100%;
+}
+.loginBtn {
+	width: 50%;
+	background-color: #fff !important;
+	color: #000 !important;
+	border: 1px solid #8c92a0;
+	border-radius: 0px;
+}
+.loginBtn.active {
+	background-color: #7971EA !important;
+	color: #fff !important;
+}
+#formStaffLogin,
+#formCustomerLogin {
+	width: 100%;
+	padding: 48px;
+	border: 1px solid #8c92a0;
+}
+#formStaffLogin .idBox
+, #formStaffLogin .pwBox {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.inputBox label {
+	width: 70px;
+}
+#staffLoginBtn {
+	width: 100%;
+	color: #fff !important;
+}
+#customerLoginBtn {
+	color: #fff !important;
+}
+.btnBox {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+} 
+.btnBox .btn {
+	width: 50%;
+	color: #fff !important;
+}
+.btnBox a:hover:not(.hovernone) {
+	background-color: #7971EA;
+	border-radius: 4px;
+	color: #fff;
+}
+
+/* signUp */
+h1 {
+	color: #000;
+}
+#formCustomerSignUp {
+    border: 1px solid;
+    padding: 48px;
+}
+
+#formCustomerSignUp input[type=date],
+#formCustomerSignUp input[type=text], 
+#formCustomerSignUp input[type=email], 
+#formCustomerSignUp input[type=password]{
+	width: 100%
+}
+
+/* error */
+.msg {
+	display: none;
+}
+.errorInput {
+	border-color: #FF0000;
+}
