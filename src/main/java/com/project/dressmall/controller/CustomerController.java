@@ -7,11 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.dressmall.service.CustomerService;
 import com.project.dressmall.util.Page;
 import com.project.dressmall.util.TeamColor;
+import com.project.dressmall.vo.Customer;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +23,31 @@ import lombok.extern.slf4j.Slf4j;
 public class CustomerController {
 	@Autowired CustomerService customerService;
 	
+	// 회원가입 액션(박시현)
+	@PostMapping("/off/customer/signup")
+	public String insertCustomer(Model model, Customer customer) {
+		boolean result = customerService.insertCustomer(customer);
+		if (!result) {
+			model.addAttribute("errorMsg", "이미 등록된 이메일입니다");
+			log.debug("errorMsg");
+			return "off/customer/signup";  
+	    } 
+		return "redirect:/on/customer/main";
+	}
+	
+	// 회원가입 폼(박시현)
+	@GetMapping("/off/customer/signup")
+	public String addCustomer() {
+		return "off/customer/signup";
+	}
+	
+	// 마이페이지 폼 호출(진수우)
+	@GetMapping("/on/customer/myPage")
+	public String myPage() {
+		return "on/customer/myPage";
+	}
+	
+	// 관리자페이지 고객리스트 출력(진수우)
 	@GetMapping("/on/staff/customerList")
 	public String getMethodName(HttpSession session, Model model, @RequestParam(defaultValue = "1") Integer currentPage, @RequestParam(defaultValue = "10") Integer rowPerPage) {
 		// paging setter.
@@ -48,6 +75,7 @@ public class CustomerController {
 		return "on/staff/customerList";
 	}
 	
+	// 관리자페이지 고객 탈퇴(진수우)
 	@GetMapping("/on/staff/deleteCustomer")
 	public String deleteCustomer(String customerMail, Integer currentPage) {
 		customerService.removeCustomer(customerMail);

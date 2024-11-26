@@ -17,14 +17,8 @@
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
 <link href="${pageContext.request.contextPath}/css/staffStyles.css" rel="stylesheet" />
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-
-
-
-
 <meta charset="UTF-8">
-<title>Insert title here</title>
-
-
+<title>상품 리스트</title>
 </head>
 <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -71,42 +65,63 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-5">
-                        <h1 class="mt-5">카테고리 추가</h1>
-                       	
-                       	<form id="addCategoryForm" action="${pageContext.request.contextPath}/on/staff/addCategory" method="post">
-                       		<div>
-                       			Title:
-                       			<input type="text" name="categoryTitle" id="categoryTitle">
-                       		</div>
-                       		<!-- errMsg 출력 -->
-                       		<span class="msg" id="errMsg"></span>
-                       		<button id="btnAddCategory" type="button" class="btn btn-main">카테고리 추가</button>
-                       	</form>
-                       	
-                       	<script>
-                       		// 유효성 검사
-                       		$('#btnAddCategory').click(function() {
-                       			// 미입력 유효성 체크
-                       			if($('#categoryTitle').val() == null || $('#categoryTitle').val() == ''){
-                       				$('#errMsg').text('카테고리를 입력해주세요.');
-                       			} else{
-                       				console.log('submit...');
-                       				$('#errMsg').text(''); // 오류메시지 초기화
-                       				$('#addCategoryForm').submit();
-                       			}
-                       		});
-                       	</script>
-                     
-                        
-                        
-                       
+                        <h1 class="mt-5">상품 목록</h1>
+                        <!-- 추가 버튼 -->
+                        <div class="d-flex justify-content-end mb-4">
+			                <a href="${pageContext.request.contextPath}/on/staff/addGoods" class="btn btn-main">
+			                    상품 추가
+			                </a>
+			            </div>
+			            <!-- 상품 리스트 -->
+			            <div class="row">
+			            	<c:forEach var="g" items="${goodsList}">
+				              <div class="col-sm-5 col-lg-3 mb-4" data-aos="fade-up">
+				                <div class="block-4 text-center border">
+				                  <figure class="block-4-image">
+				                    <a href="shop-single.html"><img src="${pageContext.request.contextPath}/images/cloth_1.jpg" alt="Image placeholder" class="img-fluid"></a>
+				                  </figure>
+				                  <div class="block-4-text p-4">
+				                    <h5><a class="text-dark text-decoration-none" href="shop-single.html">${g.goodsTitle}</a></h5>
+				                    <p class="mb-0">${g.goodsMemo}</p>
+				                    <p class="text font-weight-bold">${g.goodsPrice}원</p>
+				                  </div>
+				                  <div class="block-4 p-4">
+				                  	<a href="${pageContext.request.contextPath}/on/staff/modifyGoods?goodsNo=${g.goodsNo}" class="btn btn-main">
+					                   상품 수정
+					                </a>
+					                <a href="${pageContext.request.contextPath}/on/staff/addGoods" class="btn btn-danger">
+					                   상품 삭제
+					                </a>
+				                  </div>
+				                </div>
+				              </div>
+			       			 </c:forEach>
+			             </div>
+                        <!-- 페이징 -->
+                        <div class="text-center">
+							<c:if test="${currentPage > numPerPage}">
+								<a href="${pageContext.request.contextPath}/on/staff/goodsList?currentPage=${beginPagingNum - numPerPage}">이전</a>
+							</c:if>
+							<c:forEach var="num" begin="${beginPagingNum}" end="${endPagingNum}">
+								<c:if test="${num==currentPage}">
+									${num}&nbsp;
+								</c:if>
+								<c:if test="${num!=currentPage}">
+									<a href="${pageContext.request.contextPath}/on/staff/goodsList?currentPage=${num}">${num}</a>
+									&nbsp;
+								</c:if>
+							</c:forEach>
+							<c:if test="${currentPage < lastPage - numPerPage }">
+								<a href="${pageContext.request.contextPath}/on/staff/goodsList?currentPage=${beginPagingNum + numPerPage}">다음</a>
+							</c:if>
+						</div>
+                      
                     </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
                             <div class="text-muted">Copyright &copy; Dress Mall 2024</div>
-                           
                         </div>
                     </div>
                 </footer>

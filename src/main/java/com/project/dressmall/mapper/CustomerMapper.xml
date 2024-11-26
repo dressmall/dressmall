@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.dressmall.mapper.CustomerMapper">
+<!-- /on/customer/customerLogin - customerMail 중복검사(박시현) -->
+<select id="checkCustomerMail" parameterType="String" resultType="Integer">
+	SELECT COUNT(*) FROM customer
+	WHERE customer_mail = #{customerMail}
+</select>
+<!-- /on/customer/customerLogin - 일반회원 로그인(박시현) -->
+<select id="customerLogin" 
+		parameterType="com.project.dressmall.vo.Customer"
+		resultType="com.project.dressmall.vo.Customer">
+	SELECT 
+		customer_mail customerMail
+		, customer_pw customerPw
+	FROM customer
+	WHERE customer_mail = #{customerMail} AND customer_pw = #{customerPw}
+</select>
+
+<!-- /on/customer/signup - 회원가입(회원가입 시 고객리스트에 추가)(박시현) -->
+<insert id="insertCustomer" parameterType="com.project.dressmall.vo.Customer">
+	INSERT INTO customer (
+		customer_mail 
+		, customer_pw 
+		, customer_birth 
+		, customer_gender 
+	) VALUES (
+		#{customerMail}
+		, #{customerPw}
+		, #{customerBirth}
+		, #{customerGender}		
+	)
+</insert>
 
 <!-- /on/staff/customerList : 관리자페이지에서 고객리스트 출력 -->
 <select id="selectCustomerList" parameterType="map" resultType="com.project.dressmall.vo.Customer">

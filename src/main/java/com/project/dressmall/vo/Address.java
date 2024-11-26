@@ -6,7 +6,7 @@ import lombok.Data;
 public class Address {
 	private Integer addressNo;
 	private String customerMail;
-	private Long addressDetail;
+	private String addressDetail;
 	private String updateDate;
 	private String createDate;
 	

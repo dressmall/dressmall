@@ -17,14 +17,8 @@
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
 <link href="${pageContext.request.contextPath}/css/staffStyles.css" rel="stylesheet" />
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-
-
-
-
 <meta charset="UTF-8">
-<title>Insert title here</title>
-
-
+<title>상품수정</title>
 </head>
 <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -71,35 +65,95 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-5">
-                        <h1 class="mt-5">카테고리 추가</h1>
+                        <h1 class="mt-5">상품 수정</h1>
                        	
-                       	<form id="addCategoryForm" action="${pageContext.request.contextPath}/on/staff/addCategory" method="post">
-                       		<div>
-                       			Title:
-                       			<input type="text" name="categoryTitle" id="categoryTitle">
-                       		</div>
-                       		<!-- errMsg 출력 -->
-                       		<span class="msg" id="errMsg"></span>
-                       		<button id="btnAddCategory" type="button" class="btn btn-main">카테고리 추가</button>
-                       	</form>
-                       	
+						<form id="formGoods" action="${pageContext.request.contextPath}/on/staff/modifyGoods" method="post"
+								enctype="multipart/form-data">
+							<input type="hidden" name="goodsNo" value="${goodsNo}">
+							<table class="table">
+								<tr>
+									<td>상품 이름</td>
+									<td><input type="text" name="goodsTitle" id="goodsTitle" value="${goods.goodsTitle}"></td>
+								</tr>
+								<tr>
+									<td>상품 설명</td>
+									<td>
+										<textarea name="goodsMemo" id="goodsMemo" rows="4" cols="50">${goods.goodsMemo}</textarea>
+									</td>
+								</tr>
+								<tr>
+									<td>재고</td>
+									<td>
+										<c:if test="${goods.goodsState == '재고있음'}">
+										    <input type="radio" name="goodsState" value="재고있음" checked>재고있음&nbsp;
+										    <input type="radio" name="goodsState" value="재고없음">재고없음
+										</c:if>
+										<c:if test="${goods.goodsState != '재고있음'}">
+										    <input type="radio" name="goodsState" value="재고있음">재고있음&nbsp;
+										    <input type="radio" name="goodsState" value="재고없음" checked>재고없음
+										</c:if>
+									</td>
+								</tr>
+								<tr>
+									<td>상품 가격</td>
+									<td><input type="number" name="goodsPrice" id="goodsPrice" value="${goods.goodsPrice}"></td>
+								</tr>
+								<tr>
+									<td>카테고리</td>
+									<td>
+										<select name="categoryNo" id="categoryNo">
+											<option value="" disabled>카테고리 선택</option>
+											<c:forEach var="c" items="${categoryList}">
+												<option value="${c.categoryNo}" <c:if test="${c.categoryTitle == goods.categoryTitle}">selected</c:if>>
+													${c.categoryTitle}
+												</option>
+											</c:forEach>
+										</select>									
+									</td>
+								</tr>
+								<tr>
+									<td>기존 파일</td>
+									<td>
+										<c:if test="${goods.goodsFileNo == null }">
+											파일이 없습니다.
+										</c:if>
+										<c:if test="${goods.goodsFileNo != null }">
+											${goods.goodsFileOriginName }.${goods.goodsFileExt }
+										</c:if>
+									</td>
+								</tr>
+								<tr>
+									<td>상품 이미지 첨부</td>
+									<td>
+										<div>
+											<input type = "file" name="goodsFile" class="goodsFile" value=>
+										</div>
+										<div>
+										${param.errMsg}
+										</div>
+									</td>
+								</tr>
+							</table>
+							<button type="btn btn-main" id="btnAddGoods">상품 등록</button>
+							<span class="msg" id="errMsg"></span>
+						</form>	
+
                        	<script>
-                       		// 유효성 검사
-                       		$('#btnAddCategory').click(function() {
-                       			// 미입력 유효성 체크
-                       			if($('#categoryTitle').val() == null || $('#categoryTitle').val() == ''){
-                       				$('#errMsg').text('카테고리를 입력해주세요.');
-                       			} else{
-                       				console.log('submit...');
-                       				$('#errMsg').text(''); // 오류메시지 초기화
-                       				$('#addCategoryForm').submit();
-                       			}
-                       		});
+                       	// 유효성 체크 해야됨
+	                       	$('#btnAddGoods').click(function(){
+	                    		if($('#goodsTitle').val() == ''){
+	                    			alert('상품이름을 입력하세요');
+	                    		} else if($('#categoryNo').val() == ''){
+	                    			alert('카테고리를 선택하세요');
+	                    		} else if($('.goodsFile').last().val() == ''){
+	                    			alert('첨부하지 않은 파일이 존재합니다');
+	                    		} else{
+	                    			$('#formGoods').submit();			
+	                    		}
+	                    	});
+                       	
+                       		
                        	</script>
-                     
-                        
-                        
-                       
                     </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">

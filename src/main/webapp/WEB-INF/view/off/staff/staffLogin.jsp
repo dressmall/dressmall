@@ -33,7 +33,7 @@
 			</a>		
 		</div>
 		<form id="formStaffLogin" action="${pageContext.request.contextPath}/off/staff/staffLogin" method="post">
-			<div class="inputBox mb-2">
+			<div class="inputBox mb-3">
 				<div class="idBox">
 					<label for="staffId">staffId</label>
 					<input id="staffId" type="text" name="staffId" > 

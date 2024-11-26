@@ -10,7 +10,7 @@ public class GoodsFile {
 	private String goodsFileOrigin;
 	private String goodsFileType;
 	private String goodsFileExt;
-	private String goodsFileSize;
+	private Long goodsFileSize;
 	private String updateDate;
 	private String createDate;
 }

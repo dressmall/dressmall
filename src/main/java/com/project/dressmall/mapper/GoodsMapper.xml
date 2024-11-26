@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.dressmall.mapper.GoodsMapper">
+	
+	<!-- /on/staff/modifyGoods : 상품수정페이지에서 상품정보 수정 (진수우) -->
+	<update id="updateGoods" parameterType="com.project.dressmall.vo.Goods">
+		UPDATE goods SET 
+			goods_title = #{goodsTitle}
+			, goods_memo = #{goodsMemo}
+			, goods_price = #{goodsPrice}
+			, goods_state = #{goodsState}
+			, update_date = NOW()
+		WHERE goods_no = #{goodsNo}
+	</update>
+
+	<!-- /on/staff/modifyGoods : 상품수정페이지에서 상품정보 조회 (진수우) -->
+	<!-- /on/staff/goodsOne : 상품상세조회페이지에서 상품정보 조회 - 재활용가능 -->
+	<select id="selectGoodsOne" parameterType="Integer" resultType="map">
+		SELECT 
+			g.goods_no goodsNo
+			, g.goods_title goodsTitle
+			, g.goods_memo goodsMemo
+			, g.goods_price goodsPrice
+			, g.goods_state goodsState
+			, g.update_date goodsUpdateDate
+			, g.create_date goodsCreateDate
+			, a.category_title categoryTitle
+			, f.goods_file_no goodsFileNo
+			, f.goods_file_name goodsFileName
+			, f.goods_file_origin_name goodsFileOriginName
+			, f.goods_file_ext goodsFileExt
+			, f.goods_file_type goodsFileType
+			, f.goods_file_size goodsFileSize
+			, f.update_date goodsFileUpdateDate
+			, f.create_date goodsFileCreateDate
+		FROM goods g 
+		LEFT OUTER JOIN 
+		(SELECT
+			g.goods_no
+			, category_title
+		FROM goods_category g LEFT OUTER JOIN category c
+		ON g.category_no = c.category_no) a
+		ON g.goods_no = a.goods_no
+		LEFT OUTER JOIN goods_file f
+		ON g.goods_no = f.goods_no
+		<if test="goodsNo != null">
+			WHERE g.goods_no = #{goodsNo}
+		</if>
+	</select>
+
+	<!-- /on/staff/addGoods : 상품등록 (김혜린) -->
+	<insert id="insertGoods" parameterType="com.project.dressmall.vo.Goods"
+				useGeneratedKeys="true" keyProperty="goodsNo">	<!-- 삽입된 레코드의 자동 증가 필드 값을 goodNo에 반환받겠다는 설정 -->
+		INSERT INTO goods (
+			goods_title
+			, goods_memo
+			, goods_price
+			, goods_state)
+		VALUES (
+			#{goodsTitle}
+			, #{goodsMemo}
+			, #{goodsPrice}
+			, #{goodsState})
+	</insert>
+	
+	<!-- /on/staff/goodsList : 관리자페이지에서 상품리스트 출력 (진수우) -->
+	<select id="selectGoodsList" parameterType="map" resultType="map">
+		SELECT
+			g.goods_no goodsNo
+			, g.goods_title goodsTitle
+			, g.goods_memo goodsMemo
+			, g.goods_price goodsPrice
+			, g.goods_state goodsState
+			, g.update_date updateDate
+			, g.create_date createDate
+			, f.goods_file_origin_name goodsFileOriginName
+		FROM goods g LEFT OUTER JOIN goods_file f
+		ON g.goods_no = f.goods_no
+		ORDER BY goodsNo DESC
+		LIMIT #{beginRow}, #{rowPerPage};
+		
+	</select>
+	
+	<!-- /on/staff/goodsList : 관리자페이지에서 상품리스트 카운트 (진수우) -->
+	<select id="countGoodsList" resultType="Integer">
+		SELECT COUNT(*)
+		FROM goods;
+	</select>
+</mapper>

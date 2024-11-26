@@ -15,6 +15,11 @@ import com.project.dressmall.vo.Category;
 public class CategoryService {
 	@Autowired CategoryMapper categoryMapper;
 	
+	// /on/staff/addGoods : 카테고리 리스트 출력(상품등록에서 카테고리 선택시 필요)
+	public List<Category> getCategoryListByGoods() {
+		return categoryMapper.selectCategoryListByGoods();
+	}
+	
 	// /on/staff/removeCategory : 카테고리 삭제
 	public int removeCategory(Integer categoryNo) {
 		return categoryMapper.deleteCategory(categoryNo);
