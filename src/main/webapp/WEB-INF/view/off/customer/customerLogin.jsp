@@ -33,7 +33,7 @@
 			<button class="loginBtn btn active">일반회원</button>	
 		</div>
 		<form id="formCustomerLogin" action="${pageContext.request.contextPath}/off/customer/customerLogin" method="post">
-			<div class="inputBox mb-2">
+			<div class="inputBox mb-3">
 				<div class="idBox">
 					<label for="customerMail">Email</label>
 					<input id="customerMail" type="text" name="customerMail" placeholder="ex)abc@naver.com" > 

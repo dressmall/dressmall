@@ -33,6 +33,7 @@
 					<label for="customerMail">Email</label>
 					<input id="customerMail" type="email" name="customerMail" placeholder="ex)abc@naver.com" > 
 				</div>
+				<span class="msg d-block">${errorMsg }</span>
 				<span class="msg mail-error">이메일 주소가 올바르지 않습니다.</span>
 				<div class="pwBox mt-3">
 					<label for="customerPw" >Pw</label>
@@ -60,14 +61,17 @@
 		// 유효성 검사 
 		$('#customerSignUpBtn').click(function() {
 			
+			let emailPattern  = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;   
+			
 			let isVal = true;
 			
-			if($('#customerMail') == null || $('#customerMail').val() == '') {
+			if($('#customerMail') == null || $('#customerMail').val() == '' || !(emailPattern.test($('#customerMail').val()))) {
 				$('#customerMail').addClass("errorInput");
 				$('.mail-error').show();
 				console.log("customerMail 에러");
 				isVal = false;
-			} else {
+				
+			}  else {
 				$('.mail-error').hide();
 				$('#customerMail').removeClass("errorInput");
 			}

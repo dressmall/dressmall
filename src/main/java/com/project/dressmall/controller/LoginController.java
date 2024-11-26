@@ -25,6 +25,23 @@ public class LoginController {
 	@Autowired StaffService staffService;
 	@Autowired CustomerService customerService;
 	
+	// customer/logout
+	@GetMapping("/on/customer/logout")
+	public String customerLogout(HttpSession session) {
+		session.invalidate(); // 세션 종료
+		
+		return "redirect:/off/customer/customerLogin";
+	}
+	
+	// staff/logout
+	@GetMapping("/on/staff/logout")
+	public String staffLogout(HttpSession session) {
+		session.invalidate(); // 세션 종료
+		
+		return "redirect:/off/staff/staffLogin";
+	}
+	
+	// 일반회원 로그인 액션
 	@PostMapping("/off/customer/customerLogin")
 	public String customerLogin(Model model
 							, HttpSession session
@@ -34,6 +51,7 @@ public class LoginController {
 		Customer customer = new Customer();
 		customer.setCustomerMail(customerMail);
 		customer.setCustomerPw(customerPw);
+		
 		
 		Customer loginCustomer = customerService.customerLogin(customer);
 		if(loginCustomer == null) {

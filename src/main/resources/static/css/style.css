@@ -12,7 +12,7 @@ body {
 }
 /* 에러 메세지 css*/
 .msg {
-	font-size: 0.875rem;
+	font-size: 0.75rem;
 	color: #FF0000;
 }
 /* input css */

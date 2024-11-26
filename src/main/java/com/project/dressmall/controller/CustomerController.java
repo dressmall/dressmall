@@ -23,18 +23,21 @@ import lombok.extern.slf4j.Slf4j;
 public class CustomerController {
 	@Autowired CustomerService customerService;
 	
-	// 회원가입 액션
+	// 회원가입 액션(박시현)
 	@PostMapping("/off/customer/signup")
-	public String insertCustomer(Customer customer) {
-		Integer row = customerService.insertCustomer(customer);
-		
-		if(row == null) { // 회원가입이 실패했을 경우
-			return "off/customer/signup";
-		}
+	public String insertCustomer(Model model, Customer customer) {
+		boolean result = customerService.insertCustomer(customer);
+
+		if (!result) {
+			model.addAttribute("errorMsg", "이미 등록된 이메일입니다");
+			log.debug("errorMsg");
+			return "off/customer/signup";  
+	    } 
+		 
 		return "redirect:/on/customer/main";
 	}
 	
-	// 회원가입 폼
+	// 회원가입 폼(박시현)
 	@GetMapping("/off/customer/signup")
 	public String addCustomer() {
 		
