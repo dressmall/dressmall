@@ -38,9 +38,9 @@ public class CustomerController {
 		model.addAttribute("numPerPage", page.getNumPerPage());
 		
 		// paymentList load.
-		List<Map<String, Object>> customerList = customerService.getCustomerList(currentPage, rowPerPage, page.countBeginRow()); // DB에서 고객리스트 가져옴.
+		List<Map<String, Object>> customerList = customerService.getCustomerList(currentPage, rowPerPage, page.countBeginRow()); // get customerList.
 		log.debug(TeamColor.JIN + customerList + TeamColor.RESET);
-		model.addAttribute("customerList", customerList); // paymentList model add.
+		model.addAttribute("customerList", customerList); // customerList model add.
 		
 		// paymentList.jsp load.
 		model.addAttribute("loginStaff", session.getAttribute("loginStaff")); // login information model add.
