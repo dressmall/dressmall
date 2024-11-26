@@ -94,7 +94,7 @@
 	                                  		<button class="btn btn-secondary" disabled>완료처리</button>
 	                                  	</c:if>
 	                                  	<c:if test="${p.paymentState.equals('결제완료')}">
-	                                  		<a class="btn btn-main" href="${pageContext.request.contextPath}/on/staff/updatePayment?paymentNo=${p.paymentNo}">완료처리</a>
+	                                  		<a class="btn btn-main" href="${pageContext.request.contextPath}/on/staff/updatePayment?paymentNo=${p.paymentNo}&currentPage=${currentPage}">완료처리</a>
 	                                  	</c:if>
 	                                  </td>
 	                             	 </tr>
