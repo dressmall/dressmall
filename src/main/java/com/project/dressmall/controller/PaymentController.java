@@ -23,11 +23,6 @@ public class PaymentController {
 	
 	@GetMapping("/on/staff/paymentList")
 	public String paymentList(HttpSession session, Model model, @RequestParam(defaultValue = "1") Integer currentPage, @RequestParam(defaultValue = "10") Integer rowPerPage) {
-		// paymentList load.
-		List<Map<String, Object>> paymentList = paymentService.getPaymentList(currentPage, rowPerPage); // DB에서 결제리스트 가져옴.
-		log.debug(TeamColor.JIN + paymentList + TeamColor.RESET);
-		model.addAttribute("paymentList", paymentList); // paymentList model add.
-		
 		// paging setter.
 		Page page = new Page();
 		page.setCurrentPage(currentPage);
@@ -42,6 +37,11 @@ public class PaymentController {
 		model.addAttribute("endPagingNum", page.countEndPagingNum());
 		model.addAttribute("numPerPage", page.getNumPerPage());
 		
+		// paymentList load.
+		List<Map<String, Object>> paymentList = paymentService.getPaymentList(currentPage, rowPerPage, page.countBeginRow()); // DB에서 결제리스트 가져옴.
+		log.debug(TeamColor.JIN + paymentList + TeamColor.RESET);
+		model.addAttribute("paymentList", paymentList); // paymentList model add.
+		
 		// paymentList.jsp load.
 		model.addAttribute("loginStaff", session.getAttribute("loginStaff")); // login information model add.
 		log.debug(TeamColor.JIN + "paymentList.jsp 호출" + TeamColor.RESET);
@@ -49,8 +49,8 @@ public class PaymentController {
 	}
 	
 	@GetMapping("/on/staff/updatePayment")
-	public String paymentUpdate(Integer paymentNo) {
+	public String paymentUpdate(Integer paymentNo, Integer currentPage) {
 		paymentService.modifyPayment(paymentNo); // payment table payment_state column change.
-		return "redirect:/on/staff/paymentList";
+		return "redirect:/on/staff/paymentList?currentPage=" + currentPage;
 	}
 }
