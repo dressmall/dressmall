@@ -105,6 +105,25 @@
                               </tbody>
                        	</table>
                         
+                        <!-- 페이징 -->
+                        <div class="text-center">
+								<c:if test="${currentPage > numPerPage}">
+									<a href="${pageContext.request.contextPath}/on/staff/categoryList?currentPage=${beginPagingNum - numPerPage}">이전</a>
+								</c:if>
+								<c:forEach var="num" begin="${beginPagingNum}" end="${endPagingNum}">
+									<c:if test="${num==currentPage}">
+										${num}&nbsp;
+									</c:if>
+									<c:if test="${num!=currentPage}">
+										<a href="${pageContext.request.contextPath}/on/staff/categoryList?currentPage=${num}">${num}</a>
+										&nbsp;
+									</c:if>
+								</c:forEach>
+								<c:if test="${currentPage < lastPage - numPerPage }">
+									<a href="${pageContext.request.contextPath}/on/staff/categoryList?currentPage=${beginPagingNum + numPerPage}">다음</a>
+								</c:if>
+							</div>
+                      
                     </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
