@@ -20,11 +20,11 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class PaymentController {
 	@Autowired PaymentService paymentService;
+	@Autowired Page page;
 	
 	@GetMapping("/on/staff/paymentList")
 	public String paymentList(HttpSession session, Model model, @RequestParam(defaultValue = "1") Integer currentPage, @RequestParam(defaultValue = "10") Integer rowPerPage) {
 		// paging setter.
-		Page page = new Page();
 		page.setCurrentPage(currentPage);
 		page.setRowPerPage(rowPerPage);
 		page.setNumPerPage(10);
