@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.dressmall.mapper.GoodsFileMapper">
+
+	<!-- /on/staff/modifyGoods : 상품수정 페이지에서 파일삭제 (진수우) -->
+	<delete id="deleteGoodsFile" parameterType="Integer">
+		DELETE FROM goods_file WHERE goods_file_no = #{fileNo};
+	</delete>
+
+	<!-- /on/staff/addGoods : 상품이미지 파일정보 삽입 (진수우) -->
+	<insert id="insertGoodsFile" parameterType="com.project.dressmall.vo.GoodsFile">
+		INSERT INTO goods_file(
+			goods_no
+			, goods_file_name
+			, goods_file_origin_name
+			, goods_file_ext
+			, goods_file_type
+			, goods_file_size)
+		VALUES(
+			#{goodsNo}
+			, #{goodsFileName}
+			, #{goodsFileOrigin}
+			, #{goodsFileExt}
+			, #{goodsFileType}
+			, #{goodsFileSize}
+		)
+	</insert>
+	
+</mapper>

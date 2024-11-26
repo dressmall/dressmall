@@ -1,7 +1,5 @@
 package com.project.dressmall.vo;
 
-import java.util.List;
-
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
@@ -14,7 +12,7 @@ public class GoodsForm {
 	private String goodsMemo;
 	private Integer goodsPrice;
 	private String goodsState;
-	 private MultipartFile goodsFile;
+	private MultipartFile goodsFile;
 	
 	
 	
