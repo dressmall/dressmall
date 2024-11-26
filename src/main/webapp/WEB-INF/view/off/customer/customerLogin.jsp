@@ -24,29 +24,32 @@
     <title>customer login</title>
 </head>
 <body>
-	<form id="formStaffLogin" action="${pageContext.request.contextPath}/on/customer/login" method="post">
-		<div class="loginBox">
-			<a class="loginBtn" href="${pageContext.request.contextPath}/off/staff/login">
+	<div class="loginBox">
+		<div class="loginBtnBox">
+			<a class="loginBtn btn" href="${pageContext.request.contextPath}/off/staff/staffLogin">
 				<span>관리자</span>
 			</a>		
-			<button class="loginBtn active">일반회원</button>
+			<button class="loginBtn btn active">일반회원</button>	
 		</div>
-		<div class="inputBox">
-			<div class="idBox">
-				<label id="staffId" >Email</label>
-				<input id="staffId" type="text" name="staffId" placeholder="ex)abc@naver.com" > 
+		<form id="formCustomerLogin" action="${pageContext.request.contextPath}/off/customer/customerLogin" method="post">
+			<div class="inputBox mb-2">
+				<div class="idBox">
+					<label for="customerMail">Email</label>
+					<input id="customerMail" type="text" name="customerMail" placeholder="ex)abc@naver.com" > 
+				</div>
+				<div class="pwBox">
+					<label for="customerPw" >Pw</label>
+					<input type="password" id="customerPw" name="customerPw"> 
+				</div>			
 			</div>
-			<div class="pwBox">
-				<label id="staffPw" >Pw</label>
-				<input type="text" id="staffPw" name="staffPw"> 
-			</div>			
-		</div>
-		<div class="btnBox">
-			<button class="btn-main mr-3">로그인</button>
-			<a class="btn-main" href="${pageContext.request.contextPath}/off/customer/signup">
-				<span>회원가입</span>
-			</a>		
-		</div>
-	</form>
+			<span class="fs-6 text-danger ">${msg }</span>
+			<div class="btnBox mt-2">
+				<button id="customerLoginBtn" class="btn btn-main mr-3">로그인</button>
+				<a class="btn-main btn hovernone" href="${pageContext.request.contextPath}/off/customer/signup">
+					<span>회원가입</span>
+				</a>
+			</div>
+		</form>
+	</div>
 </body>
 </html>

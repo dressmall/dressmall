@@ -6,3 +6,51 @@ body {
 	width: 100%;
 	height: 100vh;
 }
+.loginBtnBox {
+	display:flex;
+	justify-content:center;
+	align-items: center;
+	width: 100%;
+}
+.loginBtn {
+	width: 50%;
+	background-color: #fff !important;
+	color: #000 !important;
+	border: 1px solid #8c92a0;
+	border-radius: 0px;
+}
+.loginBtn.active {
+	background-color: #7971EA !important;
+	color: #fff !important;
+}
+#formStaffLogin,
+#formCustomerLogin {
+	width: 100%;
+	padding: 48px;
+	border: 1px solid #8c92a0;
+}
+.inputBox label {
+	width: 15%;
+}
+#staffLoginBtn {
+	width: 100%;
+	color: #fff !important;
+}
+#customerLoginBtn {
+	color: #fff !important;
+}
+.btnBox {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+} 
+.btnBox .btn {
+	width: 50%;
+	color: #fff !important;
+}
+.btnBox a:hover:not(.hovernone) {
+	background-color: #7971EA;
+	border-radius: 4px;
+	color: #fff;
+}

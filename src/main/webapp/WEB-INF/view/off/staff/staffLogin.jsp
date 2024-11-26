@@ -24,26 +24,36 @@
     <title>staff login</title>
 </head>
 <body>
-	<form id="formStaffLogin" action="${pageContext.request.contextPath}/on/staff/login" method="post">
-		<div class="loginBox">
-			<button class="loginBtn active">관리자</button>
-			<a class="loginBtn" href="${pageContext.request.contextPath}/off/customer/login">
+	<div class="loginBox">
+		<div class="loginBtnBox">
+			<button class="loginBtn active btn ">관리자</button>
+			<a class="loginBtn btn" href="${pageContext.request.contextPath}/off/customer/customerLogin">
 				<span>일반 회원</span>
 			</a>		
 		</div>
-		<div class="inputBox">
-			<div class="idBox">
-				<label for="staffId">Email</label>
-				<input id="staffId" type="text" name="staffId" placeholder="ex)abc@naver.com" > 
+		<form id="formStaffLogin" action="${pageContext.request.contextPath}/off/staff/staffLogin" method="post">
+			<div class="inputBox mb-2">
+				<div class="idBox">
+					<label for="staffId">Email</label>
+					<input id="staffId" type="text" name="staffId" placeholder="ex)abc@naver.com" > 
+				</div>
+				<div class="pwBox">
+					<label for="staffPw" >Pw</label>
+					<input type="password" id="staffPw" name="staffPw"> 
+				</div>			
 			</div>
-			<div class="pwBox">
-				<label for="staffPw" >Pw</label>
-				<input type="text" id="staffPw" name="staffPw"> 
-			</div>			
-		</div>
-		<div class="btnBox">
-			<button class="btn-main btn">로그인</button>	
-		</div>
-	</form>
+			<span class="fs-6 text-danger ">${msg }</span>
+			<div class="btnBox mt-2">
+				<button id="staffLoginBtn" class="btn-main btn" >로그인</button>	
+			</div>
+		</form>
+	</div>
 </body>
+	<script type="text/javascript">
+		// 유효성 검사 필요
+	
+		$("#staffLoginBtn").click(function() {
+			$('#formStaffLogin').submit();
+		});
+	</script>
 </html>
