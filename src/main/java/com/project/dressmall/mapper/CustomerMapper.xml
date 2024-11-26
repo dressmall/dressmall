@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.dressmall.mapper.CustomerMapper">
+<!-- /on/customer/signup - 회원가입(회원가입 시 고객리스트에 추가) -->
+<insert id="insertCustomer" parameterType="com.project.dressmall.vo.Customer">
+	INSERT INTO customer (
+		customer_mail
+		, customer_pw 
+		, customer_birth 
+		, customer_gender 
+	) VALUES (
+		#{customerMail}
+		, #{customerPw}
+		, #{customerBirth}
+		, #{customerGender}		
+	)
+</insert>
 
 <!-- /on/staff/customerList : 관리자페이지에서 고객리스트 출력 -->
 <select id="selectCustomerList" parameterType="map" resultType="com.project.dressmall.vo.Customer">

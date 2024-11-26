@@ -7,11 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.dressmall.service.CustomerService;
 import com.project.dressmall.util.Page;
 import com.project.dressmall.util.TeamColor;
+import com.project.dressmall.vo.Customer;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +22,25 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class CustomerController {
 	@Autowired CustomerService customerService;
+	
+	// 회원가입 액션
+	@PostMapping("/off/customer/signup")
+	public String insertCustomer(Customer customer) {
+		Integer row = customerService.insertCustomer(customer);
+		
+		
+		if(row == null) { // 회원가입이 실패했을 경우
+			return "off/customer/signup";
+		}
+		return "redirect:/on/customer/main";
+	}
+	
+	// 회원가입 폼
+	@GetMapping("/off/customer/signup")
+	public String addCustomer() {
+		
+		return "off/customer/signup";
+	}
 	
 	@GetMapping("/on/staff/customerList")
 	public String getMethodName(HttpSession session, Model model, @RequestParam(defaultValue = "1") Integer currentPage, @RequestParam(defaultValue = "10") Integer rowPerPage) {
