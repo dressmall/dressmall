@@ -71,59 +71,35 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-5">
-                        <h1 class="mt-5">카테고리</h1>
-                        <!-- 추가 버튼 -->
-                        <div class="d-flex justify-content-end mb-4">
-			                <a href="${pageContext.request.contextPath}/on/staff/addCategory" class="btn btn-main">
-			                    카테고리 추가
-			                </a>
-			            </div>
-                        <!-- 테이블 -->
-                        <table class="table table-bordered ">
-                              <thead style="background-color: #f0f0f0;">
-                                  <tr>
-                                      <th>번호</th>
-                                      <th>카테고리명</th>
-                                      <th>업데이트 날짜</th>
-                                      <th>생성 날짜</th>
-                                      <th>삭제</th>
-                                  </tr>
-                              </thead>
-                              <tbody>                                    
-                                  <c:forEach var="c" items="${categoryList}">
-                                  	<tr>
-                                  		<td>${c.categoryNo}</td>
-                                  		<td>${c.categoryTitle}</td>
-                                  		<td>${c.updateDate}</td>
-                                  		<td>${c.createDate}</td>
-                                  		<td>
-                                  			<a href="${pageContext.request.contextPath}/on/staff/removeCategory?categoryNo=${c.categoryNo}" class="btn btn-main">삭제</a>
-                                  		</td>
-                                  	</tr>
-                                  </c:forEach>
-                           
-                              </tbody>
-                       	</table>
+                        <h1 class="mt-5">카테고리 추가</h1>
+                       	
+                       	<form id="addCategoryForm" action="${pageContext.request.contextPath}/on/staff/addCategory" method="post">
+                       		<div>
+                       			Title:
+                       			<input type="text" name="categoryTitle" id="categoryTitle">
+                       		</div>
+                       		<!-- errMsg 출력 -->
+                       		<div class="text-danger" id="errMsg"></div>
+                       		<button id="btnAddCategory" type="button" class="btn btn-main">카테고리 추가</button>
+                       	</form>
+                       	
+                       	<script>
+                       		// 유효성 검사
+                       		$('#btnAddCategory').click(function() {
+                       			// 미입력 유효성 체크
+                       			if($('#categoryTitle').val() == null || $('#categoryTitle').val() == ''){
+                       				$('#errMsg').text('카테고리를 입력해주세요.');
+                       			} else{
+                       				console.log('submit...');
+                       				$('#errMsg').text(''); // 오류메시지 초기화
+                       				$('#addCategoryForm').submit();
+                       			}
+                       		});
+                       	</script>
+                     
                         
-                        <!-- 페이징 -->
-                        <div class="text-center">
-								<c:if test="${currentPage > numPerPage}">
-									<a href="${pageContext.request.contextPath}/on/staff/categoryList?currentPage=${beginPagingNum - numPerPage}">이전</a>
-								</c:if>
-								<c:forEach var="num" begin="${beginPagingNum}" end="${endPagingNum}">
-									<c:if test="${num==currentPage}">
-										${num}&nbsp;
-									</c:if>
-									<c:if test="${num!=currentPage}">
-										<a href="${pageContext.request.contextPath}/on/staff/categoryList?currentPage=${num}">${num}</a>
-										&nbsp;
-									</c:if>
-								</c:forEach>
-								<c:if test="${currentPage < lastPage - numPerPage }">
-									<a href="${pageContext.request.contextPath}/on/staff/categoryList?currentPage=${beginPagingNum + numPerPage}">다음</a>
-								</c:if>
-							</div>
-                      
+                        
+                       
                     </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">

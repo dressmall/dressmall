@@ -2,6 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.dressmall.mapper.CategoryMapper">
 	
+	<!-- /on/staff/removeCategory : 카테고리 삭제 -->
+	<delete id="deleteCategory" parameterType="Integer">
+		DELETE FROM category
+		WHERE category_no = #{categoryNo}
+	</delete>
+	
+	<!-- /on/staff/addCategory : 카테고리 추가 -->
+	<insert id="insertCategory" parameterType="com.project.dressmall.vo.Category">
+		INSERT INTO category(category_title)
+		VALUES (#{categoryTitle})
+	</insert>
+	
 	<!-- /on/staff/categoryrList : 카테고리 리스트 출력 -->
 	<select id="selectCategoryList" 
 		parameterType="Map" resultType="com.project.dressmall.vo.Category">

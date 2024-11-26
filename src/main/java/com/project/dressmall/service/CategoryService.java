@@ -15,6 +15,16 @@ import com.project.dressmall.vo.Category;
 public class CategoryService {
 	@Autowired CategoryMapper categoryMapper;
 	
+	// /on/staff/removeCategory : 카테고리 삭제
+	public int removeCategory(Integer categoryNo) {
+		return categoryMapper.deleteCategory(categoryNo);
+	}
+	
+	// /on/staff/addCategory : 카테고리 추가
+	public int addCategory(Category paramCategory) {
+		return categoryMapper.insertCategory(paramCategory);
+	}
+	
 	// /on/staff/categoryrList : 카테고리 리스트 출력
 	public List<Category> getCategoryList(Map paramMap) {
 		return categoryMapper.selectCategoryList(paramMap);
