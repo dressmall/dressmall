@@ -74,5 +74,4 @@ public class StaffController {
 		staffService.addStaff(staff); // DB addStaff.
 		return "redirect:/on/staff/staffList";
 	}
-	
 }
