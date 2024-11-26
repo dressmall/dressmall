@@ -22,21 +22,16 @@
     <!-- 로그인 .css 추가 -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <title>customer login</title>
+    <title>customer signUp</title>
 </head>
 <body>
-	<div class="loginBox">
-		<div class="loginBtnBox">
-			<a class="loginBtn btn" href="${pageContext.request.contextPath}/off/staff/staffLogin">
-				<span>관리자</span>
-			</a>		
-			<button class="loginBtn btn active">일반회원</button>	
-		</div>
-		<form id="formCustomerLogin" action="${pageContext.request.contextPath}/off/customer/customerLogin" method="post">
-			<div class="inputBox mb-2">
+	<div>
+		<h1>회원가입</h1>
+		<form id="formCustomerSignUp" action="${pageContext.request.contextPath}/off/customer/signup" method="post">
+			<div class="inputBox mb-3">
 				<div class="idBox">
 					<label for="customerMail">Email</label>
-					<input id="customerMail" type="text" name="customerMail" placeholder="ex)abc@naver.com" > 
+					<input id="customerMail" type="email" name="customerMail" placeholder="ex)abc@naver.com" > 
 				</div>
 				<span class="msg mail-error">이메일 주소가 올바르지 않습니다.</span>
 				<div class="pwBox mt-3">
@@ -44,20 +39,26 @@
 					<input type="password" id="customerPw" name="customerPw"> 
 				</div>			
 				<span class="msg pw-error">비밀번호는 4자 이상 입력해주세요</span>
+				<div class="birthBox mt-3">
+					<label for="customerBirth" >Birth</label>
+					<input type="date" id="customerBirth" name="customerBirth"> 
+				</div>
+				<span class="msg birth-error">날짜를 선택해주세요</span>
+				<div class="genderBox mt-3">
+					<span class="d-block">Gender</span>
+					<input type="radio" id="customerGenderMale" name="customerGender" class="w-25" value="남자" checked> 남자 
+					<input type="radio" id="customerGenderFeMale" name="customerGender" class="w-25" value="여자"> 여자 
+				</div>
 			</div>
-			<span class="fs-6 text-danger ">${msg }</span>
-			<div class="btnBox mt-2">
-				<button id="customerLoginBtn" class="btn btn-main mr-3" type="button">로그인</button>
-				<a class="btn-main btn hovernone" href="${pageContext.request.contextPath}/off/customer/signup">
-					<span>회원가입</span>
-				</a>
+			<div class="btnBox">
+				<button type="button" class="btn btn-main w-100" id="customerSignUpBtn">회원가입</button>
 			</div>
 		</form>
 	</div>
 </body>
 	<script type="text/javascript">
 		// 유효성 검사 
-		$('#customerLoginBtn').click(function() {
+		$('#customerSignUpBtn').click(function() {
 			
 			let isVal = true;
 			
@@ -79,9 +80,18 @@
 				$('.pw-error').hide();
 				$('#customerPw').removeClass("errorInput");
 			}
+			if($('#customerBirth') == null || $('#customerBirth').val() == '') {
+				$('.birth-error').show();
+				$('#customerBirth').addClass("errorInput");
+				console.log("customerBirth 에러");
+				isVal = false;
+			} else {
+				$('.birth-error').hide();
+				$('#customerBirth').removeClass("errorInput");
+			}
 			if (isVal) {
+		        $('#formCustomerSignUp').submit();
 		        console.log("submit 성공");
-		        $('#formCustomerLogin').submit();
 		    }		
 		});
 	</script>

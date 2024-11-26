@@ -39,7 +39,7 @@
 					<input id="staffId" type="text" name="staffId" > 
 				</div>
 				<span class="msg id-error">아이디를 입력해주세요</span>
-				<div class="pwBox mt-2">
+				<div class="pwBox mt-3">
 					<label for="staffPw" >staffPw</label>
 					<input type="password" id="staffPw" name="staffPw"> 
 				</div>			

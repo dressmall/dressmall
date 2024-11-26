@@ -109,6 +109,11 @@ body {
 	border-radius: 4px !important;
 	color: #fff !important;
 }
+/* 에러 메세지 css*/
+.msg {
+	font-size: 0.875rem;
+	color: #FF0000;
+}
 hr {
   margin: 1rem 0;
   color: inherit;
