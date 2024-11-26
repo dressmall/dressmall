@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.dressmall.mapper.StaffMapper">
+
+	<!-- /off/staff/staffLogin : 관리자 로그인 페이지에서 입력한 정보가 DB에 있는지 확인 -->
 	<select id="staffLogin" 
 			parameterType="com.project.dressmall.vo.Staff"
 			resultType="com.project.dressmall.vo.Staff">
@@ -10,4 +12,30 @@
 		FROM staff
 		WHERE staff_id = #{staffId} AND staff_pw = #{staffPw}
 	</select>
+	
+	<!-- /on/staff/staffList : 관리자페이지에서 스태프리스트 출력 -->
+	<select id="selectStaffList" parameterType="map" resultType="com.project.dressmall.vo.Staff">
+		SELECT 
+			staff_no staffNo
+			, staff_id staffId
+			, staff_pw staffPw
+			, update_date updateDate
+			, create_date createDate
+		FROM staff
+		ORDER BY staffNo ASC
+		<if test="beginRow != null and rowPerPage != null">
+		LIMIT #{beginRow}, #{rowPerPage};
+		</if>
+	</select>
+	
+	<!-- /on/staff/staffList : 관리자페이지에서 스태프리스트 카운트 -->
+	<select id="countStaffList" resultType="Integer">
+		SELECT COUNT(*)
+		FROM staff;
+	</select>
+	
+	<!-- /on/staff/addStaff : 관리자페이지에서 스태프 추가 -->
+	<insert id="insertStaff" parameterType="com.project.dressmall.vo.Staff">
+		INSERT INTO staff(staff_id, staff_pw) VALUES(#{staffId}, #{staffPw});
+	</insert>
 </mapper>
