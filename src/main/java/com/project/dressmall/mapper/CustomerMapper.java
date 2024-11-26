@@ -9,6 +9,9 @@ import com.project.dressmall.vo.Customer;
 
 @Mapper
 public interface CustomerMapper {
+	
+	// /on/customer/customerLogin 
+	Customer customerLogin(Customer customer);
 	// /on/customer/signup - 회원가입(회원가입 시 고객리스트에 추가) 
 	Integer insertCustomer(Customer customer);
 	

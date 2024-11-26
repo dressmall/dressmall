@@ -19,11 +19,15 @@ import lombok.extern.slf4j.Slf4j;
 public class CustomerService {
 	@Autowired CustomerMapper customerMapper;
 	
+	// /on/customer/customerLogin - 일반회원 로그인
+	public Customer customerLogin(Customer customer) {
+		return customerMapper.customerLogin(customer);
+	}
+	
 	// /on/customer/signup - 회원가입(회원가입 시 고객리스트에 추가)
 	public Integer insertCustomer(Customer customer) {
 		return customerMapper.insertCustomer(customer);
 	}
-	
 	
 	// /on/staff/customerList - 관리자페이지에서 결제리스트 출력.
 	public List<Map<String, Object>> getCustomerList(Integer currentPage, Integer rowPerPage, Integer beginRow) {

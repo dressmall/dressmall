@@ -28,7 +28,6 @@ public class CustomerController {
 	public String insertCustomer(Customer customer) {
 		Integer row = customerService.insertCustomer(customer);
 		
-		
 		if(row == null) { // 회원가입이 실패했을 경우
 			return "off/customer/signup";
 		}
