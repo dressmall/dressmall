@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.dressmall.mapper.GoodsMapper">
+
+	<!-- /on/staff/addGoods : 상품등록 -->
+	<insert id="insertGoods" parameterType="com.project.dressmall.vo.Goods"
+				useGeneratedKeys="true" keyProperty="goodsNo">	<!-- 삽입된 레코드의 자동 증가 필드 값을 goodNo에 반환받겠다는 설정 -->
+		INSERT INTO goods (
+			goods_title
+			, goods_memo
+			, goods_price
+			, goods_state)
+		VALUES (
+			#{goodsTitle}
+			, #{goodsMemo}
+			, #{goodsPrice}
+			, #{goodsState})
+	</insert>
+</mapper>

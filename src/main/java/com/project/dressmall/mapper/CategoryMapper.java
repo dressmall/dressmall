@@ -10,6 +10,9 @@ import com.project.dressmall.vo.Category;
 @Mapper
 public interface CategoryMapper {
 	
+	// /on/staff/addGoods : 카테고리 리스트 출력(상품등록에서 카테고리 선택시 필요)
+	List<Category> selectCategoryListByGoods();
+	
 	// /on/staff/removeCategory : 카테고리 삭제
 	int deleteCategory(Integer categoryNo);
 	
