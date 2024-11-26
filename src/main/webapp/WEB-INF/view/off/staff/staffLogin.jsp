@@ -15,12 +15,13 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/owl.carousel.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/owl.theme.default.min.css">
 
-
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/aos.css">
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <!-- 로그인 .css 추가 -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>staff login</title>
 </head>
 <body>
@@ -34,26 +35,51 @@
 		<form id="formStaffLogin" action="${pageContext.request.contextPath}/off/staff/staffLogin" method="post">
 			<div class="inputBox mb-2">
 				<div class="idBox">
-					<label for="staffId">Email</label>
-					<input id="staffId" type="text" name="staffId" placeholder="ex)abc@naver.com" > 
+					<label for="staffId">staffId</label>
+					<input id="staffId" type="text" name="staffId" > 
 				</div>
-				<div class="pwBox">
-					<label for="staffPw" >Pw</label>
+				<span class="msg id-error">아이디를 입력해주세요</span>
+				<div class="pwBox mt-2">
+					<label for="staffPw" >staffPw</label>
 					<input type="password" id="staffPw" name="staffPw"> 
 				</div>			
+				<span class="msg pw-error">비밀번호는 4자 이상 입력해주세요</span>
 			</div>
 			<span class="fs-6 text-danger ">${msg }</span>
 			<div class="btnBox mt-2">
-				<button id="staffLoginBtn" class="btn-main btn" >로그인</button>	
+				<button id="staffLoginBtn" class="btn-main btn" type="button">로그인</button>	
 			</div>
 		</form>
 	</div>
 </body>
 	<script type="text/javascript">
-		// 유효성 검사 필요
-	
-		$("#staffLoginBtn").click(function() {
-			$('#formStaffLogin').submit();
+		// 유효성 검사 
+		$('#staffLoginBtn').click(function() {
+			
+			let isVal = true;
+			
+			if($('#staffId') == null || $('#staffId').val() == '') {
+				$('#staffId').addClass("errorInput");
+				$('.id-error').show();
+				console.log("staffId 에러");
+				isVal = false;
+			} else {
+				$('.id-error').hide();
+				$('#staffId').removeClass("errorInput");
+			}
+			if($('#staffPw') == null || $('#staffPw').val().length < 4) {
+				$('.pw-error').show();
+				$('#staffPw').addClass("errorInput");
+				console.log("staffPw 에러");
+				isVal = false;
+			} else {
+				$('.pw-error').hide();
+				$('#staffPw').removeClass("errorInput");
+			}
+			if (isVal) {
+		        $('#formStaffLogin').submit();
+		        console.log("submit 성공");
+		    }		
 		});
 	</script>
 </html>

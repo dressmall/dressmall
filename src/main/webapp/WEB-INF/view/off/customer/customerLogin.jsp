@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <!-- 로그인 .css 추가 -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>customer login</title>
 </head>
 <body>
@@ -37,14 +38,16 @@
 					<label for="customerMail">Email</label>
 					<input id="customerMail" type="text" name="customerMail" placeholder="ex)abc@naver.com" > 
 				</div>
+				<span class="msg mail-error">이메일 주소가 올바르지 않습니다.</span>
 				<div class="pwBox">
 					<label for="customerPw" >Pw</label>
 					<input type="password" id="customerPw" name="customerPw"> 
 				</div>			
+				<span class="msg pw-error">비밀번호는 4자 이상 입력해주세요</span>
 			</div>
 			<span class="fs-6 text-danger ">${msg }</span>
 			<div class="btnBox mt-2">
-				<button id="customerLoginBtn" class="btn btn-main mr-3">로그인</button>
+				<button id="customerLoginBtn" class="btn btn-main mr-3" type="button">로그인</button>
 				<a class="btn-main btn hovernone" href="${pageContext.request.contextPath}/off/customer/signup">
 					<span>회원가입</span>
 				</a>
@@ -52,4 +55,34 @@
 		</form>
 	</div>
 </body>
+	<script type="text/javascript">
+		// 유효성 검사 
+		$('#customerLoginBtn').click(function() {
+			
+			let isVal = true;
+			
+			if($('#customerMail') == null || $('#customerMail').val() == '') {
+				$('#customerMail').addClass("errorInput");
+				$('.mail-error').show();
+				console.log("customerMail 에러");
+				isVal = false;
+			} else {
+				$('.mail-error').hide();
+				$('#customerMail').removeClass("errorInput");
+			}
+			if($('#customerPw') == null || $('#customerPw').val().length < 4) {
+				$('.pw-error').show();
+				$('#customerPw').addClass("errorInput");
+				console.log("customerPw 에러");
+				isVal = false;
+			} else {
+				$('.pw-error').hide();
+				$('#customerPw').removeClass("errorInput");
+			}
+			if (isVal) {
+		        $('#formCustomerLogin').submit();
+		        console.log("/////submit");
+		    }		
+		});
+	</script>
 </html>
