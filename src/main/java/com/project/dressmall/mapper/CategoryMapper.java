@@ -11,5 +11,5 @@ public interface CategoryMapper {
 	
 	// /on/staff/categoryrList : 카테고리 리스트 출력
 	List<Category> selectCategoryList();
-	////
+	////asdfadsfdsfsfsdfsfd
 }
