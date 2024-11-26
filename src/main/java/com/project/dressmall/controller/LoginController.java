@@ -24,13 +24,20 @@ import lombok.extern.slf4j.Slf4j;
 public class LoginController {
 	@Autowired StaffService staffService;
 	@Autowired CustomerService customerService;
+	@GetMapping("/off/customer/main")
+	public String customerMain(HttpSession session) {
+		
+		
+		return "off/customer/main";
+	}
+	
 	
 	// customer/logout
 	@GetMapping("/on/customer/logout")
 	public String customerLogout(HttpSession session) {
 		session.invalidate(); // 세션 종료
 		
-		return "redirect:/off/customer/customerLogin";
+		return "redirect:/off/customer/main";
 	}
 	
 	// staff/logout

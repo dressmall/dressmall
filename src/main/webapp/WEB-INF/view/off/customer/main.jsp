@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/aos.css">
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-    <title>main(회원)</title>
+    <title>main(비회원)</title>
 
 </head>
 <body>
@@ -30,18 +30,11 @@
     <header class="site-navbar" role="banner">
       <div class="site-navbar-top">
         <div class="container">
-          <div class="row align-items-center">
-
-            <div class="col-6 col-md-4 order-2 order-md-1 site-search-icon text-left">
-              <form action="" class="site-block-top-search">
-                <span class="icon icon-search2"></span>
-                <input type="text" class="form-control border-0" placeholder="Search">
-              </form>
-            </div>
+          <div class="row align-items-center justify-content-end">
 
             <div class="col-12 mb-3 mb-md-0 col-md-4 order-1 order-md-2 text-center">
               <div class="site-logo">
-                <a href="index.html" class="js-logo-clone">Shoppers</a>
+                <a href="${pageContext.request.contextPath}/off/customer/main" class="js-logo-clone">Shoppers</a>
               </div>
             </div>
 
@@ -50,16 +43,19 @@
                 <ul>
                   	<li>
                   		<!-- 로그인 -->
-                  		<a href="${pageContext.request.contextPath}/on/customer/logout">
-                  			<span>로그아웃</span>
+                  		<a href="${pageContext.request.contextPath}/off/customer/customerLogin">
+                  			<span>로그인</span>
                   		</a>
                   	</li> 
-                  	<li><a href="${pageContext.request.contextPath}/"><span class="icon icon-person"></span></a></li> <!-- 마이페이지 -->
                   	<li>
-                   		<a href="${pageContext.request.contextPath}/" class="site-cart">
-                     	<span class="icon icon-shopping_cart"></span>
-	                      <!-- 장바구니 담은 개수 표시 -->
-	                      <span class="count"></span>
+                  	 	<!-- 비회원자가 마이페이지를 클릭했을 경우 일반회원 로그인 페이지로 넘어감 -->
+	                  	<a href="${pageContext.request.contextPath}/off/customer/customerLogin"><span class="icon icon-person"></span>
+	                  	</a>
+                  	</li>
+                  	<li>
+                  		<!-- 비회원자가 장바구니를 클릭했을 경우 일반회원 로그인 페이지로 넘어감 -->
+                   		<a href="${pageContext.request.contextPath}/off/customer/customerLogin" class="site-cart">
+                     		<span class="icon icon-shopping_cart"></span>
 	                    </a>
                  	 </li> 
                   	<li class="d-inline-block d-md-none ml-md-0"><a href="#" class="site-menu-toggle js-menu-toggle"><span class="icon-menu"></span></a></li>
@@ -72,33 +68,31 @@
       </div> 
     </header>
 
-    <div class="bg-light py-3">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 mb-0"><a href="${pageContext.request.contextPath}/on/customer/main">Home</a> 
-          <span class="mx-2 mb-0">/</span> 
-          <strong class="text-black">Shop</strong></div>
-        </div>
-      </div>
-    </div>
-
     <div class="site-section">
       <div class="container">
-
-        <div class="row mb-5">
+      	<!-- 검색기능 -->
+		<div class="order-2 order-md-1 site-search-icon d-flex align-items-center justify-content-center">
+          <form action="" class="site-block-top-search">
+            <span class="icon icon-search2"></span>
+            <input type="text" class="form-control border-0" placeholder="Search">
+          </form>
+        </div>
+        <div class="row mb-5 mt-5">
           <div class="col-md-9 order-2">
-
+			
             <div class="row">
               <div class="col-md-12 mb-5">
                 <div class="float-md-left mb-4"><h2 class="text-black h5">Shop All</h2></div>
               </div>
             </div>
             <div class="row mb-5">
-			  <!-- 상품 리스트 -->
+
               <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
                 <div class="block-4 text-center border">
                   <figure class="block-4-image">
-                    <a href="${pageContext.request.contextPath}/"><img src="${pageContext.request.contextPath}/images/cloth_1.jpg" alt="Image placeholder" class="img-fluid"></a>
+                    <a href="${pageContext.request.contextPath}/off/customer/goodsOne">
+                    	<img src="${pageContext.request.contextPath}/images/cloth_1.jpg" alt="Image placeholder" class="img-fluid">
+                    </a>
                   </figure>
                   <div class="block-4-text p-4">
                     <h3><a href="shop-single.html">Tank Top</a></h3>
@@ -113,13 +107,17 @@
               <div class="col-md-12 text-center">
                 <div class="site-block-27">
                   <ul>
-                    <li><a href="#">&lt;</a></li>
+                    <li>
+                    	<a href="#">&lt;</a>
+                    </li>
                     <li class="active"><span>1</span></li>
                     <li><a href="#">2</a></li>
                     <li><a href="#">3</a></li>
                     <li><a href="#">4</a></li>
                     <li><a href="#">5</a></li>
-                    <li><a href="#">&gt;</a></li>
+                    <li>
+                    	<a href="#">&gt;</a>
+                    </li>
                   </ul>
                 </div>
               </div>
