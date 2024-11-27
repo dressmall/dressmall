@@ -71,8 +71,8 @@ public class LoginController {
 		customer.setCustomerMail(customerMail);
 		customer.setCustomerPw(customerPw);
 		
-		
-		Customer loginCustomer = customerService.customerLogin(customer);
+		// 세션을 다른페이지에서 못가져와 (Customer)추가
+		Customer loginCustomer = (Customer)customerService.customerLogin(customer);
 		if(loginCustomer == null) {
 			model.addAttribute("msg","로그인에 실패했습니다");
 			return "off/customer/customerLogin";
