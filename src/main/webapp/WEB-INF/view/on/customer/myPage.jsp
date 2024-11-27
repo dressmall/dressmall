@@ -63,11 +63,7 @@
       </div> 
     </header>
 
-    <div class="row">
-      <div class="col-md-12 mb-5">
-        <div class="float-md-left mb-4"><h2 class="text-black h5">My Page</h2></div>
-      </div>
-    </div>
+    
 
     <div class="site-section">
       <div class="container">
@@ -91,15 +87,64 @@
             </div>
           </div>
 
-          <div class="col-md-3 order-1 mb-5 mb-md-0">
+		  <div class="d-flex">
+          <div class="col-md-3 order-0 mb-5 mb-md-0">
             <div class="border p-4 rounded mb-4">
-              <h3 class="mb-3 h6 text-uppercase text-black d-block">MENU</h3>
+              <h3 class="mb-3 h6 text-black d-block">MyPage</h3>
               <ul class="list-unstyled mb-0">
                 <li class="mb-1"><a href="#" class="d-flex"><span>주문목록</span> <span class="text-black ml-auto"></span></a></li>
                 <li class="mb-1"><a href="#" class="d-flex"><span>회원정보</span> <span class="text-black ml-auto"></span></a></li>
               </ul>
             </div>
           </div>
+          
+          <div class="d-flex w-100">
+          <div class=" order-0 m-2 mb-md-0 w-50">
+          	<h5>회원정보</h5>
+            <div class="border p-5 rounded mb-4">
+              <div class="inputBox mb-2">
+				<div class="idBox">
+					<div>Email</div>
+					<input type="text" id="staffId" name="customerMail" style="width:100%;"> 			
+				</div>
+				<div class="birthBox">
+					<div>Birth</div>
+					<input type="text" id="staffPw" name="customerBirth" style="width:100%;"> 		
+				</div>
+				<div class="genderBox">
+					<div>Gender</div>
+					<input type="text" id="staffPw" name="customerGender" style="width:100%;"> 		
+				</div>
+				
+			</div>
+			<div class="btnBox mt-3 d-flex justify-content-end">
+				<a type="button" class="btn-main btn" href="">비밀번호 변경</a>	
+			</div>
+            </div>
+          </div>
+          
+          <div class=" order-1 m-2 mb-md-0 w-50">
+          <h5>회원주소</h5>
+            <div class="border p-5 rounded mb-4">
+              <c:if test="${addressList == null }">
+              	등록된 주소가 없습니다.
+              </c:if>
+              <table class="table">
+              	<c:forEach var="a" items="${addressList }">
+              		<tr>
+	              		<td></td>
+	              		<td><a type="button" class="btn-main btn" href="">수정</a></td>
+	              		<td><a type="button" class="btn-main btn" href="">삭제</a></td>
+	              	</tr>
+              	</c:forEach>
+              </table>
+              <div class="btnBox mt-3 d-flex justify-content-end">
+				<a type="button" class="btn-main btn" href="">주소 추가</a>
+			  </div>
+            </div>
+          </div>
+          </div>
+          
         </div>
       </div>
     </div>
@@ -111,7 +156,7 @@
           <div class="col-md-12">
             <p>
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            Copyright &copy;<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All rights reserved 2024 
+            Copyright &copy;<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All rights reserved dressmall 
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
             </p>
           </div>
