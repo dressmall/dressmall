@@ -19,6 +19,11 @@ import lombok.extern.slf4j.Slf4j;
 public class CustomerService {
 	@Autowired CustomerMapper customerMapper;
 	
+	// /on/customer/modifyCustomer : 회원 비밀번호 수정 페이지에서 비밀번호 수정.(진수우)
+	public Integer modifyCustomer(Customer customer) {
+		return customerMapper.updateCustomer(customer);
+	}
+	
 	// /on/customer/myPage : 마이페이지에서 회원정보 출력.(진수우)
 	public List<Map<String, Object>> getCustomerOne(String customerMail) {
 		return customerMapper.selectCustomerOne(customerMail);

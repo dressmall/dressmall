@@ -23,6 +23,26 @@ import lombok.extern.slf4j.Slf4j;
 public class CustomerController {
 	@Autowired CustomerService customerService;
 	
+	// customer 테이블에서 비밀번호 수정.(진수우)
+	@PostMapping("/on/customer/modifyCustomer")
+	public String modifyCustomer(HttpSession session, String customerPw) {
+		// 회원 비밀번호 수정 쿼리문에 넘겨줄 객체 setter.
+		Customer customer = new Customer();
+		customer.setCustomerMail((String)session.getAttribute("loginCustomer"));
+		customer.setCustomerPw(customerPw);
+		// 데이터베이스에서 회원 비밀번호 수정.
+		customerService.modifyCustomer(customer);
+		return "redirect:/on/customer/myPage";
+	}
+	
+	// 마이페이지에서 회원 비밀번호 수정 폼 호출.(진수우)
+	@GetMapping("/on/customer/modifyCustomer")
+	public String modifyCustomer() {
+		//(String)session.getAttribute("loginCustomer");
+		log.debug(TeamColor.JIN + "modifyCustomer.jsp 호출" + TeamColor.RESET);
+		return "on/customer/modifyCustomer";
+	}
+	
 	// 회원가입 액션(박시현)
 	@PostMapping("/off/customer/signup")
 	public String insertCustomer(Model model, Customer customer) {
