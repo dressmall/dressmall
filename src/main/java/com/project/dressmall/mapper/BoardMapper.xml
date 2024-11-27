@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.dressmall.mapper.BoardMapper">
-
+	<!-- 후기 삭제 -->
+	<delete id="deleteBoard" parameterType="com.project.dressmall.vo.Board">
+		DELETE FROM board 
+		WHRER orders_no = #{orderNo}
+	</delete>
+	<!-- 후기 추가 -->
+	<insert id="insertBoard" parameterType="com.project.dressmall.vo.Board">
+		INSERT INTO board(
+			orders_no
+			, board_content
+		) VALUES (
+			#{ordersNo}
+			, #{boardContent}
+		)
+	</insert>
 </mapper>

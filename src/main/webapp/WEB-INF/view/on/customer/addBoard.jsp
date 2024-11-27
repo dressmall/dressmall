@@ -3,12 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-<meta charset="UTF-8">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<meta charset="UTF-8">
 
-<title>리뷰등록</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,700"> 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/fonts/icomoon/style.css">
@@ -20,6 +19,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/aos.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 
+	<title>리뷰등록</title>
 </head>
 <body>
   
@@ -53,7 +53,11 @@
 	                     		<span class="icon icon-shopping_cart"></span>
 		                    </a>
 	                 	 </li> 
-	                  	<li class="d-inline-block d-md-none ml-md-0"><a href="#" class="site-menu-toggle js-menu-toggle"><span class="icon-menu"></span></a></li>
+	                  	<li class="d-inline-block d-md-none ml-md-0">
+		                  	<a href="#" class="site-menu-toggle js-menu-toggle">
+		                  		<span class="icon-menu"></span>
+		                  	</a>
+	                  	</li>
 	                </ul>
 	              </div> 
 	            </div>
@@ -71,8 +75,8 @@
 		            <div class="border p-4 rounded mb-4">
 		              <h3 class="mb-3 h6 text-black d-block">MyPage</h3>
 		              <ul class="list-unstyled mb-0">
-		                <li class="mb-1"><a href="#" class="d-flex"><span class="main-text">주문목록</span> <span class="text-black ml-auto"></span></a></li>
-		                <li class="mb-1"><a href="#" class="d-flex"><span>회원정보</span> <span class="text-black ml-auto"></span></a></li>
+		                <li class="mb-1"><a href="${pageContext.request.contextPath}/on/customer/ordersList" class="d-flex"><span class="main-text">주문목록</span> <span class="text-black ml-auto"></span></a></li>
+		                <li class="mb-1"><a href="${pageContext.request.contextPath}/on/customer/myPage" class="d-flex"><span>회원정보</span> <span class="text-black ml-auto"></span></a></li>
 		              </ul>
 		            </div>
 		          </div>
@@ -82,25 +86,27 @@
 			          	<h5>리뷰 등록</h5>
 			          	<!-- 리뷰 등록 컨텐츠 -->
 			          	
-			          	<div class="content border"> <!-- border -->
-			          		<h6>주문번호 NO.01</h6> <!-- 주문번호 받기 -->
-			          		
-			          		<div class="d-flex align-items-center justify-content-start w-100 border content mb-3">
-			          			<!-- 리뷰를 등록할 제품사진과 상세정보(title, subtext, price) -->
-			          			<div class="img-box">
-				          			<img src="${pageContext.request.contextPath}/images/cloth_1.jpg" alt="Image placeholder" class="img-fluid">			          			
-			          			</div>
-			          			<div class="text-box d-flex flex-column ms-3">
-			          				<span>Title : title 받아오기</span>
-			          				<span>상품 설명 : 설명 받아오기</span>
-			          				<span>Price : 가격 받아오기</span>
-			          			</div>
-			          		</div>
+			          	<div class="content border"> 
 			          		<form action="${pageContext.request.contextPath}/on/customer/addBoard" method="post">
+				          		<h6>주문번호 NO.${ordersNo }</h6> <!-- 주문번호 받기 -->
+				          		
+				          		<div class="d-flex align-items-center justify-content-start w-100 border content mb-3">
+				          			<!-- 리뷰를 등록할 제품사진과 상세정보(title, subtext, price) -->
+				          			<div class="img-box">
+					          			<img src="${pageContext.request.contextPath}/images/cloth_1.jpg" alt="Image placeholder" class="img-fluid">			          			
+				          			</div>
+				          			<div class="text-box d-flex flex-column ms-3">
+				          				<span>Title : title 받아오기</span>
+				          				<span>상품 설명 : 설명 받아오기</span>
+				          				<span>Price : 가격 받아오기</span>
+				          			</div>
+				          		</div>
 			          			<h6>리뷰 작성</h6>
+			          			<input type="hidden" name="ordersNo" value="">
 			          			<div>
-			          				<textarea rows="5" cols="100"></textarea>
+			          				<textarea rows="5" cols="100" name="boardContent"></textarea>
 			          			</div>
+			          			<!-- 유효성 검사 후 에러 메세지 출력 -->
 			          			<div class="text-end">
 				          			<button class="btn-main">등록</button>			          			
 			          			</div>
@@ -112,22 +118,21 @@
 			</div>
 		</div>	
 	</div>
-	    <footer class="site-footer border-top">
-	      <div class="container">
-	        <div class="row">
-	        <div class="row pt-5 mt-5 text-center">
-	          <div class="col-md-12">
-	            <p class="sub-text">
-	            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-	            Copyright &copy;<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All rights reserved dressmall 
-	            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-	            </p>
-	          </div>
-	        </div>
-	      </div>
-	     </div>
-	    </footer>
-  </div>
+    <footer class="site-footer border-top">
+      <div class="container">
+        <div class="row">
+        <div class="row pt-5 mt-5 text-center">
+          <div class="col-md-12">
+            <p class="sub-text">
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            Copyright &copy;<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All rights reserved dressmall 
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </p>
+          </div>
+        </div>
+      </div>
+     </div>
+    </footer>
 
   <script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
   <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
