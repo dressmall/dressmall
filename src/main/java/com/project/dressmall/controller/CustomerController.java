@@ -66,6 +66,7 @@ public class CustomerController {
 	public String myPage(HttpSession session, Model model) {
 		// 회원정보 조회.
 		List<Map<String, Object>> customer = customerService.getCustomerOne((String)session.getAttribute("loginCustomer"));
+		// List<Map<String, Object>> customer = customerService.getCustomerOne("test");
 		log.debug(TeamColor.JIN + customer + TeamColor.RESET);
 		model.addAttribute("customer", customer);
 		log.debug(TeamColor.JIN + "myPage 폼 호출" + TeamColor.RESET);

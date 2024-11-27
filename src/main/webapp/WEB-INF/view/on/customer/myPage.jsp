@@ -115,8 +115,8 @@
 		                </c:if>
 		                <c:if test="${c.addressDetail != null }">
 		              	  <td>${c.addressDetail}</td>
-	              		  <td><a type="button" class="btn-main btn" href="${pageContext.request.contextPath}/on/customer/modifyAddress">수정</a></td>
-	              		  <td><a type="button" class="btn-main btn" href="${pageContext.request.contextPath}/on/customer/removeAddress">삭제</a></td>
+	              		  <td><a type="button" class="btn-main btn text-white" href="${pageContext.request.contextPath}/on/customer/modifyAddress">수정</a></td>
+	              		  <td><a type="button" class="btn-main btn text-white" href="${pageContext.request.contextPath}/on/customer/removeAddress">삭제</a></td>
 		                </c:if>
 	              	</tr>
               	</c:forEach>
