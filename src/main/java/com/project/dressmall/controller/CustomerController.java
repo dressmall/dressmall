@@ -43,7 +43,15 @@ public class CustomerController {
 	
 	// 마이페이지 폼 호출(진수우)
 	@GetMapping("/on/customer/myPage")
-	public String myPage() {
+	public String myPage(HttpSession session, Model model) {
+		// 회원정보 조회.
+		// Customer customer = customerService.getCustomerOne((String)session.getAttribute("loginCustomer"));
+		List<Map<String, Object>> customer = customerService.getCustomerOne("adeambrosi2@163.com");
+		
+		// 중복되는 회원정보를 통합하여 맵에 저장.
+		
+		log.debug(TeamColor.JIN + customer + TeamColor.RESET);
+		model.addAttribute("customer", customer);
 		return "on/customer/myPage";
 	}
 	

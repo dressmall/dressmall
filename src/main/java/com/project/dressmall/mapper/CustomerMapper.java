@@ -9,6 +9,9 @@ import com.project.dressmall.vo.Customer;
 
 @Mapper
 public interface CustomerMapper {
+	// /on/customer/myPage : 마이페이지에서 회원정보 출력.(진수우)
+	List<Map<String, Object>> selectCustomerOne(String customerMail);
+	
 	// /on/customer/customerLogin - 이메일 중복 검사(박시현)
 	Integer checkCustomerMail(String customerMail);
 	

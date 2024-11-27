@@ -90,10 +90,10 @@
 		  <div class="d-flex">
           <div class="col-md-3 order-0 mb-5 mb-md-0">
             <div class="border p-4 rounded mb-4">
-              <h3 class="mb-3 h6 text-black d-block">MyPage</h3>
+              <h3 class="mb-3 h6 d-block">MyPage</h3>
               <ul class="list-unstyled mb-0">
-                <li class="mb-1"><a href="#" class="d-flex"><span>주문목록</span> <span class="text-black ml-auto"></span></a></li>
-                <li class="mb-1"><a href="#" class="d-flex"><span>회원정보</span> <span class="text-black ml-auto"></span></a></li>
+                <li class="mb-1"><a href="#" class="d-flex"><span class="text-black">주문목록</span> <span class="text-black ml-auto"></span></a></li>
+                <li class="mb-1"><a href="#" class="d-flex"><span class="text-black">회원정보</span> <span class="text-black ml-auto"></span></a></li>
               </ul>
             </div>
           </div>
@@ -104,21 +104,21 @@
             <div class="border p-5 rounded mb-4">
               <div class="inputBox mb-2">
 				<div class="idBox">
-					<div>Email</div>
-					<input type="text" id="staffId" name="customerMail" style="width:100%;"> 			
+					<div class="mt-2 text-black">Email</div>
+					<div><c:out value="${customer[0].customerMail}" /></div>
 				</div>
 				<div class="birthBox">
-					<div>Birth</div>
-					<input type="text" id="staffPw" name="customerBirth" style="width:100%;"> 		
+					<div class="mt-2 text-black">Birth</div>
+					<div>${customer[0].customerBirth}</div>
 				</div>
 				<div class="genderBox">
-					<div>Gender</div>
-					<input type="text" id="staffPw" name="customerGender" style="width:100%;"> 		
+					<div class="mt-2 text-black">Gender</div>
+					<div>${customer[0].customerGender}</div>
 				</div>
 				
 			</div>
 			<div class="btnBox mt-3 d-flex justify-content-end">
-				<a type="button" class="btn-main btn" href="">비밀번호 변경</a>	
+				<a type="button" class="btn-main btn text-white" href="">비밀번호 변경</a>	
 			</div>
             </div>
           </div>
@@ -126,20 +126,22 @@
           <div class=" order-1 m-2 mb-md-0 w-50">
           <h5>회원주소</h5>
             <div class="border p-5 rounded mb-4">
-              <c:if test="${addressList == null }">
-              	등록된 주소가 없습니다.
-              </c:if>
               <table class="table">
-              	<c:forEach var="a" items="${addressList }">
+              	<c:forEach var="c" items="${customer}">
               		<tr>
-	              		<td></td>
-	              		<td><a type="button" class="btn-main btn" href="">수정</a></td>
-	              		<td><a type="button" class="btn-main btn" href="">삭제</a></td>
+              			<c:if test="${c.addressDetail == null }">
+		              	  등록된 주소가 없습니다.
+		                </c:if>
+		                <c:if test="${c.addressDetail != null }">
+		              	  <td>${c.addressDetail}</td>
+	              		  <td><a type="button" class="btn-main btn" href="">수정</a></td>
+	              		  <td><a type="button" class="btn-main btn" href="">삭제</a></td>
+		                </c:if>
 	              	</tr>
               	</c:forEach>
               </table>
               <div class="btnBox mt-3 d-flex justify-content-end">
-				<a type="button" class="btn-main btn" href="">주소 추가</a>
+				<a type="button" class="btn-main btn text-white" href="">주소 추가</a>
 			  </div>
             </div>
           </div>
