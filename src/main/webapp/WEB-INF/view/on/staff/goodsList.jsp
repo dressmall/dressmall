@@ -97,7 +97,7 @@
 				                  	<a href="${pageContext.request.contextPath}/on/staff/modifyGoods?goodsNo=${g.goodsNo}" class="btn btn-main">
 					                   상품 수정
 					                </a>
-					                <a href="${pageContext.request.contextPath}/on/staff/addGoods" class="btn btn-danger">
+					                <a href="${pageContext.request.contextPath}/on/staff/removeGoods?goodsNo=${g.goodsNo}" class="btn btn-danger">
 					                   상품 삭제
 					                </a>
 				                  </div>

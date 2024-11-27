@@ -14,10 +14,10 @@ public interface CategoryMapper {
 	List<Category> selectCategoryListByGoods();
 	
 	// /on/staff/removeCategory : 카테고리 삭제
-	int deleteCategory(Integer categoryNo);
+	Integer deleteCategory(Integer categoryNo);
 	
 	// /on/staff/addCategory : 카테고리 추가
-	int insertCategory(Category category);
+	Integer insertCategory(Category category);
 	
 	// /on/staff/categoryrList : 카테고리 리스트 출력
 	List<Category> selectCategoryList(Map<String, Object> paramMap);

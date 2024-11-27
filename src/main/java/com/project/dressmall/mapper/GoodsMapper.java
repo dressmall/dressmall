@@ -9,7 +9,10 @@ import com.project.dressmall.vo.Goods;
 
 @Mapper
 public interface GoodsMapper {
-	// /on/staff/addGoods : 상품등록
+	// /on/staff/removeGoods : 상품 삭제. (김혜린)
+	Integer deleteGoods(Integer goodsNo);
+	
+	// /on/staff/addGoods : 상품등록 .(김혜린)
 	Integer insertGoods(Goods goods);
 	
 	// /on/staff/goodsList : 관리자페이지에서 상품 리스트 출력.(진수우)

@@ -2,6 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.dressmall.mapper.GoodsCategoryMapper">
 
+	<!-- /on/staff/removeGoods : 관리자페이지에서 상품삭제 시 goods_category 삭제.(김혜린) -->
+	<delete id="deleteGoodsCategoryByGoods" parameterType="Integer">
+		DELETE FROM goods_category
+		WHERE goods_no = #{goodsNo}
+	</delete>
+
 	<!-- /on/staff/modifyGoods : 관리자페이지에서 상품수정할 때 카테고리 데이터 수정 (진수우) -->
 	<update id="updateCategoryByGoods" parameterType="com.project.dressmall.vo.GoodsCategory">
 		UPDATE goods_category SET 
@@ -9,8 +15,8 @@
 		WHERE goods_no = #{goodsNo}
 	</update>
 	
-	<!-- /on/staff/addGoods : 상품등록(카테고리등록) -->
-	<insert id="insertGoodsCategory" parameterType="com.project.dressmall.vo.GoodsCategory">
+	<!-- /on/staff/addGoods : 상품등록(카테고리등록). (김혜린) -->
+	<insert id="insertGoodsCategoryByGoods" parameterType="com.project.dressmall.vo.GoodsCategory">
 		INSERT INTO goods_category(
 			goods_no
 			, category_no

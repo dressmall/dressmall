@@ -29,6 +29,15 @@ public class GoodsController {
 	@Autowired GoodsService goodsService;
 	@Autowired CategoryService categoryService;
 	
+	// goods 삭제.(김혜린)
+	@GetMapping("/on/staff/removeGoods")
+	public String removeGoods(HttpSession session, @RequestParam Integer goodsNo) {
+		String path = session .getServletContext().getRealPath("/upload/");
+		goodsService.removeGoods(goodsNo, path);
+		
+		return "redirect:/on/staff/goodsList";
+	}
+	
 	// modifyGoods.jsp 호출.(진수우)
 	@GetMapping("/on/staff/modifyGoods")
 	public String modifyGoods(Model model, Integer goodsNo) {
