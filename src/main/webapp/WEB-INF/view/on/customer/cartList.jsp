@@ -49,7 +49,7 @@
 	                  	</a>
                   	</li>
                   	<li>
-                   		<a href="${pageContext.request.contextPath}/on/customer/cart" class="site-cart">
+                   		<a href="${pageContext.request.contextPath}/on/customer/cartList" class="site-cart">
                      		<span class="icon icon-shopping_cart"></span>
 	                    </a>
                  	 </li> 
@@ -76,17 +76,26 @@
 		        		<th class="text-center">이름</th>
 		        		<th class="text-center">가격</th>
 		        		<th class="text-center">수량</th>
+		        		<th class="text-center">총 가격</th>
 		        		<th class="text-center">삭제</th>
 		        	</tr>
-		        	<c:forEach var="c" items="cart">
+		        	<c:forEach var="c" items="${cart}">
 		        		<tr>
 			        		<td class="text-center"><input type="checkbox" name="goodsChoice"></td>
-			        		<td></td>
-			        		<td>${c.goodsTitle }</td>
-			        		<td>${c.goodsPrice }</td>
-			        		<td>${c.cartAmount }</td>
 			        		<td>
-	                        	<a class="btn btn-main" href="${pageContext.request.contextPath}">삭제</a>
+			        			<c:if test="${empty g.goodsFileName}">
+		                            <img src="${pageContext.request.contextPath}/upload/noImage.png" class="img-fluid" style="width: 150px; height: 150px; object-fit: cover;">
+		                        </c:if>
+		                        <c:if test="${not empty c.goodsFileName}">		                        
+				                    <img src="${pageContext.request.contextPath}/upload/${c.goodsFileName}.${c.goodsFileExt}" class="img-fluid" style="width: 150px; height: 150px; object-fit: cover;">
+		                        </c:if>
+			        		</td>
+			        		<td>${c.goodsTitle }</td>
+			        		<td>${c.goodsPrice }원</td>
+			        		<td>${c.cartAmount }개</td>
+			        		<td>${c.goodsTotalPrice }원</td>
+			        		<td>
+	                        	<a class="btn btn-main" href="${pageContext.request.contextPath}/on/customer/removeCart?cartNo=${c.cartNo}">삭제</a>
 	                        </td>
 			        	</tr>
 		        	</c:forEach>
@@ -97,6 +106,12 @@
       	 		<table class="table table-bordered mr-3">
 		        	<tr>
 		        		<th class="text-center">Total Price</th>
+		        	</tr>
+		        	<tr>
+		        		<td>${cart[0].totalPrice}원</td>
+		        	</tr>
+		        	<tr>
+		        		<td><a class="btn btn-main w-100" href="${pageContext.request.contextPath}">결제</a></td>
 		        	</tr>
 		        </table>
       	 	</div>

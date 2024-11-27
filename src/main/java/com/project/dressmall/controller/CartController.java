@@ -19,9 +19,16 @@ import lombok.extern.slf4j.Slf4j;
 public class CartController {
 	@Autowired CartService cartService;
 	
+	// 장바구니 목록 삭제. (진수우)
+	@GetMapping("/on/customer/removeCart")
+	public String removeCart(Integer cartNo) {
+		cartService.removeCart(cartNo);
+		return "redirect:/on/customer/cartList";
+	}
+	
 	// 장바구니 페이지 폼 호출.(진수우)
 	@GetMapping("/on/customer/cartList")
-	public String cart(Model model, HttpSession session) {
+	public String cartList(Model model, HttpSession session) {
 		//List<Map<String, Object>> cart = cartService.getCartList((String)session.getAttribute("loginCustomer"));
 		List<Map<String, Object>> cart = cartService.getCartList("test");
 		log.debug(TeamColor.JIN + cart + TeamColor.RESET);

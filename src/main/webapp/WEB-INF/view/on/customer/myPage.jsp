@@ -49,7 +49,7 @@
 	                  	</a>
                   	</li>
                   	<li>
-                   		<a href="${pageContext.request.contextPath}/on/customer/cart" class="site-cart">
+                   		<a href="${pageContext.request.contextPath}/on/customer/cartList" class="site-cart">
                      		<span class="icon icon-shopping_cart"></span>
 	                    </a>
                  	 </li> 

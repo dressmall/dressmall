@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.dressmall.mapper.CartMapper">
-
+	<!-- /on/customer/removeCart : 장바구니에서 리스트 삭제 (진수우) -->
+	<delete id="deleteCart" parameterType="Integer">
+		DELETE FROM cart WHERE cart_no = #{cartNo};
+	</delete>
+	
 	<!-- /on/customer/cartList : 장바구니에서 리스트 출력 (진수우) -->
 	<select id="selectCartList" parameterType="String" resultType="map">
 		SELECT
@@ -15,6 +19,8 @@
 			, f.goods_file_ext goodsFileExt
 			, g.goods_title goodsTitle
 			, g.goods_price goodsPrice
+			, (c.cart_amount * g.goods_price) goodsTotalPrice
+			, SUM(c.cart_amount * g.goods_price) OVER () totalPrice
 		FROM cart c 
 		LEFT OUTER JOIN goods_file f
 		ON c.goods_no = f.goods_no
