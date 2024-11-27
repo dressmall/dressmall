@@ -24,11 +24,23 @@ import lombok.extern.slf4j.Slf4j;
 public class LoginController {
 	@Autowired StaffService staffService;
 	@Autowired CustomerService customerService;
+	
+	// 로그인 안한 main페이지
 	@GetMapping("/off/customer/main")
-	public String customerMain(HttpSession session) {
-		
+	public String customerMain() {
 		
 		return "off/customer/main";
+	}
+	
+	// 로그인 안한 main페이지
+	@GetMapping("/on/customer/main")
+	public String customerMain(HttpSession session) {
+		
+		if(session == null) {
+			return "/off/customer/customerLogin";
+		}
+		
+		return "on/customer/main";
 	}
 	
 	

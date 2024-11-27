@@ -135,7 +135,7 @@
             </div>
           </div>
         </div>
-
+		<!-- 
         <div class="row">
           <div class="col-md-12">
             <div class="site-section site-blocks-2">
@@ -183,10 +183,10 @@
             </div>
           </div>
         </div>
-        
+         -->
       </div>
     </div>
-
+	
     <footer class="site-footer border-top">
       <div class="container">
         <div class="row">

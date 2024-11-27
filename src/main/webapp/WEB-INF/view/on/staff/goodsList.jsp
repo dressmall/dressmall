@@ -66,6 +66,7 @@
                 <main>
                     <div class="container-fluid px-5">
                         <h1 class="mt-5">상품 목록</h1>
+                        
                         <!-- 추가 버튼 -->
                         <div class="d-flex justify-content-end mb-4">
 			                <a href="${pageContext.request.contextPath}/on/staff/addGoods" class="btn btn-main">
@@ -78,7 +79,14 @@
 				              <div class="col-sm-5 col-lg-3 mb-4" data-aos="fade-up">
 				                <div class="block-4 text-center border">
 				                  <figure class="block-4-image">
-				                    <a href="shop-single.html"><img src="${pageContext.request.contextPath}/images/cloth_1.jpg" alt="Image placeholder" class="img-fluid"></a>
+				                  	<c:if test="${empty g.goodsFileName}">
+			                            <img 
+			                                src="${pageContext.request.contextPath}/upload/noImage.png"  
+			                                class="img-fluid">
+			                        </c:if>
+			                        <c:if test="${not empty g.goodsFileName}">		                        
+					                    <img src="${pageContext.request.contextPath}/upload/${g.goodsFileName}.${g.goodsFileExt}" class="img-fluid">
+			                        </c:if>
 				                  </figure>
 				                  <div class="block-4-text p-4">
 				                    <h5><a class="text-dark text-decoration-none" href="shop-single.html">${g.goodsTitle}</a></h5>

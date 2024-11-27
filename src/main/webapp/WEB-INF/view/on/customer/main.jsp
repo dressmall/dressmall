@@ -30,14 +30,7 @@
     <header class="site-navbar" role="banner">
       <div class="site-navbar-top">
         <div class="container">
-          <div class="row align-items-center">
-
-            <div class="col-6 col-md-4 order-2 order-md-1 site-search-icon text-left">
-              <form action="" class="site-block-top-search">
-                <span class="icon icon-search2"></span>
-                <input type="text" class="form-control border-0" placeholder="Search">
-              </form>
-            </div>
+          <div class="row  align-items-center justify-content-end">
 
             <div class="col-12 mb-3 mb-md-0 col-md-4 order-1 order-md-2 text-center">
               <div class="site-logo">
@@ -71,21 +64,16 @@
         </div>
       </div> 
     </header>
-
-    <div class="bg-light py-3">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 mb-0"><a href="${pageContext.request.contextPath}/on/customer/main">Home</a> 
-          <span class="mx-2 mb-0">/</span> 
-          <strong class="text-black">Shop</strong></div>
-        </div>
-      </div>
-    </div>
-
     <div class="site-section">
       <div class="container">
-
-        <div class="row mb-5">
+		<!-- 검색기능 -->
+		<div class="order-2 order-md-1 site-search-icon d-flex align-items-center justify-content-center">
+          <form action="" class="site-block-top-search">
+            <span class="icon icon-search2"></span>
+            <input type="text" class="form-control border-0" placeholder="Search">
+          </form>
+        </div>
+        <div class="row mb-5 mt-5">
           <div class="col-md-9 order-2">
 
             <div class="row">
@@ -98,10 +86,12 @@
               <div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
                 <div class="block-4 text-center border">
                   <figure class="block-4-image">
-                    <a href="${pageContext.request.contextPath}/"><img src="${pageContext.request.contextPath}/images/cloth_1.jpg" alt="Image placeholder" class="img-fluid"></a>
+                    <a href="${pageContext.request.contextPath}/on/customer/goodsOne">
+                    	<img src="${pageContext.request.contextPath}/images/cloth_1.jpg" alt="Image placeholder" class="img-fluid">
+                    </a>
                   </figure>
                   <div class="block-4-text p-4">
-                    <h3><a href="shop-single.html">Tank Top</a></h3>
+                    <h3><a href="${pageContext.request.contextPath}/on/customer/goodsOne">Tank Top</a></h3>
                     <p class="mb-0">Finding perfect t-shirt</p>
                     <p class="text-primary font-weight-bold">$50</p>
                   </div>
@@ -130,9 +120,9 @@
             <div class="border p-4 rounded mb-4">
               <h3 class="mb-3 h6 text-uppercase text-black d-block">Categories</h3>
               <ul class="list-unstyled mb-0">
-                <li class="mb-1"><a href="#" class="d-flex"><span>Men</span> <span class="text-black ml-auto">(2,220)</span></a></li>
-                <li class="mb-1"><a href="#" class="d-flex"><span>Women</span> <span class="text-black ml-auto">(2,550)</span></a></li>
-                <li class="mb-1"><a href="#" class="d-flex"><span>Children</span> <span class="text-black ml-auto">(2,124)</span></a></li>
+                <li class="mb-1"><a href="#" class="d-flex"><span>상의</span> <span class="text-black ml-auto">(2,220)</span></a></li>
+                <li class="mb-1"><a href="#" class="d-flex"><span>하의</span> <span class="text-black ml-auto">(2,550)</span></a></li>
+                <li class="mb-1"><a href="#" class="d-flex"><span>드레스</span> <span class="text-black ml-auto">(2,124)</span></a></li>
               </ul>
             </div>
           </div>

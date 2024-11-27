@@ -79,7 +79,7 @@
                        			<input type="text" name="categoryTitle" id="categoryTitle">
                        		</div>
                        		<!-- errMsg 출력 -->
-                       		<span class="msg" id="errMsg"></span>
+                       		<span class="msg d-block" id="errMsg"></span>
                        		<button id="btnAddCategory" type="button" class="btn btn-main">카테고리 추가</button>
                        	</form>
                        	

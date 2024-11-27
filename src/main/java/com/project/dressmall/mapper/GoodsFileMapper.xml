@@ -12,7 +12,7 @@
 		INSERT INTO goods_file(
 			goods_no
 			, goods_file_name
-			, goods_file_origin_name
+			, goods_file_origin
 			, goods_file_ext
 			, goods_file_type
 			, goods_file_size)
