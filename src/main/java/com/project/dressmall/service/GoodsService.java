@@ -30,6 +30,25 @@ public class GoodsService {
 	@Autowired GoodsFileMapper goodsFileMapper;
 	@Autowired GoodsCategoryMapper goodsCategoryMapper;
 	
+	
+	// /on/staff/removeGoods : 관리자페이지에서 상품 삭제. (김혜린)
+	public void removeGoods(Integer goodsNo, String path) {
+		// 1) goods_category 삭제
+		goodsCategoryMapper.deleteGoodsCategoryByGoods(goodsNo);
+		// 2) goods_file 삭제
+		Map<String, Object> file = goodsMapper.selectGoodsOne(goodsNo); // 삭제할 goodsFile 물리적 파일이름 정보.
+		Integer row1 = goodsFileMapper.deleteGoodsFile((Integer)file.get("goodsFileNo"));
+		// 3) goods 삭제
+		Integer row2 = goodsMapper.deleteGoods(goodsNo);
+		// 4) 물리적 파일 삭제
+		if (row1 == 1 && row2 == 1) { // 데이터베이스에서 goods_file 정보가 삭제되었다면 물리적 파일 삭제.
+			String fullname = path + (String)file.get("goodsFileName") + "." + (String)file.get("goodsFileExt");
+			File f = new File(fullname); 
+			f.delete();
+		}
+	}
+	
+	// /on/staff/goodsOne : 상품 상세페이지 출력. (김혜린)
 	// /on/staff/modifyGoods : 상품수정페이지에서 상품정보 조회.(진수우)
 	public Map<String, Object> getGoodsOne(Integer goodsNo) {
 		return goodsMapper.selectGoodsOne(goodsNo);
@@ -123,7 +142,7 @@ public class GoodsService {
 		goodsCategory.setCategoryNo(goodsForm.getCategoryNo());
 
 		// goods_category 테이블에 데이터 삽입.
-		Integer goodsCategoryRow = goodsCategoryMapper.insertGoodsCategory(goodsCategory);
+		Integer goodsCategoryRow = goodsCategoryMapper.insertGoodsCategoryByGoods(goodsCategory);
 		
 		// goods 테이블, goods_category 테이블에 데이터 삽입이 성공했고 폼에 파일이 있으면,
 		if(goodsRow == 1 && goodsCategoryRow == 1 && goodsForm.getGoodsFile() != null && !goodsForm.getGoodsFile().isEmpty()) {

@@ -47,7 +47,7 @@
                   			<span>로그아웃</span>
                   		</a>
                   	</li> 
-                  	<li><a href="${pageContext.request.contextPath}/"><span class="icon icon-person"></span></a></li> <!-- 마이페이지 -->
+                  	<li><a href="${pageContext.request.contextPath}/on/customer/myPage"><span class="icon icon-person"></span></a></li> <!-- 마이페이지 -->
                   	<li>
                    		<a href="${pageContext.request.contextPath}/" class="site-cart">
                      	<span class="icon icon-shopping_cart"></span>

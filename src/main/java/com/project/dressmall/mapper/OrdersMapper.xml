@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project.dressmall.mapper.OrdersMapper">
+	<select id="ordersList" parameterType="Map" resultType="Map">
+		SELECT
+		    a.address_no,
+		    a.customer_mail,
+		    p.payment_no,
+		    p.payment_price,
+		    p.payment_method,
+		    p.payment_state,
+		    o.orders_no,
+		    o.goods_no AS order_goods_no,
+		    o.orders_amount,
+		    g.goods_title,
+		    g.goods_price,
+		    gf.goods_file_name
+		FROM address a
+		LEFT OUTER JOIN payment p ON p.address_no = a.address_no
+		LEFT OUTER JOIN orders o ON o.payment_no = p.payment_no
+		LEFT OUTER JOIN goods g ON o.goods_no = g.goods_no
+		LEFT OUTER JOIN goods_file gf ON g.goods_no = gf.goods_no
+		WHERE a.customer_mail = #{customerMail}
+	</select>
+</mapper>

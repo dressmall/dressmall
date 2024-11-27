@@ -8,7 +8,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <meta charset="UTF-8">
 
-<title>마이페이지</title>
+<title>장바구니</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,700"> 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/fonts/icomoon/style.css">
@@ -67,68 +67,56 @@
 
     <div class="site-section">
       <div class="container">
-        <div class="row mb-5">
-		  <div class="d-flex">
-          <div class="col-md-3 order-0 mb-5 mb-md-0">
-            <div class="border p-4 rounded mb-4">
-              <h3 class="mb-3 h6 d-block">MyPage</h3>
-              <ul class="list-unstyled mb-0">
-                <li class="mb-1"><a href="${pageContext.request.contextPath}/on/customer/orderList" class="d-flex"><span class="text-black">주문목록</span> <span class="text-black ml-auto"></span></a></li>
-                <li class="mb-1"><a href="${pageContext.request.contextPath}/on/customer/myPage" class="d-flex"><span class="text-black">회원정보</span> <span class="text-black ml-auto"></span></a></li>
-              </ul>
-            </div>
-          </div>
-          
-          <div class="d-flex w-100">
-          <div class=" order-0 m-2 mb-md-0 w-50 vh-100">
-          	<h5>회원정보</h5>
-            <div class="border p-5 rounded mb-4">
-              <div class="inputBox mb-2">
-				<div class="idBox">
-					<div class="mt-2 text-black">Email</div>
-					<div><c:out value="${customer[0].customerMail}" /></div>
-				</div>
-				<div class="birthBox">
-					<div class="mt-2 text-black">Birth</div>
-					<div>${customer[0].customerBirth}</div>
-				</div>
-				<div class="genderBox">
-					<div class="mt-2 text-black">Gender</div>
-					<div>${customer[0].customerGender}</div>
-				</div>
-				
-			</div>
-			<div class="btnBox mt-3 d-flex justify-content-end">
-				<a type="button" class="btn-main btn text-white" href="${pageContext.request.contextPath}/on/customer/modifyCustomer">비밀번호 변경</a>	
-			</div>
-            </div>
-          </div>
-          
-          <div class=" order-1 m-2 mb-md-0 w-50">
-          <h5>회원주소</h5>
-            <div class="border p-5 rounded mb-4">
-              <table class="table">
-              	<c:forEach var="c" items="${customer}">
-              		<tr>
-              			<c:if test="${c.addressDetail == null }">
-		              	  등록된 주소가 없습니다.
-		                </c:if>
-		                <c:if test="${c.addressDetail != null }">
-		              	  <td>${c.addressDetail}</td>
-	              		  <td><a type="button" class="btn-main btn text-white" href="${pageContext.request.contextPath}/on/customer/modifyAddress?addressNo=${c.addressNo}">수정</a></td>
-	              		  <td><a type="button" class="btn-main btn text-white" href="${pageContext.request.contextPath}/on/customer/removeAddress?addressNo=${c.addressNo}">삭제</a></td>
-		                </c:if>
-	              	</tr>
-              	</c:forEach>
-              </table>
-              <div class="btnBox mt-3 d-flex justify-content-end">
-				<a type="button" class="btn-main btn text-white" href="${pageContext.request.contextPath}/on/customer/addAddress">주소 추가</a>
-			  </div>
-            </div>
-          </div>
-          </div>
-          
-        </div>
+      	 <div class="row">
+      	 	<div class="col-9">
+      	 		<table class="table table-bordered mr-3">
+		        	<tr>
+		        		<th class="text-center">선택</th>
+		        		<th class="text-center">이미지</th>
+		        		<th class="text-center">이름</th>
+		        		<th class="text-center">가격</th>
+		        		<th class="text-center">수량</th>
+		        		<th class="text-center">총 가격</th>
+		        		<th class="text-center">삭제</th>
+		        	</tr>
+		        	<c:forEach var="c" items="${cart}">
+		        		<tr>
+			        		<td class="text-center"><input type="checkbox" name="goodsChoice"></td>
+			        		<td>
+			        			<c:if test="${empty g.goodsFileName}">
+		                            <img src="${pageContext.request.contextPath}/upload/noImage.png" class="img-fluid" style="width: 150px; height: 150px; object-fit: cover;">
+		                        </c:if>
+		                        <c:if test="${not empty c.goodsFileName}">		                        
+				                    <img src="${pageContext.request.contextPath}/upload/${c.goodsFileName}.${c.goodsFileExt}" class="img-fluid" style="width: 150px; height: 150px; object-fit: cover;">
+		                        </c:if>
+			        		</td>
+			        		<td>${c.goodsTitle }</td>
+			        		<td>${c.goodsPrice }원</td>
+			        		<td>${c.cartAmount }개</td>
+			        		<td>${c.goodsTotalPrice }원</td>
+			        		<td>
+	                        	<a class="btn btn-main" href="${pageContext.request.contextPath}/on/customer/removeCart?cartNo=${c.cartNo}">삭제</a>
+	                        </td>
+			        	</tr>
+		        	</c:forEach>
+		        	
+		        </table>
+      	 	</div>
+      	 	<div class="col-3">
+      	 		<table class="table table-bordered mr-3">
+		        	<tr>
+		        		<th class="text-center">Total Price</th>
+		        	</tr>
+		        	<tr>
+		        		<td>${cart[0].totalPrice}원</td>
+		        	</tr>
+		        	<tr>
+		        		<td><a class="btn btn-main w-100" href="${pageContext.request.contextPath}">결제</a></td>
+		        	</tr>
+		        </table>
+      	 	</div>
+      	</div>
+       
       </div>
     </div>
 

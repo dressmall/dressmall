@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.dressmall.mapper.GoodsMapper">
+
+	<!-- /on/staff/removeGoods : 상품 삭제. (김혜린) -->
+	<delete id="deleteGoods" parameterType="Integer">
+	DELETE FROM goods
+	WHERE goods_no = #{goodsNo}
+	</delete>	
 	
 	<!-- /on/staff/modifyGoods : 상품수정페이지에서 상품정보 수정 (진수우) -->
 	<update id="updateGoods" parameterType="com.project.dressmall.vo.Goods">
