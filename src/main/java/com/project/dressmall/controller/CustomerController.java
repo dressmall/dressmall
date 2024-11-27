@@ -45,13 +45,10 @@ public class CustomerController {
 	@GetMapping("/on/customer/myPage")
 	public String myPage(HttpSession session, Model model) {
 		// 회원정보 조회.
-		// Customer customer = customerService.getCustomerOne((String)session.getAttribute("loginCustomer"));
-		List<Map<String, Object>> customer = customerService.getCustomerOne("adeambrosi2@163.com");
-		
-		// 중복되는 회원정보를 통합하여 맵에 저장.
-		
+		List<Map<String, Object>> customer = customerService.getCustomerOne((String)session.getAttribute("loginCustomer"));
 		log.debug(TeamColor.JIN + customer + TeamColor.RESET);
 		model.addAttribute("customer", customer);
+		log.debug(TeamColor.JIN + "myPage 폼 호출" + TeamColor.RESET);
 		return "on/customer/myPage";
 	}
 	
