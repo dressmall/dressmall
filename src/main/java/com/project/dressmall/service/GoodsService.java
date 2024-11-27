@@ -30,7 +30,7 @@ public class GoodsService {
 	@Autowired GoodsFileMapper goodsFileMapper;
 	@Autowired GoodsCategoryMapper goodsCategoryMapper;
 	
-		
+	
 	// /on/staff/removeGoods : 관리자페이지에서 상품 삭제. (김혜린)
 	public void removeGoods(Integer goodsNo, String path) {
 		// 1) goods_category 삭제

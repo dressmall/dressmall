@@ -29,6 +29,16 @@ public class GoodsController {
 	@Autowired GoodsService goodsService;
 	@Autowired CategoryService categoryService;
 	
+	// ----------------------------- 고객 -------------------------------------------------
+	// main 화면 출력(goods 리스트, 카테고리, 검색, 페이징) : main.jsp 호출.(김혜린)
+	@GetMapping("/on/customer/main")
+	public String main(HttpSession session, Model model, @RequestParam(defaultValue="1") Integer currentPage, @RequestParam(defaultValue="8") Integer rowPerPage) {
+		
+		
+		return "on/customer/main";
+	}
+	
+	//----------------------------- 관리자 -------------------------------------------------
 	// goods 상세정보 출력.(김혜린)
 	@GetMapping("/on/staff/goodsOne")
 	public String goodsOne(Model model
@@ -139,6 +149,7 @@ public class GoodsController {
 		log.debug(TeamColor.JIN + goodsList + TeamColor.RESET);
 		return "on/staff/goodsList";
 	}
+	
 	
 	
 }
