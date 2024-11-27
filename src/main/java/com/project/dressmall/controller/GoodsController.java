@@ -48,13 +48,13 @@ public class GoodsController {
 		MultipartFile file = goodsForm.getGoodsFile();
 		if(file != null && !file.isEmpty()) { // 첨부된 파일이 있다면
 			if(!file.getContentType().equals("image/jpeg") && !file.getContentType().equals("image/png")) {
-				String errMsg = "이미지 파일만 첨부가능합니다.";
+				String errFileMsg = "이미지 파일만 첨부가능합니다.";
 				try {
-					errMsg = URLEncoder.encode(errMsg, "UTF-8");
+					errFileMsg = URLEncoder.encode(errFileMsg, "UTF-8");
 				} catch (UnsupportedEncodingException e) {
 					e.printStackTrace();
 				}
-				return "redirect:/on/staff/modifyGoods?errMsg=" + errMsg;
+				return "redirect:/on/staff/modifyGoods?errFileMsg=" + errFileMsg + "&goodsNo=" + goodsNo;
 			}
 		}
 		String path = session.getServletContext().getRealPath("/upload/");
@@ -68,6 +68,7 @@ public class GoodsController {
 		// 카테고리 리스트 출력(카테고리 선택시 필요)
 		List<Category> categoryList = categoryService.getCategoryListByGoods();
 		model.addAttribute("categoryList", categoryList);
+		
 		return "on/staff/addGoods";
 	}
 	
@@ -76,17 +77,19 @@ public class GoodsController {
 	public String addGoods(HttpSession session, Model model, GoodsForm goodsForm) {
 		// 이미지 파일만 첨부가능.
 		MultipartFile file = goodsForm.getGoodsFile();
+		
 		if(file != null && !file.isEmpty()) { // 첨부된 파일이 있다면
 			if(!file.getContentType().equals("image/jpeg") && !file.getContentType().equals("image/png")) {
-				String errMsg = "이미지 파일만 첨부가능합니다.";
+				String errFileMsg = "이미지 파일만 첨부가능합니다.";
 				try {
-					errMsg = URLEncoder.encode(errMsg, "UTF-8");
+					errFileMsg = URLEncoder.encode(errFileMsg, "UTF-8");
 				} catch (UnsupportedEncodingException e) {
 					e.printStackTrace();
 				}
-				return "redirect:/on/staff/addGoods?errMsg=" + errMsg;
+				return "redirect:/on/staff/addGoods?errFileMsg=" + errFileMsg;
 			}
 		}
+	
 		String path = session.getServletContext().getRealPath("/upload/");
 		goodsService.addGoods(goodsForm, path);
 		return "redirect:/on/staff/goodsList";

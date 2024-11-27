@@ -73,12 +73,16 @@
 							<table class="table">
 								<tr>
 									<td>상품 이름</td>
-									<td><input type="text" name="goodsTitle" id="goodsTitle" value="${goods.goodsTitle}"></td>
+									<td>
+										<input type="text" name="goodsTitle" id="goodsTitle" value="${goods.goodsTitle}">
+										<span class="msg d-block mt-1" id="errTitle"></span> <!-- errMsg 출력 -->
+									</td>
 								</tr>
 								<tr>
 									<td>상품 설명</td>
 									<td>
 										<textarea name="goodsMemo" id="goodsMemo" rows="4" cols="50">${goods.goodsMemo}</textarea>
+										<span class="msg d-block mt-1" id="errMemo"></span> <!-- errMsg 출력 -->
 									</td>
 								</tr>
 								<tr>
@@ -91,12 +95,15 @@
 										<c:if test="${goods.goodsState != '재고있음'}">
 										    <input type="radio" name="goodsState" value="재고있음">재고있음&nbsp;
 										    <input type="radio" name="goodsState" value="재고없음" checked>재고없음
-										</c:if>
+										</c:if>										
 									</td>
 								</tr>
 								<tr>
 									<td>상품 가격</td>
-									<td><input type="number" name="goodsPrice" id="goodsPrice" value="${goods.goodsPrice}"></td>
+									<td>
+										<input type="number" name="goodsPrice" id="goodsPrice" value="${goods.goodsPrice}">
+										<span class="msg d-block mt-1" id="errPrice"></span> <!-- errMsg 출력 -->
+									</td>
 								</tr>
 								<tr>
 									<td>카테고리</td>
@@ -118,7 +125,7 @@
 											파일이 없습니다.
 										</c:if>
 										<c:if test="${goods.goodsFileNo != null }">
-											${goods.goodsFileOriginName }.${goods.goodsFileExt }
+											${goods.goodsFileOrigin}.${goods.goodsFileExt}
 										</c:if>
 									</td>
 								</tr>
@@ -128,30 +135,54 @@
 										<div>
 											<input type = "file" name="goodsFile" class="goodsFile" value=>
 										</div>
-										<div>
-										${param.errMsg}
-										</div>
+										<span class="msg d-block mt-1">${param.errFileMsg}</span> <!-- 이미지파일 아닐시 errMsg 출력 -->
 									</td>
 								</tr>
 							</table>
-							<button type="btn btn-main" id="btnAddGoods">상품 등록</button>
-							<span class="msg" id="errMsg"></span>
+							<button type="button" class="btn btn-main" id="btnModifyGoods">상품 수정</button>
 						</form>	
 
                        	<script>
-                       	// 유효성 체크 해야됨
-	                       	$('#btnAddGoods').click(function(){
-	                    		if($('#goodsTitle').val() == ''){
-	                    			alert('상품이름을 입력하세요');
-	                    		} else if($('#categoryNo').val() == ''){
-	                    			alert('카테고리를 선택하세요');
-	                    		} else if($('.goodsFile').last().val() == ''){
-	                    			alert('첨부하지 않은 파일이 존재합니다');
+                       		// 유효성 체크
+	                       		$('#btnModifyGoods').click(function(){
+	                       	 	let isValid = true;
+	                       	 	
+	                       		// 상품 이름 유효성 검사
+	                    		if($('#goodsTitle').val() == null || $('#goodsTitle').val() == ''){
+	                    			$('#errTitle').text('상품이름을 입력해주세요.');
+	                    			console.log("상품이름 미입력");
+	                    			isValid = false;
 	                    		} else{
-	                    			$('#formGoods').submit();			
+	                    			$('#errTitle').text('');	// 오류메시지 초기화
 	                    		}
+	                    		// 상품 상세정보 유효성 검사
+	                    		if($('#goodsMemo').val() == null || $('#goodsMemo').val() == ''){
+	                    			$('#errMemo').text('상품 상세정보를 입력해주세요.');
+	                    			console.log("상품설명 미입력");
+	                    			isValid = false;
+	                    		} else{
+	                    			$('#errMemo').text('');	// 오류메시지 초기화
+	                    		}  		
+	                    		// 상품가격 유효성 검사
+	                    		let price = $('#goodsPrice').val();
+    							if (price == '' || isNaN(price) || price < 0) {
+	                    			$('#errPrice').text('가격을 입력해주세요.');
+	                    			console.log("가격 유효성 오류");
+	                    			isValid = false;
+	                    		} else{
+	                    			$('#errPrice').text('');	// 오류메시지 초기화
+	                    		}	                    		
+    							    							
+    							// 서버에서 전달받은 errFileMsg 값을 자바스크립트에서 사용
+                   				let errFileMsg = "${errFileMsg}";  // JSP에서 전달된 값
+                   				
+	                    		// 전체 유효성 통과 시 폼 제출
+                   				if (isValid && errFileMsg === '') {
+                   			        console.log('submit...');
+                   			        $('#formGoods').submit();
+                   			    }	                    		
+	                    		
 	                    	});
-                       	
                        		
                        	</script>
                     </div>
