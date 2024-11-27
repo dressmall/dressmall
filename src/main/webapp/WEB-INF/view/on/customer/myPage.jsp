@@ -67,26 +67,7 @@
 
     <div class="site-section">
       <div class="container">
-
         <div class="row mb-5">
-          <div class="col-md-9 order-2">
-
-            <div class="row">
-              <div class="col-md-12 mb-5">
-                <div class="d-flex">
-                 <!-- 상세검색 드롭바 있었음 --> 
-                  
-                </div>
-              </div>
-            </div>
-            <div class="row mb-5">
-			<!-- 상품리스트 있었음 -->
-              
-
-
-            </div>
-          </div>
-
 		  <div class="d-flex">
           <div class="col-md-3 order-0 mb-5 mb-md-0">
             <div class="border p-4 rounded mb-4">
@@ -99,7 +80,7 @@
           </div>
           
           <div class="d-flex w-100">
-          <div class=" order-0 m-2 mb-md-0 w-50">
+          <div class=" order-0 m-2 mb-md-0 w-50 vh-100">
           	<h5>회원정보</h5>
             <div class="border p-5 rounded mb-4">
               <div class="inputBox mb-2">
