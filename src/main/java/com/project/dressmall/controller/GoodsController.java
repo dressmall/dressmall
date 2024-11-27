@@ -29,6 +29,17 @@ public class GoodsController {
 	@Autowired GoodsService goodsService;
 	@Autowired CategoryService categoryService;
 	
+	// goods 상세정보 출력.(김혜린)
+	@GetMapping("/on/staff/goodsOne")
+	public String goodsOne(Model model
+								, @RequestParam int goodsNo) {
+		// goods 상세정보 가져오기
+		Map<String, Object> goods = goodsService.getGoodsOne(goodsNo);
+		model.addAttribute("goods", goods);
+		model.addAttribute("goodsNo", goodsNo);
+		return "on/staff/goodsOne";
+	}
+	
 	// goods 삭제.(김혜린)
 	@GetMapping("/on/staff/removeGoods")
 	public String removeGoods(HttpSession session, @RequestParam Integer goodsNo) {

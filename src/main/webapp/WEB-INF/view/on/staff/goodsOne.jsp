@@ -17,8 +17,26 @@
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
 <link href="${pageContext.request.contextPath}/css/staffStyles.css" rel="stylesheet" />
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-<meta charset="UTF-8">
-<title>상품 리스트</title>
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mukta:300,400,700"> 
+<link rel="stylesheet" href="${pageContext.request.contextPath}/fonts/icomoon/style.css">
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/magnific-popup.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery-ui.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/owl.carousel.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/owl.theme.default.min.css">
+
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/aos.css">
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
+
+
+<title>goodsOne_관리자페이지</title>
+
+
 </head>
 <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -65,71 +83,62 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-5">
-                        <h1 class="mt-5">상품 목록</h1>
+                        <h1 class="mt-5">상품 상세정보</h1>
+                        <!-- ******************* -->
+						<div class="container mt-5">
+					        <div class="row">
+					          <div class="col-md-6">
+					            	<img src="${pageContext.request.contextPath}/upload/${goods.goodsFileName}.${goods.goodsFileExt}" class="img-fluid">
+					          </div>
+					          <div class="col-md-6">
+						            <table class="table table-bordered ">
+		                                  <tr>
+		                                      <td>상품이름</td>
+		                                      <td>${goods.goodsTitle}</td>
+		                                  </tr>
+		                                  <tr>
+		                                      <td>상품설명</td>
+		                                      <td>${goods.goodsMemo}</td>
+		                                  </tr>
+		                                  <tr>
+		                                      <td>카테고리</td>
+		                                      <td>${goods.categoryTitle}</td>
+		                                  </tr>
+		                                  <tr>
+		                                      <td>가격</td>
+		                                      <td>${goods.goodsPrice} 원</td>
+		                                  </tr>
+		                                  <tr>
+		                                      <td>재고</td>
+		                                      <td>${goods.goodsState}</td>
+		                                  </tr>
+		                                  <tr>
+		                                      <td>등록날짜</td>
+		                                      <td>${goods.goodsCreateDate}</td>
+		                                  </tr>
+		                                  <tr>
+		                                      <td>업데이트 날짜</td>
+		                                      <td>${goods.goodsUpdateDate}</td>
+		                                  </tr>
+		                                  
+			                          </table>
+						
+					          </div>
+					        </div>
+					      </div>                
                         
-                        <!-- 추가 버튼 -->
-                        <div class="d-flex justify-content-end mb-4">
-			                <a href="${pageContext.request.contextPath}/on/staff/addGoods" class="btn btn-main">
-			                    상품 추가
-			                </a>
-			            </div>
-			            <!-- 상품 리스트 -->
-			            <div class="row">
-			            	<c:forEach var="g" items="${goodsList}">
-				              <div class="col-sm-5 col-lg-3 mb-4" data-aos="fade-up">
-				                <div class="block-4 text-center border">
-				                  <figure class="block-4-image">
-				                  	<c:if test="${empty g.goodsFileName}">
-			                            <img 
-			                                src="${pageContext.request.contextPath}/upload/noImage.png"  
-			                                class="img-fluid">
-			                        </c:if>
-			                        <c:if test="${not empty g.goodsFileName}">		                        
-					                    <img src="${pageContext.request.contextPath}/upload/${g.goodsFileName}.${g.goodsFileExt}" class="img-fluid">
-			                        </c:if>
-				                  </figure>
-				                  <div class="block-4-text p-4">
-				                    <h5><a class="text-dark text-decoration-none" href="${pageContext.request.contextPath}/on/staff/goodsOne?goodsNo=${g.goodsNo}">${g.goodsTitle}</a></h5>
-				                    <p class="mb-0">${g.goodsMemo}</p>
-				                    <p class="text font-weight-bold">${g.goodsPrice}원</p>
-				                  </div>
-				                  <div class="block-4 p-4">
-				                  	<a href="${pageContext.request.contextPath}/on/staff/modifyGoods?goodsNo=${g.goodsNo}" class="btn btn-main">
-					                   상품 수정
-					                </a>
-					                <a href="${pageContext.request.contextPath}/on/staff/removeGoods?goodsNo=${g.goodsNo}" class="btn btn-danger">
-					                   상품 삭제
-					                </a>
-				                  </div>
-				                </div>
-				              </div>
-			       			 </c:forEach>
-			             </div>
-                        <!-- 페이징 -->
-                        <div class="text-center">
-							<c:if test="${currentPage > numPerPage}">
-								<a href="${pageContext.request.contextPath}/on/staff/goodsList?currentPage=${beginPagingNum - numPerPage}">이전</a>
-							</c:if>
-							<c:forEach var="num" begin="${beginPagingNum}" end="${endPagingNum}">
-								<c:if test="${num==currentPage}">
-									${num}&nbsp;
-								</c:if>
-								<c:if test="${num!=currentPage}">
-									<a href="${pageContext.request.contextPath}/on/staff/goodsList?currentPage=${num}">${num}</a>
-									&nbsp;
-								</c:if>
-							</c:forEach>
-							<c:if test="${currentPage < lastPage - numPerPage }">
-								<a href="${pageContext.request.contextPath}/on/staff/goodsList?currentPage=${beginPagingNum + numPerPage}">다음</a>
-							</c:if>
-						</div>
-                      
+                        
+                        
+                        
+                        <!-- ******************* -->
+                       
                     </div>
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
                             <div class="text-muted">Copyright &copy; Dress Mall 2024</div>
+                           
                         </div>
                     </div>
                 </footer>

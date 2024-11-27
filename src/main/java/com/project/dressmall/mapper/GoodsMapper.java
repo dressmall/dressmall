@@ -21,6 +21,7 @@ public interface GoodsMapper {
 	// /on/staff/goodsList : 관리자페이지에서 상품리스트 카운트.(진수우)
 	Integer countGoodsList();
 	
+	// /on/staff/goodsOne : 상품 상세페이지 출력. (김혜린)
 	// /on/staff/modifyGoods : 상품수정페이지에서 상품정보 조회.(진수우)
 	Map<String, Object> selectGoodsOne(Integer goodsNum);
 	

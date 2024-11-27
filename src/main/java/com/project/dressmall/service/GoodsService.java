@@ -30,6 +30,7 @@ public class GoodsService {
 	@Autowired GoodsFileMapper goodsFileMapper;
 	@Autowired GoodsCategoryMapper goodsCategoryMapper;
 	
+		
 	// /on/staff/removeGoods : 관리자페이지에서 상품 삭제. (김혜린)
 	public void removeGoods(Integer goodsNo, String path) {
 		// 1) goods_category 삭제
@@ -47,6 +48,7 @@ public class GoodsService {
 		}
 	}
 	
+	// /on/staff/goodsOne : 상품 상세페이지 출력. (김혜린)
 	// /on/staff/modifyGoods : 상품수정페이지에서 상품정보 조회.(진수우)
 	public Map<String, Object> getGoodsOne(Integer goodsNo) {
 		return goodsMapper.selectGoodsOne(goodsNo);
