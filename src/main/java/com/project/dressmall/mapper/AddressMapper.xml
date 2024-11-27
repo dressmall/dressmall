@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.dressmall.mapper.AddressMapper">
+	<!-- /on/customer/removeAddress : 마이페이지에서 주소삭제 (진수우) -->
+	<delete id="deleteAddress" parameterType="Integer">
+		DELETE FROM address WHERE address_no = #{addressNo};
+	</delete>
+	
+	<!-- /on/customer/modifyAddress : 주소수정페이지에서 주소수정 (진수우) -->
+	<update id="updateAddress" parameterType="map">
+		UPDATE address SET address_detail = #{addressDetail} WHERE address_no = #{addressNo};
+	</update>
+	
+	<!-- /on/customer/modifyAddress : 주소수정페이지에서 기존주소조회 (진수우) -->
+	<select id="selectAddressOne" parameterType="Integer" resultType="com.project.dressmall.vo.Address">
+		SELECT
+			address_no addressNo
+			, customer_mail customerMail
+			, address_detail addressDetail
+			, update_date updateDate
+			, create_date createDate
+		FROM address
+		WHERE address_no = #{addressNo};
+	</select>
 
 	<!-- /on/customer/addAddress : 주소추가페이지에서 주소추가 (진수우) -->
 	<insert id="insertAddress" parameterType="map">
