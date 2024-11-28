@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.dressmall.mapper.OrdersMapper">
+	<!-- ordersList에서 구매확정 클릭 시 배송중에서 배송완료로 수정(박시현) -->
+	<update id="updateOrdersByPayment" parameterType="Integer">
+	
+	</update>
+
+	<!-- ordersList에서 주문취소 클릭 시 삭제(박시현) -->
+	<delete id="deleteOrders" parameterType="Integer">
+	    DELETE o, p
+			FROM orders o
+			JOIN payment p ON o.payment_no = p.payment_no
+		WHERE o.orders_no = #{ordersNo} AND p.payment_no = #{paymentNo}
+	</delete>
+
+	<!-- ordersList 출력(박시현) -->
 	<select id="selectOrdersList" parameterType="com.project.dressmall.vo.Customer" resultType="map">
 		SELECT
 		    a.address_no addressNo

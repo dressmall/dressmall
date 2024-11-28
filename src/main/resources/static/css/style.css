@@ -15,10 +15,16 @@ body {
 }
 /* 메인 버튼 css*/
 .btn-main {
+    padding: 2px 5px;
 	background-color: #7971EA;
 	border-radius: 4px;
 	border-color: transparent; 
-	color:#fff
+	color:#fff;
+	word-break: keep-all;
+}
+.btn-main:hover {
+	background-color: #3A2EE0;
+	color:#fff;
 }
 /* 비활성화 버튼 css*/
 .btn-disa {
