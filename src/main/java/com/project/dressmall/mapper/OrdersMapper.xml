@@ -16,6 +16,7 @@
 		    , g.goods_memo goodsMemo
 		    , g.goods_price goodsPrice
 		    , gf.goods_file_name goodsFileName
+		    , gf.goods_file_ext goodsExt
 		FROM address a
 		LEFT OUTER JOIN payment p ON p.address_no = a.address_no
 		LEFT OUTER JOIN orders o ON o.payment_no = p.payment_no
