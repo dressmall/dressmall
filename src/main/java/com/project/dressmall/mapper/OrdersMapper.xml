@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.dressmall.mapper.OrdersMapper">
 	<!-- ordersList에서 구매확정 클릭 시 배송중에서 배송완료로 수정(박시현) -->
-	<update id="updateOrdersByPayment" parameterType="Integer">
-	
+	<update id="updateOrdersByPayment" parameterType="com.project.dressmall.vo.Payment">
+		UPDATE FROM payment 
 	</update>
 
 	<!-- ordersList에서 주문취소 클릭 시 삭제(박시현) -->

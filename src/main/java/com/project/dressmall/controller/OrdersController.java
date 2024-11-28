@@ -23,7 +23,6 @@ public class OrdersController {
 	@Autowired OrdersService ordersService;
 	
 	
-	
 	// deleteOrders - 주문목록에서 주문취소 클릭시 ordersNo 삭제 (박시현)
 	@GetMapping("/on/customer/deleteOrders")
 	public String deleteOrders(@RequestParam Integer ordersNo, @RequestParam Integer paymentNo) {

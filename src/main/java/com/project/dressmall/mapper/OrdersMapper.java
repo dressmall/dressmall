@@ -12,8 +12,8 @@ import com.project.dressmall.vo.Payment;
 @Mapper
 public interface OrdersMapper {
 	
-	// on/customer/modifyOrders
-	Integer updateOrdersByPayment();
+	// on/customer/modifyOrders 
+	Integer updateOrdersByPayment(Payment payment);
 	
 	// on/customer/deleteOrders
 	Integer deleteOrders(Integer ordersNo, Integer paymentNo);
