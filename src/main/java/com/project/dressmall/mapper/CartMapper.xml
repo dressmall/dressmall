@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.dressmall.mapper.CartMapper">
+	<!-- 고객페이지에서 장바구니에 담긴 항목 수 출력 (진수우) -->
+	<select id="countCartList">
+		SELECT
+	</select>
+	
 	<!-- /on/customer/paymentList : 결제페이지에서 장바구니에서 체크한 항목만 출력 (진수우) -->
 	<select id="selectCartListOne" parameterType="Integer" resultType="map">
 		SELECT
@@ -39,6 +44,7 @@
 			, g.goods_price goodsPrice
 			, (c.cart_amount * g.goods_price) goodsTotalPrice
 			, SUM(c.cart_amount * g.goods_price) OVER () totalPrice
+			, COUNT(*) OVER () countCartList
 		FROM cart c 
 		LEFT OUTER JOIN goods_file f
 		ON c.goods_no = f.goods_no

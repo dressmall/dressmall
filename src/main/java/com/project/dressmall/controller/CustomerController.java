@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.project.dressmall.service.CartService;
 import com.project.dressmall.service.CustomerService;
 import com.project.dressmall.util.Page;
 import com.project.dressmall.util.TeamColor;
@@ -22,6 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class CustomerController {
 	@Autowired CustomerService customerService;
+	@Autowired CartService cartService;
 	
 	// customer 테이블에서 비밀번호 수정.(진수우)
 	@PostMapping("/on/customer/modifyCustomer")
@@ -65,10 +67,11 @@ public class CustomerController {
 		// 회원정보 조회.
 		String customerMail = ((Customer)session.getAttribute("loginCustomer")).getCustomerMail();
 		List<Map<String, Object>> customer = customerService.getCustomerOne(customerMail);
-		//List<Map<String, Object>> customer = customerService.getCustomerOne("test");
 		log.debug(TeamColor.JIN + customer + TeamColor.RESET);
 		model.addAttribute("customer", customer);
 		log.debug(TeamColor.JIN + "myPage 폼 호출" + TeamColor.RESET);
+		List<Map<String, Object>> cart = cartService.getCartList(customerMail);
+		model.addAttribute("countCartList", cart.get(0).get("countCartList"));
 		return "on/customer/myPage";
 	}
 	

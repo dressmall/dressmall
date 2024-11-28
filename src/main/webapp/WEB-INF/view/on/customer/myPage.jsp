@@ -51,6 +51,8 @@
                   	<li>
                    		<a href="${pageContext.request.contextPath}/on/customer/cartList" class="site-cart">
                      		<span class="icon icon-shopping_cart"></span>
+                     		<!-- 장바구니 담은 개수 표시 -->
+	                        <span class="count">${countCartList }</span>
 	                    </a>
                  	 </li> 
                   	<li class="d-inline-block d-md-none ml-md-0"><a href="#" class="site-menu-toggle js-menu-toggle"><span class="icon-menu"></span></a></li>
