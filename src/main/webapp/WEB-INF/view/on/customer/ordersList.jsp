@@ -49,7 +49,7 @@
 		                  	</a>
 	                  	</li>
 	                  	<li>
-	                   		<a href="${pageContext.request.contextPath}/on/customer/cart" class="site-cart">
+	                   		<a href="${pageContext.request.contextPath}/on/customer/cartList" class="site-cart">
 	                     		<span class="icon icon-shopping_cart"></span>
 		                    </a>
 	                 	 </li> 
@@ -85,23 +85,8 @@
 			          <div class=" order-0 m-2 mb-md-0">
 			          	<h5>주문목록</h5>
 			          	<!-- 주문목록 리스트 출력 -->
-			          	<form action="${pageContext.request.contextPath}/on/customer/ordersList" method="get">
-			          		<c:if test="${empty paymentNo}">
-						        <div>
-						            <span>최근 주문한 상품이 없습니다</span>
-						        </div>
-						    </c:if>
-						    
-						    <c:if test="${not empty paymentNo}">
-						        <c:forEach items="${ordersList}" var="o">
-						            <span>결제 번호 NO.${o.paymentNo}</span>
-						            <span>${o.paymentMethod}</span>
-						            <span>${o.paymentState}</span>
-						            <div>
-						                
-						            </div>
-						        </c:forEach>              
-						    </c:if>
+			          	<form action="${pageContext.request.contextPath}/on/customer/ordersList" method="post">
+			          		${ordersList }
 			          	</form>
 			        </div>
 			      </div>

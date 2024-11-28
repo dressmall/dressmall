@@ -73,7 +73,7 @@
             <div class="border p-4 rounded mb-4">
               <h3 class="mb-3 h6 d-block">MyPage</h3>
               <ul class="list-unstyled mb-0">
-                <li class="mb-1"><a href="${pageContext.request.contextPath}/on/customer/orderList" class="d-flex"><span class="text-black">주문목록</span> <span class="text-black ml-auto"></span></a></li>
+                <li class="mb-1"><a href="${pageContext.request.contextPath}/on/customer/ordersList" class="d-flex"><span class="text-black">주문목록</span> <span class="text-black ml-auto"></span></a></li>
                 <li class="mb-1"><a href="${pageContext.request.contextPath}/on/customer/myPage" class="d-flex"><span class="text-black">회원정보</span> <span class="text-black ml-auto"></span></a></li>
               </ul>
             </div>

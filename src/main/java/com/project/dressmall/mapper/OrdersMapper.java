@@ -5,9 +5,11 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.project.dressmall.vo.Customer;
+
 @Mapper
 public interface OrdersMapper {
 	
 	// OrdersList 출력
-	List<Map<String, Object>> ordersList(Map<String, Object> param);
+	List<Map<String, Object>> selectOrdersList(Customer customerMail);
 }
