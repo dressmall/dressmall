@@ -63,7 +63,7 @@ public class BoardController {
 	}
 	
 	// deleteBoard - 후기 삭제
-	@GetMapping("/on/customer/goodsOne")
+	@GetMapping("/on/customer/removeBoard")
 	public String deleteBoard(Board board) {
 		Integer row = boardService.deleteBoard(board);
 		
