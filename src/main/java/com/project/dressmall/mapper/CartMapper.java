@@ -7,6 +7,9 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface CartMapper {
+	// /on/customer/paymentList : 결제페이지에서 장바구니에서 체크한 항목만 출력.(진수우)
+	Map<String, Object> selectCartListOne(Integer cartNo);
+	
 	// /on/customer/removeCart : 장바구니에서 리스트 삭제.(진수우)
 	Integer deleteCart(Integer cartNo);
 	

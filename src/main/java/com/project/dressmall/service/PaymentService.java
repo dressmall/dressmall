@@ -9,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.project.dressmall.mapper.CartMapper;
+import com.project.dressmall.mapper.OrdersMapper;
 import com.project.dressmall.mapper.PaymentMapper;
+import com.project.dressmall.vo.Payment;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,6 +21,18 @@ import lombok.extern.slf4j.Slf4j;
 @Transactional
 public class PaymentService {
 	@Autowired PaymentMapper paymentMapper;
+	@Autowired OrdersMapper ordersMapper;
+	@Autowired CartMapper cartMapper;
+	
+	// /on/customer/paymentComplete : 결제페이지에서 결제처리.(진수우)
+	public Integer addPayment(Payment payment) {
+		Integer paymentRow = paymentMapper.insertPayment(payment); // payment 테이블에 결제정보 insert.
+		if (paymentRow == 1) {
+			
+		}
+		
+		return paymentMapper.insertPayment(payment);
+	}
 	
 	// /on/staff/paymentList - 관리자페이지에서 결제리스트 출력.
 	public List<Map<String, Object>> getPaymentList(Integer currentPage, Integer rowPerPage, Integer beginRow) {
