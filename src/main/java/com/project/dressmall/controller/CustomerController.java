@@ -27,8 +27,7 @@ public class CustomerController {
 	@PostMapping("/on/customer/modifyCustomer")
 	public String modifyCustomer(HttpSession session, String customerPw) {
 		// 회원 비밀번호 수정 쿼리문에 넘겨줄 객체 setter.
-		Customer customer = new Customer();
-		customer.setCustomerMail((String)session.getAttribute("loginCustomer"));
+		Customer customer = (Customer)session.getAttribute("loginCustomer");
 		customer.setCustomerPw(customerPw);
 		// 데이터베이스에서 회원 비밀번호 수정.
 		customerService.modifyCustomer(customer);
@@ -64,7 +63,8 @@ public class CustomerController {
 	@GetMapping("/on/customer/myPage")
 	public String myPage(HttpSession session, Model model) {
 		// 회원정보 조회.
-		List<Map<String, Object>> customer = customerService.getCustomerOne((String)session.getAttribute("loginCustomer"));
+		String customerMail = ((Customer)session.getAttribute("loginCustomer")).getCustomerMail();
+		List<Map<String, Object>> customer = customerService.getCustomerOne(customerMail);
 		//List<Map<String, Object>> customer = customerService.getCustomerOne("test");
 		log.debug(TeamColor.JIN + customer + TeamColor.RESET);
 		model.addAttribute("customer", customer);
