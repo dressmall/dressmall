@@ -46,7 +46,7 @@
 		    , gf.goods_file_name goodsFileName
 		    , gf.goods_file_ext goodsExt
 		FROM address a
-		LEFT OUTER JOIN payment p ON p.address_no = a.address_no
+		INNER JOIN payment p ON p.address_no = a.address_no
 		LEFT OUTER JOIN orders o ON o.payment_no = p.payment_no
 		LEFT OUTER JOIN goods g ON o.goods_no = g.goods_no
 		LEFT OUTER JOIN goods_file gf ON g.goods_no = gf.goods_no

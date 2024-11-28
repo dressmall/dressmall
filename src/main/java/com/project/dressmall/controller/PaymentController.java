@@ -50,12 +50,15 @@ public class PaymentController {
 		// 고객 장바구니리스트 가져오기.
 		List<Map<String, Object>> cartList = cartService.getCartListOne(goodsChoice);
 		model.addAttribute("cartList", cartList);
-		// 총 결제가격을 계산하여 리스트에 저장.
+		// 총 결제가격을 계산.
 		Long totalPrice = 0L;
 		for (Map<String, Object> cart : cartList) {
 			totalPrice += (Long)cart.get("goodsTotalPrice");
 		}
 		model.addAttribute("totalPrice", totalPrice);
+		// 장바구니에 담긴 항목 수 계산.
+		List<Map<String, Object>> cart = cartService.getCartList(customerMail);
+		model.addAttribute("countCartList", cart.get(0).get("countCartList"));
 		return "on/customer/paymentList";
 	}
 	

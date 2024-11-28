@@ -14,11 +14,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.project.dressmall.service.CartService;
 import com.project.dressmall.service.CategoryService;
 import com.project.dressmall.service.GoodsService;
 import com.project.dressmall.util.Page;
 import com.project.dressmall.util.TeamColor;
 import com.project.dressmall.vo.Category;
+import com.project.dressmall.vo.Customer;
 import com.project.dressmall.vo.GoodsForm;
 
 import jakarta.servlet.http.HttpSession;
@@ -29,6 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 public class GoodsController {
 	@Autowired GoodsService goodsService;
 	@Autowired CategoryService categoryService;
+	@Autowired CartService cartService;
 	
 	// ----------------------------- 고객 -------------------------------------------------
 	// main 화면 출력(goods 리스트, 카테고리, 검색, 페이징) : main.jsp 호출.(김혜린)
@@ -68,6 +71,9 @@ public class GoodsController {
 		
 		model.addAttribute("loginStaff", session.getAttribute("loginStaff")); // login information model add.
 		
+		String customerMail = ((Customer)session.getAttribute("loginCustomer")).getCustomerMail();
+		List<Map<String, Object>> cart = cartService.getCartList(customerMail);
+		model.addAttribute("countCartList", cart.get(0).get("countCartList"));
 
 		return "on/customer/main";
 	}
