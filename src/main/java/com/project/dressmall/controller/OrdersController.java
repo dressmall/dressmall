@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.project.dressmall.service.CartService;
 import com.project.dressmall.service.OrdersService;
 import com.project.dressmall.util.TeamColor;
 import com.project.dressmall.vo.Customer;
@@ -21,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class OrdersController {
 	@Autowired OrdersService ordersService;
-	
+	@Autowired CartService cartService;
 	
 	// deleteOrders - 주문목록에서 주문취소 클릭시 ordersNo 삭제 (박시현)
 	@GetMapping("/on/customer/deleteOrders")
@@ -43,6 +44,9 @@ public class OrdersController {
 		log.debug(TeamColor.PARK + "customerMail : " + customerMail + TeamColor.RESET);
 		log.debug(TeamColor.PARK + "ordersList : " + ordersList + TeamColor.RESET);
 		model.addAttribute("ordersList", ordersList);
+		
+		List<Map<String, Object>> cart = cartService.getCartList(customerMail.getCustomerMail());
+		model.addAttribute("countCartList", cart.get(0).get("countCartList"));
 		
 		return "on/customer/ordersList";
 	}
