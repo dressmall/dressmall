@@ -49,7 +49,7 @@
 		                  	</a>
 	                  	</li>
 	                  	<li>
-	                   		<a href="${pageContext.request.contextPath}/on/customer/cart" class="site-cart">
+	                   		<a href="${pageContext.request.contextPath}/on/customer/cartList" class="site-cart">
 	                     		<span class="icon icon-shopping_cart"></span>
 		                    </a>
 	                 	 </li> 
@@ -88,28 +88,32 @@
 			          	
 			          	<div class="content border"> 
 			          		<form action="${pageContext.request.contextPath}/on/customer/addBoard" method="post">
-				          		<h6>주문번호 NO.${ordersNo }</h6> <!-- 주문번호 받기 -->
-				          		
-				          		<div class="d-flex align-items-center justify-content-start w-100 border content mb-3">
-				          			<!-- 리뷰를 등록할 제품사진과 상세정보(title, subtext, price) -->
-				          			<div class="img-box">
-					          			<img src="${pageContext.request.contextPath}/images/cloth_1.jpg" alt="Image placeholder" class="img-fluid">			          			
+					          	<h6>주문번호 NO.${ordersNo }</h6> <!-- 주문번호 받기 -->
+					          	<!-- @RequestParamfh ordersNo을 넘겨주기위해 -->
+					          	<c:forEach items="${ordersByGoods}" var="og">
+						          	<input type="hidden" name="ordersNo" value="${og.ordersNo}">
+						          	<input type="hidden" name="goodsNo" value="${og.goodsNo}">
+					          		<div class="d-flex align-items-center justify-content-start w-100 border content mb-3">
+					          			<!-- 리뷰를 등록할 제품사진과 상세정보(title, subtext, price) -->
+										<div class="img-box">
+											<img src="${pageContext.request.contextPath}/images/cloth_1.jpg" alt="Image placeholder" class="img-fluid">
+										</div>
+										<div class="text-box d-flex flex-column ms-3">
+											<span>Title : ${og.goodsTitle }</span> 
+											<span class=" text-memo">상품 설명 : ${og.goodsMemo }</span> 
+											<span>Price : ${og.goodsPrice }</span> 
+										</div>
+										
+					          		</div>
+				          			<h6>리뷰 작성</h6>
+				          			<div>
+				          				<textarea rows="5" cols="100" name="boardContent"></textarea>
 				          			</div>
-				          			<div class="text-box d-flex flex-column ms-3">
-				          				<span>Title : title 받아오기</span>
-				          				<span>상품 설명 : 설명 받아오기</span>
-				          				<span>Price : 가격 받아오기</span>
+				          			<!-- 유효성 검사 후 에러 메세지 출력 -->
+				          			<div class="text-end">
+					          			<button class="btn-main" type="submit">등록</button>			          			
 				          			</div>
-				          		</div>
-			          			<h6>리뷰 작성</h6>
-			          			<input type="hidden" name="ordersNo" value="">
-			          			<div>
-			          				<textarea rows="5" cols="100" name="boardContent"></textarea>
-			          			</div>
-			          			<!-- 유효성 검사 후 에러 메세지 출력 -->
-			          			<div class="text-end">
-				          			<button class="btn-main">등록</button>			          			
-			          			</div>
+			          			</c:forEach>
 			          		</form>
 			          	</div>
 			        </div>

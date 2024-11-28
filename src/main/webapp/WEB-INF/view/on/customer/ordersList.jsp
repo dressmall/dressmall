@@ -85,7 +85,7 @@
 			          <div class=" order-0 m-2 mb-md-0 w-100">
 			          	<h5>주문목록</h5>
 			          	<!-- 주문목록 리스트 출력 -->
-			          	<div class="border w-100 content ordersList-box">
+			          	<div class="border w-100 content scroll-box">
 				          	<form action="${pageContext.request.contextPath}/on/customer/ordersList" method="post">
 				          		<c:forEach items="${ordersList }" var="o">
 				          			<div>
@@ -115,7 +115,7 @@
 					          			</div>
 					          			<div class="orders-box content border d-flex align-items-center justify-content-start mb-3">
 					          				<div class="img-box">
-					          					
+					          					<input type="hidden" name="ordersNo" value="${o.ordersNo }">
 					          				 	<c:if test="${o.goodsFileName == null}">
 						          					<img src="${pageContext.request.contextPath}/upload/noImage.png" class="img-fluid" style="width: 150px; height: 150px; object-fit: cover;">			          				 	
 					          				 	</c:if>
@@ -131,7 +131,7 @@
 					          					<span>수량 : ${o.ordersAmount }</span>				          				
 					          				</div>
 					          				<c:if test="${o.paymentState == '배송완료' }">
-						          				<a class="btn-main" href="${pageContext.request.contextPath}/on/customer/addBoard">리뷰등록</a>
+						          				<a class="btn-main" href="${pageContext.request.contextPath}/on/customer/addBoard?ordersNo=${o.ordersNo }">리뷰등록</a>
 						          			</c:if>	
 					          			</div>
 					          		</div>	

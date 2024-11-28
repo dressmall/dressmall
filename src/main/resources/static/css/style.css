@@ -67,16 +67,16 @@ input {
 	word-break: keep-all
 }
 /* ordersList-box */
-.ordersList-box {
-	max-height: 750px;
+.scroll-box {
+	max-height: 550px;
 	overflow-y: scroll; 
 }
 /* ordersList-box 스크롤 커스텀 */
-.ordersList-box::-webkit-scrollbar {
+.scroll-box::-webkit-scrollbar {
     width: 10px;  
 }
 
-.ordersList-box::-webkit-scrollbar-thumb {
+.scroll-box::-webkit-scrollbar-thumb {
     background: #7971EA;
     border-radius: 10px; 
 }

@@ -54,9 +54,9 @@
 	                  			<span>로그아웃</span>
 	                  		</a>
 	                  	</li> 
-	                  	<li><a href="${pageContext.request.contextPath}/"><span class="icon icon-person"></span></a></li> <!-- 마이페이지 -->
+	                  	<li><a href="${pageContext.request.contextPath}/on/customer/myPage"><span class="icon icon-person"></span></a></li> <!-- 마이페이지 -->
 	                  	<li>
-	                   		<a href="${pageContext.request.contextPath}/" class="site-cart">
+	                   		<a href="${pageContext.request.contextPath}/on/customer/cartList" class="site-cart">
 	                     	<span class="icon icon-shopping_cart"></span>
 		                      <!-- 장바구니 담은 개수 표시 -->
 		                      <span class="count"></span>
@@ -85,6 +85,7 @@
 	<div class="site-section">
       <div class="container">
         <div class="row">
+        	<!-- 상품 상세정보 -->
           <div class="col-md-6">
             <img src="images/cloth_1.jpg" alt="Image" class="img-fluid">
           </div>
@@ -131,8 +132,8 @@
             </div>
 
             </div>
-            <p><a href="cart.html" class="buy-now btn btn-sm btn-primary">Add To Cart</a></p>
-
+            <p><a href="${pageContext.request.contextPath}/on/customer/cartList" class="buy-now btn btn-sm btn-primary">Add To Cart</a></p>
+		
           </div>
         </div>
       </div>
@@ -150,71 +151,12 @@
           <div class="col-md-12">
             <div class="nonloop-block-3 owl-carousel">
               <div class="item">
-                <div class="block-4 text-center">
-                  <figure class="block-4-image">
-                    <img src="images/cloth_1.jpg" alt="Image placeholder" class="img-fluid">
-                  </figure>
-                  <div class="block-4-text p-4">
-                    <h3><a href="#">Tank Top</a></h3>
-                    <p class="mb-0">Finding perfect t-shirt</p>
-                    <p class="text-primary font-weight-bold">$50</p>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="block-4 text-center">
-                  <figure class="block-4-image">
-                    <img src="images/shoe_1.jpg" alt="Image placeholder" class="img-fluid">
-                  </figure>
-                  <div class="block-4-text p-4">
-                    <h3><a href="#">Corater</a></h3>
-                    <p class="mb-0">Finding perfect products</p>
-                    <p class="text-primary font-weight-bold">$50</p>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="block-4 text-center">
-                  <figure class="block-4-image">
-                    <img src="images/cloth_2.jpg" alt="Image placeholder" class="img-fluid">
-                  </figure>
-                  <div class="block-4-text p-4">
-                    <h3><a href="#">Polo Shirt</a></h3>
-                    <p class="mb-0">Finding perfect products</p>
-                    <p class="text-primary font-weight-bold">$50</p>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="block-4 text-center">
-                  <figure class="block-4-image">
-                    <img src="images/cloth_3.jpg" alt="Image placeholder" class="img-fluid">
-                  </figure>
-                  <div class="block-4-text p-4">
-                    <h3><a href="#">T-Shirt Mockup</a></h3>
-                    <p class="mb-0">Finding perfect products</p>
-                    <p class="text-primary font-weight-bold">$50</p>
-                  </div>
-                </div>
-              </div>
-              <div class="item">
-                <div class="block-4 text-center">
-                  <figure class="block-4-image">
-                    <img src="images/shoe_1.jpg" alt="Image placeholder" class="img-fluid">
-                  </figure>
-                  <div class="block-4-text p-4">
-                    <h3><a href="#">Corater</a></h3>
-                    <p class="mb-0">Finding perfect products</p>
-                    <p class="text-primary font-weight-bold">$50</p>
-                  </div>
-                </div>
+                
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    
-    <!-- footer -->
 </body>
 </html>
