@@ -63,7 +63,7 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        ${loginStaff}
+                        ${loginStaff.staffId}
                     </div>
                 </nav>
             </div>
@@ -97,7 +97,7 @@
                                   		<td>${c.updateDate}</td>
                                   		<td>${c.createDate}</td>
                                   		<td>
-                                  			<a href="${pageContext.request.contextPath}/on/staff/removeCategory?categoryNo=${c.categoryNo}" class="btn btn-main">삭제</a>
+                                  			<a href="${pageContext.request.contextPath}/on/staff/removeCategory?categoryNo=${c.categoryNo}" class="btn btn-main w-100">삭제</a>
                                   		</td>
                                   	</tr>
                                   </c:forEach>

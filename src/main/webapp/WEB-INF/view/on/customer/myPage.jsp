@@ -73,7 +73,7 @@
             <div class="border p-4 rounded mb-4">
               <h3 class="mb-3 h6 d-block">MyPage</h3>
               <ul class="list-unstyled mb-0">
-                <li class="mb-1"><a href="${pageContext.request.contextPath}/on/customer/orderList" class="d-flex"><span class="text-black">주문목록</span> <span class="text-black ml-auto"></span></a></li>
+                <li class="mb-1"><a href="${pageContext.request.contextPath}/on/customer/ordersList" class="d-flex"><span class="text-black">주문목록</span> <span class="text-black ml-auto"></span></a></li>
                 <li class="mb-1"><a href="${pageContext.request.contextPath}/on/customer/myPage" class="d-flex"><span class="text-black">회원정보</span> <span class="text-black ml-auto"></span></a></li>
               </ul>
             </div>
@@ -105,8 +105,9 @@
           </div>
           
           <div class=" order-1 m-2 mb-md-0 w-50">
-          <h5>회원주소</h5>
+          <h5>주소리스트</h5>
             <div class="border p-5 rounded mb-4">
+              <div class="scroll-box">
               <table class="table">
               	<c:forEach var="c" items="${customer}">
               		<tr>
@@ -115,12 +116,13 @@
 		                </c:if>
 		                <c:if test="${c.addressDetail != null }">
 		              	  <td>${c.addressDetail}</td>
-	              		  <td><a type="button" class="btn-main btn text-white" href="${pageContext.request.contextPath}/on/customer/modifyAddress?addressNo=${c.addressNo}">수정</a></td>
-	              		  <td><a type="button" class="btn-main btn text-white" href="${pageContext.request.contextPath}/on/customer/removeAddress?addressNo=${c.addressNo}">삭제</a></td>
+	              		  <td><a type="button" class="btn-main btn w-100" href="${pageContext.request.contextPath}/on/customer/modifyAddress?addressNo=${c.addressNo}">수정</a></td>
+	              		  <td><a type="button" class="btn-main btn w-100" href="${pageContext.request.contextPath}/on/customer/removeAddress?addressNo=${c.addressNo}">삭제</a></td>
 		                </c:if>
 	              	</tr>
               	</c:forEach>
               </table>
+              </div>
               <div class="btnBox mt-3 d-flex justify-content-end">
 				<a type="button" class="btn-main btn text-white" href="${pageContext.request.contextPath}/on/customer/addAddress">주소 추가</a>
 			  </div>

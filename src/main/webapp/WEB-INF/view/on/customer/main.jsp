@@ -49,7 +49,7 @@
                   	</li> 
                   	<li><a href="${pageContext.request.contextPath}/on/customer/myPage"><span class="icon icon-person"></span></a></li> <!-- 마이페이지 -->
                   	<li>
-                   		<a href="${pageContext.request.contextPath}/" class="site-cart">
+                   		<a href="${pageContext.request.contextPath}/on/customer/cartList" class="site-cart">
                      	<span class="icon icon-shopping_cart"></span>
 	                      <!-- 장바구니 담은 개수 표시 -->
 	                      <span class="count"></span>

@@ -49,7 +49,7 @@
 		                  	</a>
 	                  	</li>
 	                  	<li>
-	                   		<a href="${pageContext.request.contextPath}/on/customer/cart" class="site-cart">
+	                   		<a href="${pageContext.request.contextPath}/on/customer/cartList" class="site-cart">
 	                     		<span class="icon icon-shopping_cart"></span>
 		                    </a>
 	                 	 </li> 
@@ -82,27 +82,62 @@
 		          </div>
 		          
 		          <div class="d-flex w-100">
-			          <div class=" order-0 m-2 mb-md-0">
+			          <div class=" order-0 m-2 mb-md-0 w-100">
 			          	<h5>주문목록</h5>
 			          	<!-- 주문목록 리스트 출력 -->
-			          	<form action="${pageContext.request.contextPath}/on/customer/ordersList" method="get">
-			          		<c:if test="${empty paymentNo}">
-						        <div>
-						            <span>최근 주문한 상품이 없습니다</span>
-						        </div>
-						    </c:if>
-						    
-						    <c:if test="${not empty paymentNo}">
-						        <c:forEach items="${ordersList}" var="o">
-						            <span>결제 번호 NO.${o.paymentNo}</span>
-						            <span>${o.paymentMethod}</span>
-						            <span>${o.paymentState}</span>
-						            <div>
-						                
-						            </div>
-						        </c:forEach>              
-						    </c:if>
-			          	</form>
+			          	<div class="border w-100 content scroll-box">
+				          	<form action="${pageContext.request.contextPath}/on/customer/ordersList" method="post">
+				          		<c:forEach items="${ordersList }" var="o">
+				          			<div>
+				          				<div class="payment-box d-flex align-items-center justify-content-between mb-3">
+						          			결제번호 No.${o.paymentNo }
+						          			<div>
+						          				<span class="main-text">
+								          			${o.paymentState }	    				
+						          				</span>
+							          			<!-- 결제완료일 경우 -->
+							          			<c:if test="${o.paymentState == '결제완료' }">
+							          				<a
+							          					href="${pageContext.request.contextPath}/on/customer/deleteOrders?ordersNo=${o.ordersNo}&paymentNo=${o.paymentNo }"
+							          					 class="btn-main ms-3">
+							          					주문취소	
+							          				</a>
+							          			</c:if>		
+							          			<!-- 배송중일 경우 -->	          			
+							          			<c:if test="${o.paymentState == '배송중' }">
+							          				<button class="btn-main ms-3">구매확정</button>
+							          			</c:if>			 
+							          			<!-- 배송완료일 경우 -->         			
+							          			<c:if test="${o.paymentState == '배송완료' }">
+							          				<button class="btn-disa ms-3" disabled>구매확정</button>
+							          			</c:if>	
+						          			</div>
+					          			</div>
+					          			<div class="orders-box content border d-flex align-items-center justify-content-start mb-3">
+					          				<div class="img-box">
+					          					<input type="hidden" name="ordersNo" value="${o.ordersNo }">
+					          				 	<c:if test="${o.goodsFileName == null}">
+						          					<img src="${pageContext.request.contextPath}/upload/noImage.png" class="img-fluid" style="width: 150px; height: 150px; object-fit: cover;">			          				 	
+					          				 	</c:if>
+					          					<c:if test="${o.goodsFileName != null}">
+								          			${o.goodsFileName }
+								          			.${o.goodsFileExt }
+					          					</c:if>	          			
+					          				</div>
+					          				<div class="text-box d-flex flex-column">
+					          					<span>Title : ${o.goodsTitle }</span>
+					          					<span class=" text-memo">상세설명 : ${o.goodsMemo }</span>
+					          					<span>가격 : ${o.goodsPrice }</span>
+					          					<span>수량 : ${o.ordersAmount }</span>				          				
+					          				</div>
+					          				<c:if test="${o.paymentState == '배송완료' }">
+						          				<a class="btn-main" href="${pageContext.request.contextPath}/on/customer/addBoard?ordersNo=${o.ordersNo }">리뷰등록</a>
+						          			</c:if>	
+					          			</div>
+					          		</div>	
+				          		</c:forEach>
+				          	</form>			          	
+			          	</div>
 			        </div>
 			      </div>
 			   </div>
@@ -125,15 +160,15 @@
      </div>
     </footer>
 
-  <script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
-  <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
-  <script src="${pageContext.request.contextPath}/js/popper.min.js"></script>
-  <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-  <script src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
-  <script src="${pageContext.request.contextPath}/js/jquery.magnific-popup.min.js"></script>
-  <script src="${pageContext.request.contextPath}/js/aos.js"></script>
-
-  <script src="${pageContext.request.contextPath}/js/main.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
+	<script src="${pageContext.request.contextPath}/js/popper.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery.magnific-popup.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/aos.js"></script>
+	
+	<script src="${pageContext.request.contextPath}/js/main.js"></script>
     
   </body>
 

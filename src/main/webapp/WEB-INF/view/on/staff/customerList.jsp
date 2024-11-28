@@ -58,7 +58,7 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        ${loginStaff}
+                        ${loginStaff.staffId}
                     </div>
                 </nav>
             </div>
@@ -88,7 +88,7 @@
 	                                  <td>${c.updateDate}</td>
 	                                  <td>${c.createDate}</td>
 	                                  <td>
-	                                  	<a class="btn btn-main" href="${pageContext.request.contextPath}/on/staff/deleteCustomer?customerMail=${c.customerMail}&currentPage=${currentPage}">탈퇴</a>
+	                                  	<a class="btn btn-main w-100" href="${pageContext.request.contextPath}/on/staff/deleteCustomer?customerMail=${c.customerMail}&currentPage=${currentPage}">탈퇴</a>
 	                                  </td>
 	                             	 </tr>
 	                          	</c:forEach>

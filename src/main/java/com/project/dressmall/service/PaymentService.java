@@ -9,7 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.project.dressmall.mapper.CartMapper;
+import com.project.dressmall.mapper.OrdersMapper;
 import com.project.dressmall.mapper.PaymentMapper;
+import com.project.dressmall.vo.Orders;
+import com.project.dressmall.vo.Payment;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,6 +22,34 @@ import lombok.extern.slf4j.Slf4j;
 @Transactional
 public class PaymentService {
 	@Autowired PaymentMapper paymentMapper;
+	@Autowired OrdersMapper ordersMapper;
+	@Autowired CartMapper cartMapper;
+	
+	// /on/customer/paymentComplete : 결제페이지에서 결제처리.(진수우)
+	public void paymentProcess(Payment payment, List<Integer> cartNo) {
+		Integer paymentRow = paymentMapper.insertPayment(payment); // payment 테이블에 결제정보 insert.
+		Integer paymentNo = payment.getPaymentNo(); // goods 테이블에 데이터 삽입 시 자동으로 생성되는 goodsNo 값 받아옴.
+		if (paymentRow == 1) {
+			Integer count = 0;
+			for (Integer c : cartNo) {
+				// 장바구니에서 선택된 항목들의 정보를 가져와서 Orders 객체에 set.
+				Map<String, Object> cart = cartMapper.selectCartListOne(c);
+				Orders orders = new Orders();
+				orders.setGoodsNo((Integer)cart.get("goodsNo"));
+				orders.setOrdersAmount((Integer)cart.get("cartAmount"));
+				orders.setPaymentNo(paymentNo); 
+				// orders 테이블에 결제정보 insert.
+				count += ordersMapper.insertOrder(orders);
+			}
+			if (count == cartNo.size()) {
+				count = 0;
+				// 결제된 목록들을 장바구니에서 삭제.
+				for (Integer c : cartNo) {
+					count += cartMapper.deleteCart(c);
+				}
+			}
+		}
+	}
 	
 	// /on/staff/paymentList - 관리자페이지에서 결제리스트 출력.
 	public List<Map<String, Object>> getPaymentList(Integer currentPage, Integer rowPerPage, Integer beginRow) {

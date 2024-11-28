@@ -15,11 +15,25 @@ body {
 }
 /* 메인 버튼 css*/
 .btn-main {
+    padding: 2px 5px;
 	background-color: #7971EA;
 	border-radius: 4px;
 	border-color: transparent; 
-	color:#fff
+	color:#fff;
+	word-break: keep-all;
 }
+.btn-main:hover {
+	background-color: #3A2EE0;
+	color:#fff;
+}
+/* 비활성화 버튼 css*/
+.btn-disa {
+	background-color: #8c92a0;
+	color: #fff;
+	border-radius: 4px;
+	border-color: transparent; 
+}
+
 /* 에러 메세지 css*/
 .msg {
 	font-size: 0.75rem;
@@ -40,7 +54,36 @@ input {
 .img-box > img {
 	width: 100%;
 }
+.text-box {
+	box-sizing: border-box;
+	overflow: auto;
+}
+/* 텍스트가 너무 길 경우 뒤에 ...으로 넘어가기*/
+.text-memo {
+	margin: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	word-break: keep-all
+}
+/* ordersList-box */
+.scroll-box {
+	max-height: 550px;
+	overflow-y: scroll; 
+}
+/* ordersList-box 스크롤 커스텀 */
+.scroll-box::-webkit-scrollbar {
+    width: 10px;  
+}
 
+.scroll-box::-webkit-scrollbar-thumb {
+    background: #7971EA;
+    border-radius: 10px; 
+}
+
+.ordersList-box::-webkit-scrollbar-track {
+    background: #D6D6D6;  
+}
 ::-moz-selection {
   background: #000;
   color: #fff; }

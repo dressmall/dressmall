@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.project.dressmall.service.AddressService;
 import com.project.dressmall.util.TeamColor;
 import com.project.dressmall.vo.Address;
+import com.project.dressmall.vo.Customer;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -57,8 +58,8 @@ public class AddressController {
 		// 회원 주소 수정 쿼리문에 넘겨줄 map 생성.
 		Map<String, Object> param = new HashMap<>();
 		param.put("addressDetail", addressDetail);
-		param.put("customerMail", (String)session.getAttribute("loginCustomer"));
-		// param.put("customerMail", "test");
+		String customerMail = ((Customer)session.getAttribute("loginCustomer")).getCustomerMail();
+		param.put("customerMail", customerMail);
 		log.debug(TeamColor.JIN + param + TeamColor.RESET);
 		
 		// 데이터베이스에서 회원 비밀번호 수정.

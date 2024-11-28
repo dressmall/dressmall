@@ -32,18 +32,6 @@ public class LoginController {
 		return "off/customer/main";
 	}
 	
-	// 로그인 안한 main페이지
-	@GetMapping("/on/customer/main")
-	public String customerMain(HttpSession session) {
-		
-		if(session == null) {
-			return "/off/customer/customerLogin";
-		}
-		
-		return "on/customer/main";
-	}
-	
-	
 	// customer/logout
 	@GetMapping("/on/customer/logout")
 	public String customerLogout(HttpSession session) {
@@ -71,17 +59,17 @@ public class LoginController {
 		customer.setCustomerMail(customerMail);
 		customer.setCustomerPw(customerPw);
 		
-		// 세션을 다른페이지에서 못가져와 (Customer)추가
-		Customer loginCustomer = (Customer)customerService.customerLogin(customer);
+		Customer loginCustomer = customerService.customerLogin(customer);
+		
 		if(loginCustomer == null) {
 			model.addAttribute("msg","로그인에 실패했습니다");
 			return "off/customer/customerLogin";
 		}
 		session.setAttribute("loginCustomer", loginCustomer);
 		
-		log.debug(TeamColor.PARK + "customer 로그인" + TeamColor.RESET);
-		log.debug(TeamColor.PARK + "customerMail : " + customerMail + TeamColor.RESET);
-		log.debug(TeamColor.PARK + "customerPw : " + customerPw + TeamColor.RESET);
+		
+		log.debug(TeamColor.PARK + "customer 로그인성공" + TeamColor.RESET);
+		log.debug(TeamColor.PARK + "loginCustomer : " + loginCustomer + TeamColor.RESET);
 		
 		return "redirect:/on/customer/main";
 	}
@@ -89,7 +77,7 @@ public class LoginController {
 	// 일반회원 로그인 폼
 	@GetMapping("/off/customer/customerLogin")
 	public String customerLogin() {
-		log.debug(TeamColor.PARK + "customer 로그인" + TeamColor.RESET);
+		log.debug(TeamColor.PARK + "customer 폼출력" + TeamColor.RESET);
 		
 		return "off/customer/customerLogin";
 	}
