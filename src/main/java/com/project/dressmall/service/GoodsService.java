@@ -31,14 +31,24 @@ public class GoodsService {
 	@Autowired GoodsCategoryMapper goodsCategoryMapper;
 	
 	// /on/customer/main : 메인페이지 상품 리스트 출력.(김혜린)
-	public List<Map<String, Object>> getMain(Map paramMap) {
-				
-		return goodsMapper.selectMain(paramMap);
+	public List<Map<String, Object>> getMain(Map<String, Object> paramMap) {
+		
+		if(paramMap.get("categoryNo") == null) {
+			return goodsMapper.selectMain(paramMap);
+		} else {
+			return goodsMapper.selectMainByCategory(paramMap);
+		}
+			
 	}
 	
 	// /on/customer/main : 메인페이지 상품리스트 카운트.(김혜린)
-	public Integer countGoodsListByMain(String searchWord) {
-		return goodsMapper.countGoodsListByMain(searchWord);
+	public Integer countGoodsListByMain(String searchWord, Integer categoryNo) {
+		
+		Map<String, Object> param = new HashMap<>();
+		param.put("searchWord", searchWord);
+		param.put("categoryNo", categoryNo);
+		
+		return goodsMapper.countGoodsListByMain(param);
 	}
 	
 	

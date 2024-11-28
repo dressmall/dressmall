@@ -2,7 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.dressmall.mapper.CategoryMapper">
 	
-	<!-- /on/staff/addGoods : 카테고리 리스트 출력(상품등록에서 카테고리 선택시 필요) -->
+	<!-- /on/customer/main : 카테고리 리스트 + 카테고리별 개수 구하기.(김혜린) -->
+	<select id="countCategory" resultType="Map">
+		SELECT 
+			c.category_no categoryNo
+			, c.category_title categoryTitle
+			, COUNT(*) count
+		FROM category c 
+		INNER JOIN goods_category gc
+		ON c.category_no = gc.category_no
+		GROUP BY c.category_no
+		ORDER BY c.category_no
+	</select>
+	
+	<!-- /on/staff/addGoods : 카테고리 리스트 출력(상품등록에서 카테고리 선택시 필요).(김혜린) -->
+	<!-- /on/customer/main : 카테고리 리스트 출력 (카테고리별로 필터링).(김혜린) -->
 	<select id="selectCategoryListByGoods" resultType="com.project.dressmall.vo.Category">
 		SELECT 
 			category_no categoryNo
@@ -13,19 +27,19 @@
 		ORDER BY category_no
 	</select>
 	
-	<!-- /on/staff/removeCategory : 카테고리 삭제 -->
+	<!-- /on/staff/removeCategory : 카테고리 삭제.(김혜린) -->
 	<delete id="deleteCategory" parameterType="Integer">
 		DELETE FROM category
 		WHERE category_no = #{categoryNo}
 	</delete>
 	
-	<!-- /on/staff/addCategory : 카테고리 추가 -->
+	<!-- /on/staff/addCategory : 카테고리 추가.(김혜린) -->
 	<insert id="insertCategory" parameterType="com.project.dressmall.vo.Category">
 		INSERT INTO category(category_title)
 		VALUES (#{categoryTitle})
 	</insert>
 	
-	<!-- /on/staff/categoryrList : 카테고리 리스트 출력 -->
+	<!-- /on/staff/categoryrList : 카테고리 리스트 출력.(김혜린) -->
 	<select id="selectCategoryList" 
 		parameterType="Map" resultType="com.project.dressmall.vo.Category">
 		SELECT 
@@ -38,7 +52,7 @@
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
 	
-	<!-- /on/staff/categoryrList : 카테고리 리스트 전체 행 개수(페이징에 필요) -->
+	<!-- /on/staff/categoryrList : 카테고리 리스트 전체 행 개수(페이징에 필요).(김혜린) -->
 	<select id="countCategoryList" resultType="Integer">
 		SELECT COUNT(*) FROM category	
 	</select>

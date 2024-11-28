@@ -118,7 +118,7 @@
                 
                   <!-- 검색어 있는 경우 -->
                   <c:if test="${searchWord != null}">
-	                  <ul>                  
+	                  <ul>         
 	                  	<c:if test="${currentPage > numPerPage}">
 							<li><a href="${pageContext.request.contextPath}/on/customer/main?currentPage=${beginPagingNum - numPerPage}&searchWord=${searchWord}">&lt;</a></li>
 						</c:if>
@@ -138,22 +138,45 @@
                   
                   <!-- 검색어 없는 경우 -->
                   <c:if test="${searchWord == null}">
-	                  <ul>                  
-	                  	<c:if test="${currentPage > numPerPage}">
-							<li><a href="${pageContext.request.contextPath}/on/customer/main?currentPage=${beginPagingNum - numPerPage}">&lt;</a></li>
-						</c:if>
-						<c:forEach var="num" begin="${beginPagingNum}" end="${endPagingNum}">
-							<c:if test="${num==currentPage}">
-								<li class="active"><span>${num}</span></li>
+                  	  <!-- 카테고리 없는 경우 -->
+                  	  <c:if test="${categoryNo == null}">
+                  	  	<ul>                  
+		                  	<c:if test="${currentPage > numPerPage}">
+								<li><a href="${pageContext.request.contextPath}/on/customer/main?currentPage=${beginPagingNum - numPerPage}">&lt;</a></li>
 							</c:if>
-							<c:if test="${num!=currentPage}">
-								<li><a href="${pageContext.request.contextPath}/on/customer/main?currentPage=${num}">${num}</a></li>
+							<c:forEach var="num" begin="${beginPagingNum}" end="${endPagingNum}">
+								<c:if test="${num==currentPage}">
+									<li class="active"><span>${num}</span></li>
+								</c:if>
+								<c:if test="${num!=currentPage}">
+									<li><a href="${pageContext.request.contextPath}/on/customer/main?currentPage=${num}">${num}</a></li>
+								</c:if>
+							</c:forEach>
+		                    <c:if test="${currentPage < lastPage - numPerPage }">
+								<li><a href="${pageContext.request.contextPath}/on/customer/main?currentPage=${beginPagingNum + numPerPage}">&gt;</a></li>
 							</c:if>
-						</c:forEach>
-	                    <c:if test="${currentPage < lastPage - numPerPage }">
-							<li><a href="${pageContext.request.contextPath}/on/customer/main?currentPage=${beginPagingNum + numPerPage}">&gt;</a></li>
-						</c:if>
-	                  </ul>
+		                </ul>
+                  	  </c:if>
+                  	  <!-- 카테고리 있는 경우 -->
+                  	  <c:if test="${categoryNo != null}">
+                  	  	<ul>                  
+		                  	<c:if test="${currentPage > numPerPage}">
+								<li><a href="${pageContext.request.contextPath}/on/customer/main?currentPage=${beginPagingNum - numPerPage}&categoryNo=${categoryNo}">&lt;</a></li>
+							</c:if>
+							<c:forEach var="num" begin="${beginPagingNum}" end="${endPagingNum}">
+								<c:if test="${num==currentPage}">
+									<li class="active"><span>${num}</span></li>
+								</c:if>
+								<c:if test="${num!=currentPage}">
+									<li><a href="${pageContext.request.contextPath}/on/customer/main?currentPage=${num}&categoryNo=${categoryNo}">${num}</a></li>
+								</c:if>
+							</c:forEach>
+		                    <c:if test="${currentPage < lastPage - numPerPage }">
+								<li><a href="${pageContext.request.contextPath}/on/customer/main?currentPage=${beginPagingNum + numPerPage}&categoryNo=${categoryNo}">&gt;</a></li>
+							</c:if>
+		                </ul>
+                  	  </c:if>
+	                  
                   </c:if>
                   
                 </div>
@@ -164,20 +187,27 @@
             
           </div>
 
-          <div class="col-md-3 order-1 mb-5 mb-md-0">
+            <div class="col-md-3 order-1 mb-5 mb-md-0">
             <div class="border p-4 rounded mb-4">
               <h3 class="mb-3 h6 text-uppercase text-black d-block">Categories</h3>
               <ul class="list-unstyled mb-0">
-                <li class="mb-1"><a href="#" class="d-flex"><span>상의</span> <span class="text-black ml-auto">(2,220)</span></a></li>
-                <li class="mb-1"><a href="#" class="d-flex"><span>하의</span> <span class="text-black ml-auto">(2,550)</span></a></li>
-                <li class="mb-1"><a href="#" class="d-flex"><span>드레스</span> <span class="text-black ml-auto">(2,124)</span></a></li>
+              	<c:forEach var="c" items="${categoryCountList}">
+	                <li class="mb-1">
+						<a href="${pageContext.request.contextPath}/on/customer/main?currentPage=${currentPage}&categoryNo=${c.categoryNo}" class="d-flex">
+	                		<span>${c.categoryTitle}</span>
+	                		<span class="text-black ml-auto">(${c.count})</span>
+		                </a>
+	                </li>              	
+              	</c:forEach>
               </ul>
             </div>
           </div>
+          
         </div>
         
       </div>
     </div>
+    
 	<footer class="py-4 bg-light mt-auto">
        <div class="container-fluid px-4">
            <div class="d-flex align-items-center justify-content-between small">
