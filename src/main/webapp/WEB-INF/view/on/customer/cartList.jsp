@@ -69,7 +69,8 @@
       <div class="container">
       	 <div class="row">
       	 	<div class="col-9">
-      	 		<table class="table table-bordered mr-3">
+      	 		<table class="table table-bordered mr-3" >
+      	 			<thead>
 		        	<tr>
 		        		<th class="text-center">선택</th>
 		        		<th class="text-center">이미지</th>
@@ -79,37 +80,53 @@
 		        		<th class="text-center">총 가격</th>
 		        		<th class="text-center">삭제</th>
 		        	</tr>
-		        	<c:forEach var="c" items="${cart}">
+		        	</thead>
+		        	<tbody>
+		        	<c:if test="${cart.isEmpty()}">
 		        		<tr>
-			        		<td class="text-center"><input type="checkbox" name="goodsChoice" id="goodsChoice" value="${c.cartNo }"></td>
-			        		<td>
-			        			<c:if test="${empty g.goodsFileName}">
-		                            <img src="${pageContext.request.contextPath}/upload/noImage.png" class="img-fluid" style="width: 150px; height: 150px; object-fit: cover;">
-		                        </c:if>
-		                        <c:if test="${not empty c.goodsFileName}">		                        
-				                    <img src="${pageContext.request.contextPath}/upload/${c.goodsFileName}.${c.goodsFileExt}" class="img-fluid" style="width: 150px; height: 150px; object-fit: cover;">
-		                        </c:if>
-			        		</td>
-			        		<td>${c.goodsTitle }</td>
-			        		<td>${c.goodsPrice }원</td>
-			        		<td>${c.cartAmount }개</td>
-			        		<td>${c.goodsTotalPrice }원</td>
-			        		<td>
-	                        	<a class="btn btn-main" href="${pageContext.request.contextPath}/on/customer/removeCart?cartNo=${c.cartNo}">삭제</a>
-	                        </td>
-			        	</tr>
-		        	</c:forEach>
-		        	
+		        			<td colspan="7" class="text-center">상품이 비었습니다.</td>
+		        		</tr>
+		        	</c:if>
+		        	<c:if test="${!cart.isEmpty()}">
+		        		<c:forEach var="c" items="${cart}">
+			        		<tr>
+				        		<td class="text-center"><input type="checkbox" name="goodsChoice" id="goodsChoice" value="${c.cartNo }"></td>
+				        		<td>
+				        			<c:if test="${empty c.goodsFileName}">
+			                            <img src="${pageContext.request.contextPath}/upload/noImage.png" class="img-fluid" style="width: 150px; height: 150px; object-fit: cover;">
+			                        </c:if>
+			                        <c:if test="${not empty c.goodsFileName}">		                        
+					                    <img src="${pageContext.request.contextPath}/upload/${c.goodsFileName}.${c.goodsFileExt}" class="img-fluid" style="width: 150px; height: 150px; object-fit: cover;">
+			                        </c:if>
+				        		</td>
+				        		<td><a class="text-dark text-decoration-none" href="${pageContext.request.contextPath }/on/customer/goodsOne?goodsNo=${c.goodsNo}">${c.goodsTitle}</a></td>
+				        		<td>${c.goodsPrice }원</td>
+				        		<td>${c.cartAmount }개</td>
+				        		<td>${c.goodsTotalPrice }원</td>
+				        		<td>
+		                        	<a class="btn btn-main w-100" href="${pageContext.request.contextPath}/on/customer/removeCart?cartNo=${c.cartNo}">삭제</a>
+		                        </td>
+				        	</tr>
+			        	</c:forEach>
+		        	</c:if>
+		        	</tbody>
 		        </table>
       	 	</div>
       	 	<div class="col-3">
-      	 		<table class="table table-bordered mr-3">
+      	 		<table class="table table-bordered mr-3 sticky-top bg-light">
 		        	<tr>
 		        		<th class="text-center">Cart Total Price</th>
 		        	</tr>
-		        	<tr>
-		        		<td>${cart[0].totalPrice}원</td>
-		        	</tr>
+		        	<c:if test="${cart.isEmpty()}">
+			        	<tr>
+			        		<td>0원</td>
+			        	</tr>
+			        </c:if>
+		        	<c:if test="${!cart.isEmpty()}">
+			        	<tr>
+			        		<td>${cart[0].totalPrice}원</td>
+			        	</tr>
+			        </c:if>
 		        	<tr>
 		        		<td><button class="btn btn-main w-100" type="button" id="cartButton">결제</button></td>
 		        	</tr>

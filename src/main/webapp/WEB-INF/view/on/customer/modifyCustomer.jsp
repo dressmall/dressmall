@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <!-- 로그인 .css 추가 -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
-    <title>스태프 추가</title>
+    <title>비밀번호 수정</title>
 </head>
 <body>
 	<div class="loginBox">
