@@ -91,6 +91,7 @@
 		        		<th>Total</th>
 		        	</tr>
 			        	<c:forEach var="c" items="${cartList}">
+			        		<input type="hidden" name="cartNo" value="${c.cartNo }">
 			        		<tr>
 				        		<td>${c.goodsTitle } X ${c.cartAmount }</td>
 				        		<td>${c.goodsTotalPrice }원</td>
@@ -103,11 +104,11 @@
 			        </table>
 			        <div class="border p-3 d-flex justify-content-around align-items-center">
 					  <div>
-					    <input type="radio" name="paymentMethod" value="카드" id="payCard" checked>
+					    <input type="radio" name="paymentMethod" value="카드" checked>
 					    <label for="payCard" class="ms-1">카드</label>
 					  </div>
 					  <div>
-					    <input type="radio" name="paymentMethod" value="페이" id="payPay">
+					    <input type="radio" name="paymentMethod" value="페이">
 					    <label for="payPay" class="ms-1">페이</label>
 					  </div>
 					</div>

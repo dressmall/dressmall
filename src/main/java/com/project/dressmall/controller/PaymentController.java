@@ -32,10 +32,11 @@ public class PaymentController {
 	
 	// 결제 수행.(진수우)
 	@PostMapping("/on/customer/paymentComplete")
-	public String paymentComplete(HttpSession session, Payment payment) {
-		
-		
-		return "redirect:/on/paymentComplete";
+	public String paymentComplete(HttpSession session, Payment payment, @RequestParam(value = "cartNo", required = false) List<Integer> cartNo) {
+		log.debug(TeamColor.JIN + cartNo + TeamColor.RESET);
+		log.debug(TeamColor.JIN + payment + TeamColor.RESET);
+		paymentService.paymentProcess(payment, cartNo);
+		return "redirect:/on/customer/ordersList";
 	}
 	
 	// 결제 페이지 폼호출.(진수우)

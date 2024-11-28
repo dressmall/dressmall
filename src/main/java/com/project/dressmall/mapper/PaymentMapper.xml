@@ -3,7 +3,7 @@
 <mapper namespace="com.project.dressmall.mapper.PaymentMapper">
 
 <!-- /on/customer/paymentComplete : 결제페이지에서 결제처리 (진수우) -->
-<insert id="insertPayment" parameterType="com.project.dressmall.vo.Payment">
+<insert id="insertPayment" parameterType="com.project.dressmall.vo.Payment" useGeneratedKeys="true" keyProperty="paymentNo">
 	INSERT INTO payment(
 		address_no
 		, payment_price
@@ -11,7 +11,7 @@
 	) VALUES (
 		#{addressNo}
 		, #{paymentPrice}
-		, #{paymentState}
+		, #{paymentMethod}
 	);
 </insert>
 
