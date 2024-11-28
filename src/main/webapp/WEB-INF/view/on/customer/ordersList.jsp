@@ -86,7 +86,7 @@
 			          	<h5>주문목록</h5>
 			          	<!-- 주문목록 리스트 출력 -->
 			          	<form action="${pageContext.request.contextPath}/on/customer/ordersList" method="post">
-			          		${ordersList }
+			          		
 			          	</form>
 			        </div>
 			      </div>

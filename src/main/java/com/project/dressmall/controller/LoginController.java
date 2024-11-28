@@ -59,7 +59,7 @@ public class LoginController {
 		customer.setCustomerMail(customerMail);
 		customer.setCustomerPw(customerPw);
 		
-		Customer loginCustomer = (Customer) session.getAttribute("loginCustomer");
+		Customer loginCustomer = customerService.customerLogin(customer);
 		
 		if(loginCustomer == null) {
 			model.addAttribute("msg","로그인에 실패했습니다");
@@ -77,7 +77,7 @@ public class LoginController {
 	// 일반회원 로그인 폼
 	@GetMapping("/off/customer/customerLogin")
 	public String customerLogin() {
-		log.debug(TeamColor.PARK + "customer 로그인" + TeamColor.RESET);
+		log.debug(TeamColor.PARK + "customer 폼출력" + TeamColor.RESET);
 		
 		return "off/customer/customerLogin";
 	}
