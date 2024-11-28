@@ -30,6 +30,17 @@ public class GoodsService {
 	@Autowired GoodsFileMapper goodsFileMapper;
 	@Autowired GoodsCategoryMapper goodsCategoryMapper;
 	
+	// /on/customer/main : 메인페이지 상품 리스트 출력.(김혜린)
+	public List<Map<String, Object>> getMain(Map paramMap) {
+				
+		return goodsMapper.selectMain(paramMap);
+	}
+	
+	// /on/customer/main : 메인페이지 상품리스트 카운트.(김혜린)
+	public Integer countGoodsListByMain(String searchWord) {
+		return goodsMapper.countGoodsListByMain(searchWord);
+	}
+	
 	
 	// /on/staff/removeGoods : 관리자페이지에서 상품 삭제. (김혜린)
 	public void removeGoods(Integer goodsNo, String path) {

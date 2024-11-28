@@ -9,6 +9,12 @@ import com.project.dressmall.vo.Goods;
 
 @Mapper
 public interface GoodsMapper {
+	// /on/customer/main : 메인페이지 상품 리스트 출력.(김혜린)
+	List<Map<String, Object>> selectMain(Map<String, Object> param);
+	
+	// /on/customer/main : 메인페이지 상품리스트 카운트.(김혜린)
+	Integer countGoodsListByMain(String searchWord);
+	
 	// /on/staff/removeGoods : 상품 삭제. (김혜린)
 	Integer deleteGoods(Integer goodsNo);
 	

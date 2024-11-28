@@ -2,6 +2,7 @@ package com.project.dressmall.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,9 +33,42 @@ public class GoodsController {
 	// ----------------------------- 고객 -------------------------------------------------
 	// main 화면 출력(goods 리스트, 카테고리, 검색, 페이징) : main.jsp 호출.(김혜린)
 	@GetMapping("/on/customer/main")
-	public String main(HttpSession session, Model model, @RequestParam(defaultValue="1") Integer currentPage, @RequestParam(defaultValue="8") Integer rowPerPage) {
+	public String main(HttpSession session, Model model
+					, @RequestParam(defaultValue="1") Integer currentPage
+					, @RequestParam(defaultValue="9") Integer rowPerPage
+					, @RequestParam(required = false) String searchWord) {
+		log.debug(TeamColor.KIM + "searchWord: "+ searchWord + TeamColor.RESET);
 		
+		// 페이징 코드 setter.
+		Page page = new Page();
+		page.setCurrentPage(currentPage);
+		page.setRowPerPage(rowPerPage);
+		page.setCountTotalRow(goodsService.countGoodsListByMain(searchWord));
+		page.setNumPerPage(5);
 		
+		log.debug(TeamColor.KIM + "전체행개수: "+ page.getCountTotalRow() + TeamColor.RESET);
+		
+		// 페이징 코드 getter.
+		model.addAttribute("currentPage", page.getCurrentPage());
+		model.addAttribute("lastPage", page.countLastPage());
+		model.addAttribute("beginPagingNum", page.countBeginPaingNum());
+		model.addAttribute("endPagingNum", page.countEndPagingNum());
+		model.addAttribute("numPerPage", page.getNumPerPage());
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("beginRow", page.countBeginRow());	// 페이지 첫번째 행 계산
+		map.put("rowPerPage", page.getRowPerPage());	
+		
+		map.put("searchWord", searchWord);	
+		
+		// 상품리스트 출력 ///메인출력
+		List<Map<String, Object>> main = goodsService.getMain(map);
+		model.addAttribute("main", main);
+		log.debug(TeamColor.KIM + "main: "+ main + TeamColor.RESET);
+		
+		model.addAttribute("loginStaff", session.getAttribute("loginStaff")); // login information model add.
+		
+
 		return "on/customer/main";
 	}
 	
