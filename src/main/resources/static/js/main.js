@@ -134,17 +134,42 @@ jQuery(document).ready(function($) {
 	var sitePlusMinus = function() {
 		$('.js-btn-minus').on('click', function(e){
 			e.preventDefault();
-			if ( $(this).closest('.input-group').find('.form-control').val() != 0  ) {
-				$(this).closest('.input-group').find('.form-control').val(parseInt($(this).closest('.input-group').find('.form-control').val()) - 1);
+			var $input = $(this).closest('.input-group').find('.form-control');
+			var currentValue = parseInt($input.val());
+			if (currentValue > 1) {
+				$input.val(currentValue - 1);
 			} else {
-				$(this).closest('.input-group').find('.form-control').val(parseInt(0));
+				$input.val(1);  // 수량이 1 미만으로 내려가지 않도록
 			}
+			
+			// cartAmount 필드에 업데이트된 값 설정
+			updateCartAmount(quantityInput.val());
 		});
+		
+		
 		$('.js-btn-plus').on('click', function(e){
 			e.preventDefault();
-			$(this).closest('.input-group').find('.form-control').val(parseInt($(this).closest('.input-group').find('.form-control').val()) + 1);
+			var $input = $(this).closest('.input-group').find('.form-control');
+			var currentValue = parseInt($input.val());
+			$input.val(currentValue + 1);
+			
+			// cartAmount 필드에 업데이트된 값 설정
+			updateCartAmount(quantityInput.val());
 		});
+		
+		// id가 'addCartForm'인 폼 전송 시 cartAmount 값 설정
+	    $('#addCartForm').on('submit', function() {
+	        var quantity = $(this).find('.form-control').val();  // 수량을 가져옴
+	        $(this).find('input[name="cartAmount"]').val(quantity);  // cartAmount 값 설정
+	    });
+		
 	};
+	// cartAmount 필드를 업데이트하는 함수
+	function updateCartAmount(quantity) {
+	    // 숨겨진 cartAmount 필드의 값을 변경
+	    $('#addCartForm').find('input[name="cartAmount"]').val(quantity);
+	}
+	
 	sitePlusMinus();
 
 
