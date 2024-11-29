@@ -99,7 +99,7 @@
                        </c:if>
 	                 </figure>
 	                 <div class="block-4-text p-4">
-	                   <h3><a href="${pageContext.request.contextPath}/on/customer/goodsOne">${m.goodsTitle}</a></h3>
+	                   <h3><a href="${pageContext.request.contextPath}/on/customer/goodsOne?goodsNo=${m.goodsNo}">${m.goodsTitle}</a></h3>
 	                   <p class="mb-0">${m.goodsMemo}</p>
 	                   <p class="text-primary font-weight-bold">${m.goodsPrice}원</p>
 	                   <c:if test="${m.goodsState == '재고없음'}">
