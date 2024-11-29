@@ -25,13 +25,7 @@ public class LoginController {
 	@Autowired StaffService staffService;
 	@Autowired CustomerService customerService;
 	
-	// 로그인 안한 main페이지
-	@GetMapping("/off/customer/main")
-	public String customerMain() {
 		
-		return "off/customer/main";
-	}
-	
 	// customer/logout
 	@GetMapping("/on/customer/logout")
 	public String customerLogout(HttpSession session) {

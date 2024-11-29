@@ -20,7 +20,7 @@
 </head>
 <body>
 	<div class="loginBox">
-		<form id="formaddAddress" action="${pageContext.request.contextPath}/on/customer/modifyAddress" method="post">
+		<form id="formaddAddress" action="${pageContext.request.contextPath}/on/customer/modifyAddress">
 			<div>
 				<h4>주소 수정</h4>
 			</div>
@@ -56,9 +56,24 @@
 
 		// 폼 제출
 		if (isVal) {
-	        console.log("submit 성공");
-	        $('#formaddAddress').submit();
-	    }
+			// AJAX로 폼 제출
+			$.ajax({
+				type: 'POST',
+				url: $('#formaddAddress').attr('action'),
+				data: $('#formaddAddress').serialize(),
+				success: function(response) {
+					// 완료 후 부모 새로고침 및 팝업 닫기
+				    if (window.opener) {
+				        window.opener.location.reload(); // 부모 새로고침
+				    }
+				    window.close(); // 팝업 닫기
+				},
+				error: function(xhr, status, error) {
+					// 에러가 발생하면 처리할 로직 (필요시)
+					alert('폼 제출 실패');
+				}
+			});
+		}
 	});
 </script>
 </html>
