@@ -100,7 +100,7 @@
 						  </div>
 					    </div>
 						<div class="btnBox mt-3 d-flex justify-content-end">
-							<a type="button" class="btn-main btn text-white" href="${pageContext.request.contextPath}/on/customer/modifyCustomer">비밀번호 변경</a>	
+							<button class="btn-main btn" onclick="openPopupModifyCustomer()">비밀번호 변경</button>
 						</div>
 		            </div>
 		          </div>
@@ -117,7 +117,7 @@
 				                </c:if>
 				                <c:if test="${c.addressDetail != null }">
 				              	  <td style="word-break: keep-all;">${c.addressDetail}</td>
-			              		  <td style="vertical-align:middle"><a type="button" class="btn-main btn w-100" href="${pageContext.request.contextPath}/on/customer/modifyAddress?addressNo=${c.addressNo}">수정</a></td>
+			              		  <td style="vertical-align:middle"><button class="btn-main btn" onclick="openPopupModifyAddress(${c.addressNo})">수정</button></td>
 			              		  <td style="vertical-align:middle"><a type="button" class="btn-main btn w-100" href="${pageContext.request.contextPath}/on/customer/removeAddress?addressNo=${c.addressNo}">삭제</a></td>
 				                </c:if>
 			              	</tr>
@@ -125,7 +125,7 @@
 		              </table>
 		              </div>
 		              <div class="btnBox mt-3 d-flex justify-content-end">
-						<a type="button" class="btn-main btn text-white" href="${pageContext.request.contextPath}/on/customer/addAddress">주소 추가</a>
+						<button class="btn-main btn" onclick="openPopupAddAddress()">주소 추가</button>
 					  </div>
 		            </div>
 		          </div>
@@ -151,9 +151,71 @@
   <script src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
   <script src="${pageContext.request.contextPath}/js/jquery.magnific-popup.min.js"></script>
   <script src="${pageContext.request.contextPath}/js/aos.js"></script>
-
   <script src="${pageContext.request.contextPath}/js/main.js"></script>
-    
+  <script>
+  	// 비밀번호 변경 팝업
+  	function openPopupModifyCustomer() {
+	  	  // 화면의 크기 (뷰포트 크기)
+	  	  const screenWidth = window.innerWidth;
+	  	  const screenHeight = window.innerHeight;
+	
+	  	  // 팝업 크기
+	  	  const popupWidth = 500;
+	  	  const popupHeight = 600;
+	
+	  	  // 중앙 위치 계산
+	  	  const left = Math.max((screenWidth - popupWidth) / 2, 0);
+	  	  const top = Math.max((screenHeight - popupHeight) / 2, 0);
+	  	  
+	      // 팝업창 옵션 설정
+	      const url = '${pageContext.request.contextPath}/on/customer/modifyCustomer'; // 호출할 JSP 경로
+	      const name = '비밀번호 변경'; // 팝업창 이름
+	      const options = 'width=' + popupWidth + ',height=' + popupHeight + ',top=' + top + ',left=' + left + ',scrollbars=yes,resizable=no';
+	      window.open(url, name, options);
+	}
+  	
+  	// 주소변경 팝업
+  	function openPopupModifyAddress(addressNo) {
+	  	  // 화면의 크기 (뷰포트 크기)
+	  	  const screenWidth = window.innerWidth;
+	  	  const screenHeight = window.innerHeight;
+	
+	  	  // 팝업 크기
+	  	  const popupWidth = 500;
+	  	  const popupHeight = 600;
+	
+	  	  // 중앙 위치 계산
+	  	  const left = Math.max((screenWidth - popupWidth) / 2, 0);
+	  	  const top = Math.max((screenHeight - popupHeight) / 2, 0);
+	  	  
+	      // 팝업창 옵션 설정
+	      const url = '${pageContext.request.contextPath}/on/customer/modifyAddress?addressNo=' + addressNo; // 호출할 JSP 경로
+	      const name = '주소 수정'; // 팝업창 이름
+	      const options = 'width=' + popupWidth + ',height=' + popupHeight + ',top=' + top + ',left=' + left + ',scrollbars=yes,resizable=no';
+	      window.open(url, name, options);
+	}
+  	
+  	// 주소추가 팝업
+  	function openPopupAddAddress() {
+	  	  // 화면의 크기 (뷰포트 크기)
+	  	  const screenWidth = window.innerWidth;
+	  	  const screenHeight = window.innerHeight;
+	
+	  	  // 팝업 크기
+	  	  const popupWidth = 500;
+	  	  const popupHeight = 600;
+	
+	  	  // 중앙 위치 계산
+	  	  const left = Math.max((screenWidth - popupWidth) / 2, 0);
+	  	  const top = Math.max((screenHeight - popupHeight) / 2, 0);
+	  	  
+	      // 팝업창 옵션 설정
+	      const url = '${pageContext.request.contextPath}/on/customer/addAddress'; // 호출할 JSP 경로
+	      const name = '주소 추가'; // 팝업창 이름
+	      const options = 'width=' + popupWidth + ',height=' + popupHeight + ',top=' + top + ',left=' + left + ',scrollbars=yes,resizable=no';
+	      window.open(url, name, options);
+	}
+  </script>
   </body>
 
 </html>

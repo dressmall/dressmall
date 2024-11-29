@@ -69,9 +69,7 @@
                         
                         <!-- 추가 버튼 -->
                         <div class="d-flex justify-content-end mb-4">
-			                <a href="${pageContext.request.contextPath}/on/staff/addGoods" class="btn btn-main">
-			                    상품 추가
-			                </a>
+                     	   <button class="btn-main btn" onclick="openPopupAddGoods()">상품 추가</button>
 			            </div>
 			            <!-- 상품 리스트 -->
 			            <div class="row">
@@ -94,9 +92,7 @@
 				                    <p class="text font-weight-bold">${g.goodsPrice}원</p>
 				                  </div>
 				                  <div class="block-4 p-4">
-				                  	<a href="${pageContext.request.contextPath}/on/staff/modifyGoods?goodsNo=${g.goodsNo}" class="btn btn-main">
-					                   상품 수정
-					                </a>
+				                  	<button class="btn-main btn" onclick="openPopupModifyGoods(${g.goodsNo})">상품 수정</button>
 					                <a href="${pageContext.request.contextPath}/on/staff/removeGoods?goodsNo=${g.goodsNo}" class="btn btn-danger">
 					                   상품 삭제
 					                </a>
@@ -139,5 +135,48 @@
         <script src="${pageContext.request.contextPath}/js/scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
         <script src="${pageContext.request.contextPath}/js/datatables-simple-demo.js"></script>
+        <script>
+        // 상품등록 팝업
+      	function openPopupAddGoods() {
+    	  	  // 화면의 크기 (뷰포트 크기)
+    	  	  const screenWidth = window.innerWidth;
+    	  	  const screenHeight = window.innerHeight;
+    	
+    	  	  // 팝업 크기
+    	  	  const popupWidth = 500;
+    	  	  const popupHeight = 800;
+    	
+    	  	  // 중앙 위치 계산
+    	  	  const left = Math.max((screenWidth - popupWidth) / 2, 0);
+    	  	  const top = Math.max((screenHeight - popupHeight) / 2, 0);
+    	  	  
+    	      // 팝업창 옵션 설정
+    	      const url = '${pageContext.request.contextPath}/on/staff/addGoods'; // 호출할 JSP 경로
+    	      const name = '상품 등록'; // 팝업창 이름
+    	      const options = 'width=' + popupWidth + ',height=' + popupHeight + ',top=' + top + ',left=' + left + ',scrollbars=yes,resizable=no';
+    	      window.open(url, name, options);
+    	}
+     
+        // 상품수정 팝업
+      	function openPopupModifyGoods(goodsNo) {
+    	  	  // 화면의 크기 (뷰포트 크기)
+    	  	  const screenWidth = window.innerWidth;
+    	  	  const screenHeight = window.innerHeight;
+    	
+    	  	  // 팝업 크기
+    	  	  const popupWidth = 500;
+    	  	  const popupHeight = 800;
+    	
+    	  	  // 중앙 위치 계산
+    	  	  const left = Math.max((screenWidth - popupWidth) / 2, 0);
+    	  	  const top = Math.max((screenHeight - popupHeight) / 2, 0);
+    	  	  
+    	      // 팝업창 옵션 설정
+    	      const url = '${pageContext.request.contextPath}/on/staff/modifyGoods?goodsNo=' + goodsNo; // 호출할 JSP 경로
+    	      const name = '상품 수정'; // 팝업창 이름
+    	      const options = 'width=' + popupWidth + ',height=' + popupHeight + ',top=' + top + ',left=' + left + ',scrollbars=yes,resizable=no';
+    	      window.open(url, name, options);
+    	}
+        </script>
 </body>
 </html>

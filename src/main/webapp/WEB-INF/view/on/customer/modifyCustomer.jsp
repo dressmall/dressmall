@@ -20,7 +20,7 @@
 </head>
 <body>
 	<div class="loginBox">
-		<form id="formModifyCustomer" action="${pageContext.request.contextPath}/on/customer/modifyCustomer" method="post">
+		<form id="formModifyCustomer" action="${pageContext.request.contextPath}/on/customer/modifyCustomer">
 			<div>
 				<h4>회원 비밀번호수정</h4>
 			</div>
@@ -32,32 +32,44 @@
 				</div>
 			</div>
 			<div class="btnBox mt-2">
-				<button type="button" id="staffAddBtn" class="btn-main btn">수정</button>	
+				<button type="button" id="modifyCustomerBtn" class="btn-main btn">수정</button>	
 			</div>
 		</form>
 	</div>
 </body>
-	<script >
-	// 유효성 검사
-	$('#staffAddBtn').click(function() {
+	<script>
+	// 유효성 검사 및 폼 제출 (AJAX)
+	$('#modifyCustomerBtn').click(function() {
 		let isVal = true;
 
 		// PW 유효성 검사
 		if ($('#customerPw').length === 0 || $('#customerPw').val().length < 4) {
 			$('.pw-error').show().text("비밀번호는 4자 이상 입력해주세요");
 			$('#customerPw').addClass("errorInput");
-			console.log("staffPw 에러");
+			console.log("customerPw 에러");
 			isVal = false;
 		} else {
 			$('.pw-error').hide();
-			$('#staffPw').removeClass("errorInput");
+			$('#customerPw').removeClass("errorInput");
 		}
 
 		// 폼 제출
 		if (isVal) {
-	        console.log("submit 성공");
-	        $('#formModifyCustomer').submit();
-	    }
+			// AJAX로 폼 제출
+			$.ajax({
+				type: 'POST',
+				url: $('#formModifyCustomer').attr('action'),
+				data: $('#formModifyCustomer').serialize(),
+				success: function(response) {
+					// 서버에서 응답 성공 후 팝업창 닫기
+					window.close();
+				},
+				error: function(xhr, status, error) {
+					// 에러가 발생하면 처리할 로직 (필요시)
+					alert('폼 제출 실패');
+				}
+			});
+		}
 	});
 </script>
 </html>
