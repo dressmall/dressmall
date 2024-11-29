@@ -55,7 +55,7 @@ public class BoardController {
 								, @RequestParam("ordersNo") Integer ordersNo) {
 		
 		// goods정보 출력
-		List<Map<String, Object>> ordersByGoods = boardMapper.selectBoardList(ordersNo);
+		List<Map<String, Object>> ordersByGoods = boardMapper.selectOrdersList(ordersNo);
 		
 		model.addAttribute("ordersByGoods",ordersByGoods);
 		model.addAttribute("ordersNo",ordersNo);

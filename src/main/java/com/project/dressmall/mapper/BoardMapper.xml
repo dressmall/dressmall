@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.dressmall.mapper.BoardMapper">
+	<!-- goodsOne에 출력할 boardList -->
+	<select id="selectBoardList" parameterType="map" resultType="map">
+		SELECT
+			o.orders_no ordersNo
+			, o.goods_no goodsNo
+			, b.board_content boardContent
+		FROM orders o
+		LEFT OUTER JOIN board b  ON o.orders_no = b.orders_no
+		LEFT OUTER JOIN goods g ON o.goods_no = g.goods_no
+		WHERE g.goods_no = #{goodsNo}
+	</select>
+
 	<!-- 이미 리뷰등록이 되어있는 ordersNo에는 button 삭제 -->
 	<select id="selectBoardByOrders" parameterType="Integer">
 		SELECT EXISTS (
@@ -15,7 +27,7 @@
 		WHERE orders_no = #{orderNo}
 	</delete>
 	<!-- 후기 추가 폼에 쓸 goods/orders정보 (박시현) -->
-	<select id="selectBoardList" parameterType="map" resultType="map">
+	<select id="selectOrdersList" parameterType="map" resultType="map">
 		SELECT
 		     o.orders_no ordersNo
 		    , o.goods_no goodsNo

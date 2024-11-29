@@ -23,7 +23,7 @@
 </head>
 <body>
   
-  <div class="site-wrap">
+  	<div class="site-wrap">
 	    <header class="site-navbar" role="banner">
 	      <div class="site-navbar-top">
 	        <div class="container">
@@ -150,21 +150,13 @@
 			</div>
 		</div>	
 	</div>
-    <footer class="site-footer border-top">
-      <div class="container">
-        <div class="row">
-        <div class="row pt-5 mt-5 text-center">
-          <div class="col-md-12">
-            <p class="sub-text">
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            Copyright &copy;<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All rights reserved dressmall 
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            </p>
-          </div>
-        </div>
-      </div>
-     </div>
-    </footer>
+    <footer class="py-4 bg-light mt-auto">
+       <div class="container-fluid px-4">
+           <div class="d-flex align-items-center justify-content-between small">
+               <div class="text-muted">Copyright &copy; Dress Mall 2024</div>
+           </div>
+       </div>
+   </footer>
 
 	<script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>

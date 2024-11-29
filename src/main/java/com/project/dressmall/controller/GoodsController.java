@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.project.dressmall.service.BoardService;
 import com.project.dressmall.service.CartService;
 import com.project.dressmall.service.CategoryService;
 import com.project.dressmall.service.GoodsService;
@@ -32,6 +33,7 @@ public class GoodsController {
 	@Autowired GoodsService goodsService;
 	@Autowired CategoryService categoryService;
 	@Autowired CartService cartService;
+	@Autowired BoardService boardService;
 	
 	// ----------------------------- 고객 -------------------------------------------------
 	// main 화면 출력(goods 리스트, 카테고리, 검색, 페이징) : main.jsp 호출.(김혜린)
@@ -50,6 +52,10 @@ public class GoodsController {
 		model.addAttribute("countCartList", cart.get(0).get("countCartList"));
 
 		model.addAttribute("customerMail", customerMail);
+		
+		// boardList 출력
+		List<Map<String, Object>> boardList = boardService.selectBoardList(goodsNo);
+		model.addAttribute("boardList", boardList);
 		
 		return "on/customer/goodsOne";
 	}

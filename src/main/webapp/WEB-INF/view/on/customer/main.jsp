@@ -100,7 +100,7 @@
 	                 </figure>
 	                 <div class="block-4-text p-4">
 	                   <h3><a href="${pageContext.request.contextPath}/on/customer/goodsOne?goodsNo=${m.goodsNo}">${m.goodsTitle}</a></h3>
-	                   <p class="mb-0">${m.goodsMemo}</p>
+	                   <p class="mb-0 text-memo">${m.goodsMemo}</p>
 	                   <p class="text-primary font-weight-bold">${m.goodsPrice}원</p>
 	                   <c:if test="${m.goodsState == '재고없음'}">
 		                   <p class="text-danger font-weight-bold">품절</p>	                   

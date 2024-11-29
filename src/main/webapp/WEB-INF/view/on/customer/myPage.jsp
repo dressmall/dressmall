@@ -71,87 +71,78 @@
       <div class="container">
         <div class="row mb-5">
 		  <div class="d-flex">
-          <div class="col-md-3 order-0 mb-5 mb-md-0">
-            <div class="border p-4 rounded mb-4">
-              <h3 class="mb-3 h6 d-block">MyPage</h3>
-              <ul class="list-unstyled mb-0">
-                <li class="mb-1"><a href="${pageContext.request.contextPath}/on/customer/ordersList" class="d-flex"><span >주문목록</span> <span class="text-black ml-auto"></span></a></li>
-                <li class="mb-1"><a href="${pageContext.request.contextPath}/on/customer/myPage" class="d-flex"><span class=" main-text">회원정보</span> <span class="text-black ml-auto"></span></a></li>
-              </ul>
-            </div>
-          </div>
-          
-          <div class="d-flex w-100">
-          <div class=" order-0 m-2 mb-md-0 w-50 vh-100">
-          	<h5>회원정보</h5>
-            <div class="border p-5 rounded mb-4">
-              <div class="inputBox mb-2">
-				<div class="idBox">
-					<div class="mt-2 text-black">Email</div>
-					<div><c:out value="${customer[0].customerMail}" /></div>
-				</div>
-				<div class="birthBox">
-					<div class="mt-2 text-black">Birth</div>
-					<div>${customer[0].customerBirth}</div>
-				</div>
-				<div class="genderBox">
-					<div class="mt-2 text-black">Gender</div>
-					<div>${customer[0].customerGender}</div>
-				</div>
-				
-			</div>
-			<div class="btnBox mt-3 d-flex justify-content-end">
-				<a type="button" class="btn-main btn text-white" href="${pageContext.request.contextPath}/on/customer/modifyCustomer">비밀번호 변경</a>	
-			</div>
-            </div>
-          </div>
-          
-          <div class=" order-1 m-2 mb-md-0 w-50">
-          <h5>주소리스트</h5>
-            <div class="border p-5 rounded mb-4">
-              <div class="scroll-box">
-              <table class="table">
-              	<c:forEach var="c" items="${customer}">
-              		<tr>
-              			<c:if test="${c.addressDetail == null }">
-		              	  등록된 주소가 없습니다.
-		                </c:if>
-		                <c:if test="${c.addressDetail != null }">
-		              	  <td style="word-break: keep-all;">${c.addressDetail}</td>
-	              		  <td style="vertical-align:middle"><a type="button" class="btn-main btn w-100" href="${pageContext.request.contextPath}/on/customer/modifyAddress?addressNo=${c.addressNo}">수정</a></td>
-	              		  <td style="vertical-align:middle"><a type="button" class="btn-main btn w-100" href="${pageContext.request.contextPath}/on/customer/removeAddress?addressNo=${c.addressNo}">삭제</a></td>
-		                </c:if>
-	              	</tr>
-              	</c:forEach>
-              </table>
-              </div>
-              <div class="btnBox mt-3 d-flex justify-content-end">
-				<a type="button" class="btn-main btn text-white" href="${pageContext.request.contextPath}/on/customer/addAddress">주소 추가</a>
-			  </div>
-            </div>
-          </div>
-          </div>
-          
-        </div>
-      </div>
-    </div>
-
-    <footer class="site-footer border-top">
-      <div class="container">
-        <div class="row">
-        <div class="row pt-5 mt-5 text-center">
-          <div class="col-md-12">
-            <p>
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            Copyright &copy;<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All rights reserved dressmall 
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            </p>
-          </div>
-        </div>
-      </div>
-     </div>
-    </footer>
+	          <div class="col-md-3 order-0 mb-5 mb-md-0">
+	            <div class="border p-4 rounded mb-4">
+	              <h3 class="mb-3 h6 d-block">MyPage</h3>
+	              <ul class="list-unstyled mb-0">
+	                <li class="mb-1"><a href="${pageContext.request.contextPath}/on/customer/ordersList" class="d-flex"><span >주문목록</span> <span class="text-black ml-auto"></span></a></li>
+	                <li class="mb-1"><a href="${pageContext.request.contextPath}/on/customer/myPage" class="d-flex"><span class=" main-text">회원정보</span> <span class="text-black ml-auto"></span></a></li>
+	              </ul>
+	            </div>
+	          </div>
+	          
+	          <div class="d-flex w-100">
+		          <div class=" order-0 m-2 mb-md-0 w-50 vh-100">
+		          	<h5>회원정보</h5>
+		            <div class="border p-5 rounded mb-4">
+		                <div class="inputBox mb-2">
+						  <div class="idBox">
+							  <div class="mt-2 text-black">Email</div>
+							  <div><c:out value="${customer[0].customerMail}" /></div>
+						  </div>
+						  <div class="birthBox">
+							  <div class="mt-2 text-black">Birth</div>
+							  <div>${customer[0].customerBirth}</div>
+						  </div>
+						  <div class="genderBox">
+							  <div class="mt-2 text-black">Gender</div>
+							  <div>${customer[0].customerGender}</div>
+						  </div>
+					    </div>
+						<div class="btnBox mt-3 d-flex justify-content-end">
+							<a type="button" class="btn-main btn text-white" href="${pageContext.request.contextPath}/on/customer/modifyCustomer">비밀번호 변경</a>	
+						</div>
+		            </div>
+		          </div>
+	          
+		          <div class=" order-1 m-2 mb-md-0 w-50">
+		          <h5>주소리스트</h5>
+		            <div class="border p-5 rounded mb-4">
+		              <div class="scroll-box">
+		              <table class="table">
+		              	<c:forEach var="c" items="${customer}">
+		              		<tr>
+		              			<c:if test="${c.addressDetail == null }">
+				              	  등록된 주소가 없습니다.
+				                </c:if>
+				                <c:if test="${c.addressDetail != null }">
+				              	  <td style="word-break: keep-all;">${c.addressDetail}</td>
+			              		  <td style="vertical-align:middle"><a type="button" class="btn-main btn w-100" href="${pageContext.request.contextPath}/on/customer/modifyAddress?addressNo=${c.addressNo}">수정</a></td>
+			              		  <td style="vertical-align:middle"><a type="button" class="btn-main btn w-100" href="${pageContext.request.contextPath}/on/customer/removeAddress?addressNo=${c.addressNo}">삭제</a></td>
+				                </c:if>
+			              	</tr>
+		              	</c:forEach>
+		              </table>
+		              </div>
+		              <div class="btnBox mt-3 d-flex justify-content-end">
+						<a type="button" class="btn-main btn text-white" href="${pageContext.request.contextPath}/on/customer/addAddress">주소 추가</a>
+					  </div>
+		            </div>
+		          </div>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	</div>
   </div>
+    <footer class="py-4 bg-light mt-auto">
+       <div class="container-fluid px-4">
+           <div class="d-flex align-items-center justify-content-between small">
+               <div class="text-muted">Copyright &copy; Dress Mall 2024</div>
+              
+           </div>
+       </div>
+   </footer>
 
   <script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
   <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>

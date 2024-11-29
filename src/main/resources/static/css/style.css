@@ -68,7 +68,7 @@ input {
 }
 /* ordersList-box */
 .scroll-box {
-	max-height: 550px;
+	max-height: 620px;
 	overflow-y: scroll; 
 }
 /* ordersList-box 스크롤 커스텀 */
