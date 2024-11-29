@@ -116,7 +116,7 @@
 							          			</c:if>	
 						          			</div>
 					          			</div>
-					          			<div class="orders-box content border d-flex align-items-center justify-content-start mb-3">
+					          			<div class="orders-box content border d-flex align-items-center justify-content-between mb-3">
 					          				<div class="img-box">
 					          					<input type="hidden" name="ordersNo" value="${o.ordersNo }">
 					          				 	<c:if test="${o.goodsFileName == null}">
@@ -137,7 +137,7 @@
 					          					<a class="btn-main" href="${pageContext.request.contextPath}/on/customer/addBoard?ordersNo=${o.ordersNo}">리뷰등록</a>
 					          				</c:if>
 					          				<c:if test="${o.paymentState == '배송완료' && o.review}">
-					          					<span class="d-inline-block ms-2" style="word-break: keep-all;">리뷰등록</span>
+					          					<span class="d-inline-block " style="word-break: keep-all;">리뷰등록</span>
 					          				</c:if>
 					          			</div>
 					          		</div>	

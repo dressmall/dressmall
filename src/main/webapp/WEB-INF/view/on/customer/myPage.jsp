@@ -75,8 +75,8 @@
             <div class="border p-4 rounded mb-4">
               <h3 class="mb-3 h6 d-block">MyPage</h3>
               <ul class="list-unstyled mb-0">
-                <li class="mb-1"><a href="${pageContext.request.contextPath}/on/customer/ordersList" class="d-flex"><span class="text-black">주문목록</span> <span class="text-black ml-auto"></span></a></li>
-                <li class="mb-1"><a href="${pageContext.request.contextPath}/on/customer/myPage" class="d-flex"><span class="text-black">회원정보</span> <span class="text-black ml-auto"></span></a></li>
+                <li class="mb-1"><a href="${pageContext.request.contextPath}/on/customer/ordersList" class="d-flex"><span >주문목록</span> <span class="text-black ml-auto"></span></a></li>
+                <li class="mb-1"><a href="${pageContext.request.contextPath}/on/customer/myPage" class="d-flex"><span class=" main-text">회원정보</span> <span class="text-black ml-auto"></span></a></li>
               </ul>
             </div>
           </div>
@@ -117,9 +117,9 @@
 		              	  등록된 주소가 없습니다.
 		                </c:if>
 		                <c:if test="${c.addressDetail != null }">
-		              	  <td>${c.addressDetail}</td>
-	              		  <td><a type="button" class="btn-main btn w-100" href="${pageContext.request.contextPath}/on/customer/modifyAddress?addressNo=${c.addressNo}">수정</a></td>
-	              		  <td><a type="button" class="btn-main btn w-100" href="${pageContext.request.contextPath}/on/customer/removeAddress?addressNo=${c.addressNo}">삭제</a></td>
+		              	  <td style="word-break: keep-all;">${c.addressDetail}</td>
+	              		  <td style="vertical-align:middle"><a type="button" class="btn-main btn w-100" href="${pageContext.request.contextPath}/on/customer/modifyAddress?addressNo=${c.addressNo}">수정</a></td>
+	              		  <td style="vertical-align:middle"><a type="button" class="btn-main btn w-100" href="${pageContext.request.contextPath}/on/customer/removeAddress?addressNo=${c.addressNo}">삭제</a></td>
 		                </c:if>
 	              	</tr>
               	</c:forEach>
