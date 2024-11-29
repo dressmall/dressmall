@@ -11,11 +11,12 @@ import com.project.dressmall.vo.Payment;
 
 @Mapper
 public interface OrdersMapper {
+	
 	// /on/customer/paymentComplete : 결제페이지에서 결제할 때 order 정보 추가.(진수우)
 	Integer insertOrder(Orders orders);
 	
 	// on/customer/modifyOrders 
-	Integer updateOrdersByPayment(Payment payment);
+	Integer updateOrdersByPayment(Integer paymentNo);
 	
 	// on/customer/deleteOrders
 	Integer deleteOrders(Integer ordersNo, Integer paymentNo);

@@ -107,10 +107,11 @@
 							          			</c:if>		
 							          			<!-- 배송중일 경우 -->	          			
 							          			<c:if test="${o.paymentState == '배송중' }">
-							          				<button class="btn-main ms-3">구매확정</button>
+							          				<a	href="${pageContext.request.contextPath}/on/customer/modifyOrders?paymentNo=${o.paymentNo }"
+							          					class="btn-main ms-3">구매확정</a>
 							          			</c:if>			 
 							          			<!-- 배송완료일 경우 -->         			
-							          			<c:if test="${o.paymentState == '배송완료' }">
+							          			<c:if test="${o.paymentState == '배송완료' && o.review }">
 							          				<button class="btn-disa ms-3" disabled>구매확정</button>
 							          			</c:if>	
 						          			</div>
@@ -132,9 +133,12 @@
 					          					<span>가격 : ${o.goodsPrice }</span>
 					          					<span>수량 : ${o.ordersAmount }</span>				          				
 					          				</div>
-					          				<c:if test="${o.paymentState == '배송완료' }">
-						          				<a class="btn-main" href="${pageContext.request.contextPath}/on/customer/addBoard?ordersNo=${o.ordersNo }">리뷰등록</a>
-						          			</c:if>	
+					          				<c:if test="${o.paymentState == '배송완료' && !o.review}">
+					          					<a class="btn-main" href="${pageContext.request.contextPath}/on/customer/addBoard?ordersNo=${o.ordersNo}">리뷰등록</a>
+					          				</c:if>
+					          				<c:if test="${o.paymentState == '배송완료' && o.review}">
+					          					<span class="d-inline-block ms-2" style="word-break: keep-all;">리뷰등록</span>
+					          				</c:if>
 					          			</div>
 					          		</div>	
 				          		</c:forEach>

@@ -16,8 +16,10 @@
 	</insert>
 	
 	<!-- ordersList에서 구매확정 클릭 시 배송중에서 배송완료로 수정(박시현) -->
-	<update id="updateOrdersByPayment" parameterType="com.project.dressmall.vo.Payment">
-		UPDATE FROM payment 
+	<update id="updateOrdersByPayment" parameterType="Integer">
+		UPDATE payment
+		SET payment_state = '배송완료'
+		WHERE payment_no = #{paymentNo} AND payment_state = '배송중'
 	</update>
 
 	<!-- ordersList에서 주문취소 클릭 시 삭제(박시현) -->

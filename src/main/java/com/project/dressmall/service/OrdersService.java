@@ -16,6 +16,11 @@ import com.project.dressmall.vo.Orders;
 public class OrdersService {
 	@Autowired OrdersMapper ordersMapper;
 	
+	// on/customer/modifyOrders 
+	public Integer updateOrdersByPayment(Integer paymentNo) {
+		return ordersMapper.updateOrdersByPayment(paymentNo);
+	}
+	
 	// on/customer/deleteOrders
 	public Integer deleteOrders(Integer ordersNo, Integer paymentNo) {
 		return ordersMapper.deleteOrders(ordersNo, paymentNo);
