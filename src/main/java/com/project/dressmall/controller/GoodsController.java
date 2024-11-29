@@ -90,6 +90,10 @@ public class GoodsController {
 		List<Map<String, Object>> categoryCountList = categoryService.getCategoryCounts();
 		log.debug(TeamColor.KIM + "categoryCountList: "+ categoryCountList + TeamColor.RESET);
 		model.addAttribute("categoryCountList", categoryCountList);
+		// 카테고리 : 전체 상품 개수 가져오기
+		Integer totalCount = goodsService.countGoodsList();
+		model.addAttribute("totalCount", totalCount);
+		
 		
 		model.addAttribute("loginStaff", session.getAttribute("loginStaff")); // login information model add.
 		

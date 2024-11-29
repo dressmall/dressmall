@@ -102,6 +102,9 @@
 	                   <h3><a href="${pageContext.request.contextPath}/on/customer/goodsOne">${m.goodsTitle}</a></h3>
 	                   <p class="mb-0">${m.goodsMemo}</p>
 	                   <p class="text-primary font-weight-bold">${m.goodsPrice}원</p>
+	                   <c:if test="${m.goodsState == '재고없음'}">
+		                   <p class="text-danger font-weight-bold">품절</p>	                   
+	                   </c:if>
 	                 </div>
 	               </div>
 	              </div>			  	
@@ -191,6 +194,12 @@
             <div class="border p-4 rounded mb-4">
               <h3 class="mb-3 h6 text-uppercase text-black d-block">Categories</h3>
               <ul class="list-unstyled mb-0">
+              	<li class="mb-1">
+              		<a href="${pageContext.request.contextPath}/on/customer/main?currentPage=${currentPage}" class="d-flex">
+                		<span>전체</span>
+                		<span class="text-black ml-auto">(${totalCount})</span>
+	                </a>
+              	</li>
               	<c:forEach var="c" items="${categoryCountList}">
 	                <li class="mb-1">
 						<a href="${pageContext.request.contextPath}/on/customer/main?currentPage=${currentPage}&categoryNo=${c.categoryNo}" class="d-flex">

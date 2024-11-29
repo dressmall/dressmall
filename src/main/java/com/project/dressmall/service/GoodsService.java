@@ -208,6 +208,7 @@ public class GoodsService {
 		return goodsMapper.selectGoodsList(param);
 	}
 	
+	// /on/customer/main : 카테고리 전체 상품 카운트. (김혜린)
 	// /on/staff/goodsList : 관리자페이지에서 상품리스트 카운트.(진수우)
 	public Integer countGoodsList() {
 		return goodsMapper.countGoodsList();
