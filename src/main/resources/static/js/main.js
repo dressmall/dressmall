@@ -136,14 +136,16 @@ jQuery(document).ready(function($) {
 			e.preventDefault();
 			var $input = $(this).closest('.input-group').find('.form-control');
 			var currentValue = parseInt($input.val());
+			
+			// 수량이 1 미만으로 내려가지 않도록
 			if (currentValue > 1) {
 				$input.val(currentValue - 1);
 			} else {
-				$input.val(1);  // 수량이 1 미만으로 내려가지 않도록
+				$input.val(1);  
 			}
 			
 			// cartAmount 필드에 업데이트된 값 설정
-			updateCartAmount(quantityInput.val());
+			 updateCartAmount($input.val());  
 		});
 		
 		
@@ -154,18 +156,23 @@ jQuery(document).ready(function($) {
 			$input.val(currentValue + 1);
 			
 			// cartAmount 필드에 업데이트된 값 설정
-			updateCartAmount(quantityInput.val());
+			updateCartAmount($input.val());  
 		});
 		
 		// id가 'addCartForm'인 폼 전송 시 cartAmount 값 설정
-	    $('#addCartForm').on('submit', function() {
-	        var quantity = $(this).find('.form-control').val();  // 수량을 가져옴
+	    $('#addCartForm').on('submit', function() {			
+	        var quantity = $('#addCartForm').find('.form-control').val();   // 수량을 가져옴
+			console.log("폼 제출 시 quantity 값: " + quantity); 
 	        $(this).find('input[name="cartAmount"]').val(quantity);  // cartAmount 값 설정
+			// 확인을 위해 디버깅 메시지 추가
+	        console.log("숨겨진 cartAmount 값: " + $(this).find('input[name="cartAmount"]').val());
+	        
 	    });
 		
 	};
 	// cartAmount 필드를 업데이트하는 함수
 	function updateCartAmount(quantity) {
+		console.log("Updating cartAmount to: " + quantity); // 값이 제대로 출력되는지 확인
 	    // 숨겨진 cartAmount 필드의 값을 변경
 	    $('#addCartForm').find('input[name="cartAmount"]').val(quantity);
 	}

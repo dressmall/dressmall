@@ -109,32 +109,32 @@
 	                   <p class="text-danger font-weight-bold">품절</p>	                   
                    	</c:if>
 	            </div>
-	            
-	            <!-- 수량 +,- 버튼 -->
-	            <div class="mb-5 mt-3">
-	              	<div class="input-group mb-3" style="max-width: 120px;">
-		              <div class="input-group-prepend">
-		                <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
-		              </div>
-		              <input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-		              <div class="input-group-append">
-		                <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
-		              </div>
-	            	</div>
-	            </div>
-	                        
-	            
+	            	            
 	            <!-- 장바구니 추가 버튼 -->
 	            <c:if test="${goods.goodsState == '재고있음'}">		            
 		            <form id="addCartForm" action="${pageContext.request.contextPath}/on/customer/addCart" method="post">
+				        <!-- 수량 +,- 버튼 -->
+			            <div class="mb-5 mt-3">
+			              	<div class="input-group mb-3" style="max-width: 120px;">
+				              <div class="input-group-prepend">
+				                <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
+				              </div>
+				              <input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+				              <div class="input-group-append">
+				                <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
+				              </div>
+			            	</div>
+			            </div>
+				        
 				        <!-- 숨겨진 입력 필드로 값 전송 -->
 				        <input type="hidden" name="customerMail" value="${customerMail}">
 				        <input type="hidden" name="goodsNo" value="${goodsNo}">
-				        <input type="hidden" name="cartAmount" value="">
+				        <input type="hidden" name="cartAmount" value="1">
 				        <!-- Add to Cart 버튼 -->
 				        <button type="submit" class="buy-now btn btn-sm btn-primary">Add To Cart</button>
 				    </form>            
 	            </c:if>
+	            
 	            <!-- 버튼 비활성화 -->
 	            <c:if test="${goods.goodsState == '재고없음'}"> 
 		            <p>

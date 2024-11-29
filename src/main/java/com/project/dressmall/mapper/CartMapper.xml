@@ -51,7 +51,7 @@
 			, c.cart_amount cartAmount
 			, c.update_date updateDate
 			, c.create_date createDate
-			, f.goods_file_origin goodsFileOrigin
+			, f.goods_file_name goodsFileName
 			, f.goods_file_ext goodsFileExt
 			, g.goods_title goodsTitle
 			, g.goods_price goodsPrice
