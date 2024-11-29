@@ -39,7 +39,7 @@
 	<div class="loginBox">
 		<form id="formGoods"
 			action="${pageContext.request.contextPath}/on/staff/modifyGoods"
-			method="post" enctype="multipart/form-data">
+			enctype="multipart/form-data">
 			<input type="hidden" name="goodsNo" value="${goodsNo}">
 			<div>
 				<h4>상품 수정</h4>
@@ -147,8 +147,27 @@
 
 		// 전체 유효성 통과 시 폼 제출
 		if (isValid && errFileMsg === '') {
-			console.log('submit...');
-			$('#formGoods').submit();
+			// `FormData` 객체 생성
+			let formData = new FormData($('#formGoods')[0]);
+			
+			// AJAX로 폼 제출
+			$.ajax({
+				type: 'POST',
+				url: $('#formGoods').attr('action'),
+				data: formData, // FormData 객체 사용
+				processData: false, // 데이터 처리를 하지 않음
+				contentType: false, // `multipart/form-data` 헤더 설정
+				success: function (response) {
+					// 완료 후 부모 새로고침 및 팝업 닫기
+					if (window.opener) {
+						window.opener.location.reload(); // 부모 새로고침
+					}
+					window.close(); // 팝업 닫기
+				},
+				error: function (xhr, status, error) {
+					alert('폼 제출 실패: ' + (xhr.responseText || error));
+				},
+			});
 		}
 
 	});
