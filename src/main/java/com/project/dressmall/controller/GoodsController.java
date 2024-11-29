@@ -36,10 +36,19 @@ public class GoodsController {
 	// ----------------------------- 고객 -------------------------------------------------
 	// main 화면 출력(goods 리스트, 카테고리, 검색, 페이징) : main.jsp 호출.(김혜린)
 	@GetMapping("/on/customer/goodsOne")
-	public String maingoodsone(HttpSession session, Model model) {
+	public String maingoodsone(HttpSession session, Model model
+										, @RequestParam Integer goodsNo) {
+		
+		// goods 상세정보 가져오기
+		Map<String, Object> goods = goodsService.getGoodsOne(goodsNo);
+		model.addAttribute("goods", goods);
+		model.addAttribute("goodsNo", goodsNo);
 		
 		
-		// 
+		String customerMail = ((Customer)session.getAttribute("loginCustomer")).getCustomerMail();
+		List<Map<String, Object>> cart = cartService.getCartList(customerMail);
+		model.addAttribute("countCartList", cart.get(0).get("countCartList"));
+
 		return "on/customer/goodsOne";
 	}
 	
@@ -94,9 +103,6 @@ public class GoodsController {
 		Integer totalCount = goodsService.countGoodsList();
 		model.addAttribute("totalCount", totalCount);
 		
-		
-		model.addAttribute("loginStaff", session.getAttribute("loginStaff")); // login information model add.
-		
 		String customerMail = ((Customer)session.getAttribute("loginCustomer")).getCustomerMail();
 		List<Map<String, Object>> cart = cartService.getCartList(customerMail);
 		model.addAttribute("countCartList", cart.get(0).get("countCartList"));
@@ -108,7 +114,7 @@ public class GoodsController {
 	// goods 상세정보 출력.(김혜린)
 	@GetMapping("/on/staff/goodsOne")
 	public String goodsOne(Model model
-								, @RequestParam int goodsNo) {
+								, @RequestParam Integer goodsNo) {
 		// goods 상세정보 가져오기
 		Map<String, Object> goods = goodsService.getGoodsOne(goodsNo);
 		model.addAttribute("goods", goods);
