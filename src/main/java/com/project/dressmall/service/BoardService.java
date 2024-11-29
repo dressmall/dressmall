@@ -15,7 +15,7 @@ import com.project.dressmall.vo.Board;
 public class BoardService {
 	@Autowired BoardMapper boardMapper;
 	
-	// on/customer/goodsOne
+	// on/customer/goodsOne(박시현) 
 	public List<Map<String, Object>> selectBoardList(Integer goodsNo) {
 		return boardMapper.selectBoardList(goodsNo);
 	}
@@ -31,7 +31,7 @@ public class BoardService {
 	}
 	
 	// deleteBoard - 후기 삭제(박시현) 
-	public Integer deleteBoard(Board board) {
-		return boardMapper.deleteBoard(board);
+	public Integer deleteBoard(Integer ordersNo) {
+		return boardMapper.deleteBoard(ordersNo);
 	}
 }

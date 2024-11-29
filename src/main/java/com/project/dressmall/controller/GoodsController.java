@@ -56,6 +56,7 @@ public class GoodsController {
 		// boardList 출력
 		List<Map<String, Object>> boardList = boardService.selectBoardList(goodsNo);
 		model.addAttribute("boardList", boardList);
+		log.debug(TeamColor.PARK + "customerMail : " + customerMail + TeamColor.RESET);
 		
 		return "on/customer/goodsOne";
 	}

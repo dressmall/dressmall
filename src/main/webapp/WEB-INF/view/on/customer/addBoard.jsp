@@ -89,7 +89,7 @@
 			          	<!-- 리뷰 등록 컨텐츠 -->
 			          	
 			          	<div class="content border"> 
-			          		<form action="${pageContext.request.contextPath}/on/customer/addBoard" method="post">
+			          		<form  id="addBoardForm" action="${pageContext.request.contextPath}/on/customer/addBoard" method="post">
 					          	<h6>주문번호 NO.${ordersNo }</h6> <!-- 주문번호 받기 -->
 					          	<!-- @RequestParamfh ordersNo을 넘겨주기위해 -->
 					          	<c:forEach items="${ordersByGoods}" var="og">
@@ -118,6 +118,7 @@
 				          			</div>
 			          			</c:forEach>
 			          		</form>
+			          		  
 			          	</div>
 			        </div>
 			      </div>
@@ -150,22 +151,23 @@
   <script src="${pageContext.request.contextPath}/js/aos.js"></script>
 
   <script src="${pageContext.request.contextPath}/js/main.js"></script>
-  <script type="text/javascript">
-  	// 유효성 검사
-  	$('#btnBoard').click(function() {
-  		let isValid = true;
-  		
-  		if($('#boardContent') == null || $('#boardContent').val() == '') {
-  			$('#errBoardContent').text('리뷰를 작성해주세요');
-  			isValid = false;
-  		} else {
-  			$('#errBoardContent').text('');
-  		}
-  		$('#btnBoard').sumbit
-  		
-	})
-  </script>
-    
+
+    <script type="text/javascript">
+	  	// 유효성 검사
+	  	$('#btnBoard').click(function() {
+	  		let isValid = true;
+	  		
+	  		if($('#boardContent') == null || $('#boardContent').val() == '') {
+	  			$('#errBoardContent').text('리뷰를 작성해주세요');
+	  			isValid = false;
+	  		} else {
+	  			console.log('리뷰등록')
+	  			$('#errBoardContent').text('');
+		  		$('#addBoardForm').submit();
+	  		}
+	  		
+		})
+	  </script>
   </body>
 
 </html>
