@@ -36,9 +36,11 @@ public class GoodsController {
 	@Autowired BoardService boardService;
 	
 	// ----------------------------- 고객 -------------------------------------------------
-	// main 화면 출력(goods 리스트, 카테고리, 검색, 페이징) : main.jsp 호출.(김혜린)
+	
+	
+	// 고객 - 상품상세 페이지 출력 - 회원 : goodsOne.jsp 호출.(김혜린)
 	@GetMapping("/on/customer/goodsOne")
-	public String maingoodsone(HttpSession session, Model model
+	public String onMainGoodsOne(HttpSession session, Model model
 										, @RequestParam Integer goodsNo) {
 		
 		// goods 상세정보 가져오기
@@ -60,9 +62,64 @@ public class GoodsController {
 		return "on/customer/goodsOne";
 	}
 	
-	// main 화면 출력(goods 리스트, 카테고리, 검색, 페이징) : main.jsp 호출.(김혜린)
+	// main 화면 출력(goods 리스트, 카테고리, 검색, 페이징) - 비회원 : main.jsp 호출.(김혜린)
+	@GetMapping("/off/customer/main")
+	public String offMain(HttpSession session, Model model
+					, @RequestParam(defaultValue="1") Integer currentPage
+					, @RequestParam(defaultValue="9") Integer rowPerPage
+					, @RequestParam(required = false) String searchWord
+					, @RequestParam(required = false) Integer categoryNo) {
+		log.debug(TeamColor.KIM + "searchWord: "+ searchWord + TeamColor.RESET);
+		log.debug(TeamColor.KIM + "categoryNo: "+ categoryNo + TeamColor.RESET);
+		
+		// 페이징 코드 setter.
+		Page page = new Page();
+		page.setCurrentPage(currentPage);
+		page.setRowPerPage(rowPerPage);
+		page.setCountTotalRow(goodsService.countGoodsListByMain(searchWord, categoryNo));
+		page.setNumPerPage(5);
+		
+		log.debug(TeamColor.KIM + "전체행개수: "+ page.getCountTotalRow() + TeamColor.RESET);
+		
+		// 페이징 코드 getter.
+		model.addAttribute("currentPage", page.getCurrentPage());
+		model.addAttribute("lastPage", page.countLastPage());
+		model.addAttribute("beginPagingNum", page.countBeginPaingNum());
+		model.addAttribute("endPagingNum", page.countEndPagingNum());
+		model.addAttribute("numPerPage", page.getNumPerPage());
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("beginRow", page.countBeginRow());	// 페이지 첫번째 행 계산
+		map.put("rowPerPage", page.getRowPerPage());	
+		
+		map.put("searchWord", searchWord);	
+		
+		if(categoryNo == null || categoryNo == 0) {
+			map.put("categoryNo", null);
+		} else {
+			map.put("categoryNo", categoryNo);			
+		}
+		
+		// 상품리스트 출력 
+		List<Map<String, Object>> main = goodsService.getMain(map);
+		model.addAttribute("main", main);
+		log.debug(TeamColor.KIM + "main: "+ main + TeamColor.RESET);
+		
+		// 카테고리 리스트 + 카테고리별 개수 가져오기
+		List<Map<String, Object>> categoryCountList = categoryService.getCategoryCounts();
+		log.debug(TeamColor.KIM + "categoryCountList: "+ categoryCountList + TeamColor.RESET);
+		model.addAttribute("categoryCountList", categoryCountList);
+		// 카테고리 : 전체 상품 개수 가져오기
+		Integer totalCount = goodsService.countGoodsList();
+		model.addAttribute("totalCount", totalCount);
+		
+
+		return "off/customer/main";
+	}
+	
+	// main 화면 출력(goods 리스트, 카테고리, 검색, 페이징) - 회원 : main.jsp 호출.(김혜린)
 	@GetMapping("/on/customer/main")
-	public String main(HttpSession session, Model model
+	public String onMain(HttpSession session, Model model
 					, @RequestParam(defaultValue="1") Integer currentPage
 					, @RequestParam(defaultValue="9") Integer rowPerPage
 					, @RequestParam(required = false) String searchWord
