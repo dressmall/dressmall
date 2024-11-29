@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.dressmall.mapper.CartMapper">
+	
+	<!-- /on/customer/addCart : 장바구니 추가.(김혜린) -->
+	<insert id="insertCart" parameterType="com.project.dressmall.vo.Cart">
+		INSERT INTO cart(
+			customer_mail
+			, goods_no
+			, cart_amount)
+		VALUES(
+			#{customerMail}
+			, #{goodsNo}
+			, #{cartAmount})	
+	</insert>
+
 	<!-- 고객페이지에서 장바구니에 담긴 항목 수 출력 (진수우) -->
 	<select id="countCartList">
 		SELECT

@@ -110,6 +110,7 @@
                    	</c:if>
 	            </div>
 	            
+	            <!-- 수량 +,- 버튼 -->
 	            <div class="mb-5 mt-3">
 	              	<div class="input-group mb-3" style="max-width: 120px;">
 		              <div class="input-group-prepend">
@@ -123,8 +124,16 @@
 	            </div>
 	                        
 	            
-	            <c:if test="${goods.goodsState == '재고있음'}">
-		            <p><a href="${pageContext.request.contextPath}/on/customer/cartList" class="buy-now btn btn-sm btn-primary">Add To Cart</a></p>	            
+	            <!-- 장바구니 추가 버튼 -->
+	            <c:if test="${goods.goodsState == '재고있음'}">		            
+		            <form id="addCartForm" action="${pageContext.request.contextPath}/on/customer/addCart" method="post">
+				        <!-- 숨겨진 입력 필드로 값 전송 -->
+				        <input type="hidden" name="customerMail" value="${customerMail}">
+				        <input type="hidden" name="goodsNo" value="${goodsNo}">
+				        <input type="hidden" name="cartAmount" value="">
+				        <!-- Add to Cart 버튼 -->
+				        <button type="submit" class="buy-now btn btn-sm btn-primary">Add To Cart</button>
+				    </form>            
 	            </c:if>
 	            <!-- 버튼 비활성화 -->
 	            <c:if test="${goods.goodsState == '재고없음'}"> 
@@ -162,5 +171,16 @@
         </div>
       </div>
     </div>
+    
+	<script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
+   	<script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
+  	<script src="${pageContext.request.contextPath}/js/popper.min.js"></script>
+  	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+  	<script src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
+  	<script src="${pageContext.request.contextPath}/js/jquery.magnific-popup.min.js"></script>
+  	<script src="${pageContext.request.contextPath}/js/aos.js"></script>
+
+  	<script src="${pageContext.request.contextPath}/js/main.js"></script>
+    
 </body>
 </html>

@@ -49,6 +49,8 @@ public class GoodsController {
 		List<Map<String, Object>> cart = cartService.getCartList(customerMail);
 		model.addAttribute("countCartList", cart.get(0).get("countCartList"));
 
+		model.addAttribute("customerMail", customerMail);
+		
 		return "on/customer/goodsOne";
 	}
 	

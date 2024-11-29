@@ -1,7 +1,6 @@
 package com.project.dressmall.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.project.dressmall.mapper.CartMapper;
+import com.project.dressmall.vo.Cart;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,6 +18,11 @@ import lombok.extern.slf4j.Slf4j;
 @Transactional
 public class CartService {
 	@Autowired CartMapper cartMapper;
+	
+	// /on/customer/addCart : 장바구니 추가.(김혜린)
+	public Integer addCart(Cart cart) {
+		return cartMapper.insertCart(cart);		
+	}
 	
 	// /on/customer/paymentList : 결제페이지에서 장바구니에서 체크한 항목만 출력.(진수우)
 	public List<Map<String, Object>> getCartListOne(List<Integer> goodsChoice) {
