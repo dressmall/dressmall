@@ -57,8 +57,8 @@
                    		<a href="${pageContext.request.contextPath}/off/customer/customerLogin" class="site-cart">
                      		<span class="icon icon-shopping_cart"></span>
 	                    </a>
-                 	 </li> 
-                  	<li class="d-inline-block d-md-none ml-md-0"><a href="#" class="site-menu-toggle js-menu-toggle"><span class="icon-menu"></span></a></li>
+                 	</li> 
+                  	
                 </ul>
               </div> 
             </div>

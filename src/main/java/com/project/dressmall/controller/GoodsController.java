@@ -37,6 +37,23 @@ public class GoodsController {
 	
 	// ----------------------------- 고객 -------------------------------------------------
 	
+	// 고객 - 상품상세 페이지 출력 - 비회원 : goodsOne.jsp 호출.(김혜린)
+	@GetMapping("/off/customer/goodsOne")
+	public String offMainGoodsOne(HttpSession session, Model model
+										, @RequestParam Integer goodsNo) {
+		
+		// goods 상세정보 가져오기
+		Map<String, Object> goods = goodsService.getGoodsOne(goodsNo);
+		model.addAttribute("goods", goods);
+		model.addAttribute("goodsNo", goodsNo);
+		
+				
+		// boardList 출력
+		List<Map<String, Object>> boardList = boardService.selectBoardList(goodsNo);
+		model.addAttribute("boardList", boardList);
+		
+		return "off/customer/goodsOne";
+	}
 	
 	// 고객 - 상품상세 페이지 출력 - 회원 : goodsOne.jsp 호출.(김혜린)
 	@GetMapping("/on/customer/goodsOne")
