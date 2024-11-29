@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.project.dressmall.service.BoardService;
 import com.project.dressmall.service.CartService;
 import com.project.dressmall.service.CategoryService;
 import com.project.dressmall.service.GoodsService;
@@ -32,21 +33,48 @@ public class GoodsController {
 	@Autowired GoodsService goodsService;
 	@Autowired CategoryService categoryService;
 	@Autowired CartService cartService;
+	@Autowired BoardService boardService;
 	
 	// ----------------------------- 고객 -------------------------------------------------
+	// main 화면 출력(goods 리스트, 카테고리, 검색, 페이징) : main.jsp 호출.(김혜린)
+	@GetMapping("/on/customer/goodsOne")
+	public String maingoodsone(HttpSession session, Model model
+										, @RequestParam Integer goodsNo) {
+		
+		// goods 상세정보 가져오기
+		Map<String, Object> goods = goodsService.getGoodsOne(goodsNo);
+		model.addAttribute("goods", goods);
+		model.addAttribute("goodsNo", goodsNo);
+		
+		
+		String customerMail = ((Customer)session.getAttribute("loginCustomer")).getCustomerMail();
+		List<Map<String, Object>> cart = cartService.getCartList(customerMail);
+		model.addAttribute("countCartList", cart.get(0).get("countCartList"));
+
+		model.addAttribute("customerMail", customerMail);
+		
+		// boardList 출력
+		List<Map<String, Object>> boardList = boardService.selectBoardList(goodsNo);
+		model.addAttribute("boardList", boardList);
+		
+		return "on/customer/goodsOne";
+	}
+	
 	// main 화면 출력(goods 리스트, 카테고리, 검색, 페이징) : main.jsp 호출.(김혜린)
 	@GetMapping("/on/customer/main")
 	public String main(HttpSession session, Model model
 					, @RequestParam(defaultValue="1") Integer currentPage
 					, @RequestParam(defaultValue="9") Integer rowPerPage
-					, @RequestParam(required = false) String searchWord) {
+					, @RequestParam(required = false) String searchWord
+					, @RequestParam(required = false) Integer categoryNo) {
 		log.debug(TeamColor.KIM + "searchWord: "+ searchWord + TeamColor.RESET);
+		log.debug(TeamColor.KIM + "categoryNo: "+ categoryNo + TeamColor.RESET);
 		
 		// 페이징 코드 setter.
 		Page page = new Page();
 		page.setCurrentPage(currentPage);
 		page.setRowPerPage(rowPerPage);
-		page.setCountTotalRow(goodsService.countGoodsListByMain(searchWord));
+		page.setCountTotalRow(goodsService.countGoodsListByMain(searchWord, categoryNo));
 		page.setNumPerPage(5);
 		
 		log.debug(TeamColor.KIM + "전체행개수: "+ page.getCountTotalRow() + TeamColor.RESET);
@@ -64,12 +92,24 @@ public class GoodsController {
 		
 		map.put("searchWord", searchWord);	
 		
-		// 상품리스트 출력 ///메인출력
+		if(categoryNo == null || categoryNo == 0) {
+			map.put("categoryNo", null);
+		} else {
+			map.put("categoryNo", categoryNo);			
+		}
+		
+		// 상품리스트 출력 
 		List<Map<String, Object>> main = goodsService.getMain(map);
 		model.addAttribute("main", main);
 		log.debug(TeamColor.KIM + "main: "+ main + TeamColor.RESET);
 		
-		model.addAttribute("loginStaff", session.getAttribute("loginStaff")); // login information model add.
+		// 카테고리 리스트 + 카테고리별 개수 가져오기
+		List<Map<String, Object>> categoryCountList = categoryService.getCategoryCounts();
+		log.debug(TeamColor.KIM + "categoryCountList: "+ categoryCountList + TeamColor.RESET);
+		model.addAttribute("categoryCountList", categoryCountList);
+		// 카테고리 : 전체 상품 개수 가져오기
+		Integer totalCount = goodsService.countGoodsList();
+		model.addAttribute("totalCount", totalCount);
 		
 		String customerMail = ((Customer)session.getAttribute("loginCustomer")).getCustomerMail();
 		List<Map<String, Object>> cart = cartService.getCartList(customerMail);
@@ -82,7 +122,7 @@ public class GoodsController {
 	// goods 상세정보 출력.(김혜린)
 	@GetMapping("/on/staff/goodsOne")
 	public String goodsOne(Model model
-								, @RequestParam int goodsNo) {
+								, @RequestParam Integer goodsNo) {
 		// goods 상세정보 가져오기
 		Map<String, Object> goods = goodsService.getGoodsOne(goodsNo);
 		model.addAttribute("goods", goods);

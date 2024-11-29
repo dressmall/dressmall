@@ -41,7 +41,7 @@
 	
 	            <div class="col-12 mb-3 mb-md-0 col-md-4 order-1 order-md-2 text-center">
 	              <div class="site-logo">
-	                <a href="index.html" class="js-logo-clone">Shoppers</a>
+	                <a href="${pageContext.request.contextPath}/off/customer/main" class="js-logo-clone">Shoppers</a>
 	              </div>
 	            </div>
 	
@@ -59,7 +59,7 @@
 	                   		<a href="${pageContext.request.contextPath}/on/customer/cartList" class="site-cart">
 	                     	<span class="icon icon-shopping_cart"></span>
 		                      <!-- 장바구니 담은 개수 표시 -->
-		                      <span class="count"></span>
+		                      <span class="count">${countCartList}</span>
 		                    </a>
 	                 	 </li> 
 	                  	<li class="d-inline-block d-md-none ml-md-0"><a href="#" class="site-menu-toggle js-menu-toggle"><span class="icon-menu"></span></a></li>
@@ -85,56 +85,69 @@
 	<div class="site-section">
       <div class="container">
         <div class="row">
-        	<!-- 상품 상세정보 -->
-          <div class="col-md-6">
-            <img src="images/cloth_1.jpg" alt="Image" class="img-fluid">
-          </div>
-          <div class="col-md-6">
-            <h2 class="text-black">Tank Top T-Shirt</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur, vitae, explicabo? Incidunt facere, natus soluta dolores iusto! Molestiae expedita veritatis nesciunt doloremque sint asperiores fuga voluptas, distinctio, aperiam, ratione dolore.</p>
-            <p class="mb-4">Ex numquam veritatis debitis minima quo error quam eos dolorum quidem perferendis. Quos repellat dignissimos minus, eveniet nam voluptatibus molestias omnis reiciendis perspiciatis illum hic magni iste, velit aperiam quis.</p>
-            <p><strong class="text-primary h4">$50.00</strong></p>
-            <div class="mb-1 d-flex">
-              <label for="option-sm" class="d-flex mr-3 mb-3">
-                <span class="d-inline-block mr-2" style="top:-2px; position: relative;">
-                	<input type="radio" id="option-sm" name="shop-sizes">
-                </span> 
-                <span class="d-inline-block text-black">Small</span>
-              </label>
-              <label for="option-md" class="d-flex mr-3 mb-3">
-                <span class="d-inline-block mr-2" style="top:-2px; position: relative;">
-                	<input type="radio" id="option-md" name="shop-sizes">
-                </span> 
-                <span class="d-inline-block text-black">Medium</span>
-              </label>
-              <label for="option-lg" class="d-flex mr-3 mb-3">
-                <span class="d-inline-block mr-2" style="top:-2px; position: relative;">
-                	<input type="radio" id="option-lg" name="shop-sizes">
-                </span> 
-                <span class="d-inline-block text-black">Large</span>
-              </label>
-              <label for="option-xl" class="d-flex mr-3 mb-3">
-                <span class="d-inline-block mr-2" style="top:-2px; position: relative;">
-                	<input type="radio" id="option-xl" name="shop-sizes">
-                </span> 
-                <span class="d-inline-block text-black"> Extra Large</span>
-              </label>
-            </div>
-            <div class="mb-5">
-              <div class="input-group mb-3" style="max-width: 120px;">
-              <div class="input-group-prepend">
-                <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
-              </div>
-              <input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-              <div class="input-group-append">
-                <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
-              </div>
-            </div>
-
-            </div>
-            <p><a href="${pageContext.request.contextPath}/on/customer/cartList" class="buy-now btn btn-sm btn-primary">Add To Cart</a></p>
-		
-          </div>
+        	 <!-- 상품 상세정보 -->
+	          <div class="col-md-6">
+                <c:if test="${empty goods.goodsFileName}">
+                    <img 
+                        src="${pageContext.request.contextPath}/upload/noImage.png"  
+                        class="img-fluid">
+                </c:if>
+                <c:if test="${not empty goods.goodsFileName}">		                        
+             		 <img src="${pageContext.request.contextPath}/upload/${goods.goodsFileName}.${goods.goodsFileExt}" class="img-fluid">
+                </c:if>
+	          </div>
+	          
+	          <div class="col-md-6">
+	            <h2 class="text-black">${goods.goodsTitle}</h2>
+	            <p>${goods.goodsMemo}</p>
+	            <p><strong class="text-primary h4">${goods.goodsPrice} 원</strong></p>
+	            <div class="mb-1 d-flex">
+					<c:if test="${goods.goodsState == '재고있음'}">
+	                   <p class="text-dark font-weight-bold">재고있음</p>	                   
+                   	</c:if>
+					<c:if test="${goods.goodsState == '재고없음'}">
+	                   <p class="text-danger font-weight-bold">품절</p>	                   
+                   	</c:if>
+	            </div>
+	            	            
+	            <!-- 장바구니 추가 버튼 -->
+	            <c:if test="${goods.goodsState == '재고있음'}">		            
+		            <form id="addCartForm" action="${pageContext.request.contextPath}/on/customer/addCart" method="post">
+				        <!-- 수량 +,- 버튼 -->
+			            <div class="mb-5 mt-3">
+			              	<div class="input-group mb-3" style="max-width: 120px;">
+				              <div class="input-group-prepend">
+				                <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
+				              </div>
+				              <input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+				              <div class="input-group-append">
+				                <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
+				              </div>
+			            	</div>
+			            </div>
+				        
+				        <!-- 숨겨진 입력 필드로 값 전송 -->
+				        <input type="hidden" name="customerMail" value="${customerMail}">
+				        <input type="hidden" name="goodsNo" value="${goodsNo}">
+				        <input type="hidden" name="cartAmount" value="1">
+				        <!-- Add to Cart 버튼 -->
+				        <button type="submit" class="buy-now btn btn-sm btn-primary">Add To Cart</button>
+				    </form>            
+	            </c:if>
+	            
+	            <!-- 버튼 비활성화 -->
+	            <c:if test="${goods.goodsState == '재고없음'}"> 
+		            <p>
+			            <a href="${pageContext.request.contextPath}/on/customer/cartList" 
+			            	class="buy-now btn btn-sm btn-primary disabled" 
+			            	tabindex="-1"
+       						aria-disabled="true">
+			            	Add To Cart
+			            </a>
+		            </p>	            
+	            </c:if>
+			
+	          </div>
         </div>
       </div>
     </div>
@@ -158,5 +171,16 @@
         </div>
       </div>
     </div>
+    
+	<script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
+   	<script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
+  	<script src="${pageContext.request.contextPath}/js/popper.min.js"></script>
+  	<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+  	<script src="${pageContext.request.contextPath}/js/owl.carousel.min.js"></script>
+  	<script src="${pageContext.request.contextPath}/js/jquery.magnific-popup.min.js"></script>
+  	<script src="${pageContext.request.contextPath}/js/aos.js"></script>
+
+  	<script src="${pageContext.request.contextPath}/js/main.js"></script>
+    
 </body>
 </html>

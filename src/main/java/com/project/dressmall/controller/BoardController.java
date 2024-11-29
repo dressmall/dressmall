@@ -55,7 +55,7 @@ public class BoardController {
 								, @RequestParam("ordersNo") Integer ordersNo) {
 		
 		// goods정보 출력
-		List<Map<String, Object>> ordersByGoods = boardMapper.selectBoardList(ordersNo);
+		List<Map<String, Object>> ordersByGoods = boardMapper.selectOrdersList(ordersNo);
 		
 		model.addAttribute("ordersByGoods",ordersByGoods);
 		model.addAttribute("ordersNo",ordersNo);
@@ -71,10 +71,11 @@ public class BoardController {
 	
 	// deleteBoard - 후기 삭제
 	@GetMapping("/on/customer/removeBoard")
-	public String deleteBoard(Board board) {
+	public String deleteBoard(Board board
+							,@RequestParam("goodsNo") Integer goodsNo) {
 		Integer row = boardService.deleteBoard(board);
 		
-		return "redirect:/on/customer/goodsOne" ;
+		return "redirect:/on/customer/goodsOne?goodsNo" + goodsNo ;
 	}
 
 }

@@ -109,11 +109,12 @@
 					          		</div>
 				          			<h6>리뷰 작성</h6>
 				          			<div>
-				          				<textarea rows="5" cols="100" name="boardContent"></textarea>
+				          				<textarea id="boardContent" rows="5" cols="100" name="boardContent"></textarea>
+				          				<span id="errBoardContent" class="msg d-block mt-1"></span><!-- 에러메세지 -->
 				          			</div>
 				          			<!-- 유효성 검사 후 에러 메세지 출력 -->
 				          			<div class="text-end">
-					          			<button class="btn-main" type="submit">등록</button>			          			
+					          			<button id="btnBoard" class="btn-main" type="button">등록</button>			          			
 				          			</div>
 			          			</c:forEach>
 			          		</form>
@@ -149,6 +150,21 @@
   <script src="${pageContext.request.contextPath}/js/aos.js"></script>
 
   <script src="${pageContext.request.contextPath}/js/main.js"></script>
+  <script type="text/javascript">
+  	// 유효성 검사
+  	$('#btnBoard').click(function() {
+  		let isValid = true;
+  		
+  		if($('#boardContent') == null || $('#boardContent').val() == '') {
+  			$('#errBoardContent').text('리뷰를 작성해주세요');
+  			isValid = false;
+  		} else {
+  			$('#errBoardContent').text('');
+  		}
+  		$('#btnBoard').sumbit
+  		
+	})
+  </script>
     
   </body>
 

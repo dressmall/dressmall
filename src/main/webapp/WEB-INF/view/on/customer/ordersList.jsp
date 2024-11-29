@@ -23,7 +23,7 @@
 </head>
 <body>
   
-  <div class="site-wrap">
+  	<div class="site-wrap">
 	    <header class="site-navbar" role="banner">
 	      <div class="site-navbar-top">
 	        <div class="container">
@@ -107,15 +107,16 @@
 							          			</c:if>		
 							          			<!-- 배송중일 경우 -->	          			
 							          			<c:if test="${o.paymentState == '배송중' }">
-							          				<button class="btn-main ms-3">구매확정</button>
+							          				<a	href="${pageContext.request.contextPath}/on/customer/modifyOrders?paymentNo=${o.paymentNo }"
+							          					class="btn-main ms-3">구매확정</a>
 							          			</c:if>			 
 							          			<!-- 배송완료일 경우 -->         			
-							          			<c:if test="${o.paymentState == '배송완료' }">
+							          			<c:if test="${o.paymentState == '배송완료' && o.review }">
 							          				<button class="btn-disa ms-3" disabled>구매확정</button>
 							          			</c:if>	
 						          			</div>
 					          			</div>
-					          			<div class="orders-box content border d-flex align-items-center justify-content-start mb-3">
+					          			<div class="orders-box content border d-flex align-items-center justify-content-between mb-3">
 					          				<div class="img-box">
 					          					<input type="hidden" name="ordersNo" value="${o.ordersNo }">
 					          				 	<c:if test="${o.goodsFileName == null}">
@@ -132,9 +133,12 @@
 					          					<span>가격 : ${o.goodsPrice }</span>
 					          					<span>수량 : ${o.ordersAmount }</span>				          				
 					          				</div>
-					          				<c:if test="${o.paymentState == '배송완료' }">
-						          				<a class="btn-main" href="${pageContext.request.contextPath}/on/customer/addBoard?ordersNo=${o.ordersNo }">리뷰등록</a>
-						          			</c:if>	
+					          				<c:if test="${o.paymentState == '배송완료' && !o.review}">
+					          					<a class="btn-main" href="${pageContext.request.contextPath}/on/customer/addBoard?ordersNo=${o.ordersNo}">리뷰등록</a>
+					          				</c:if>
+					          				<c:if test="${o.paymentState == '배송완료' && o.review}">
+					          					<span class="d-inline-block " style="word-break: keep-all;">리뷰등록</span>
+					          				</c:if>
 					          			</div>
 					          		</div>	
 				          		</c:forEach>
@@ -146,21 +150,13 @@
 			</div>
 		</div>	
 	</div>
-    <footer class="site-footer border-top">
-      <div class="container">
-        <div class="row">
-        <div class="row pt-5 mt-5 text-center">
-          <div class="col-md-12">
-            <p class="sub-text">
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            Copyright &copy;<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All rights reserved dressmall 
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            </p>
-          </div>
-        </div>
-      </div>
-     </div>
-    </footer>
+    <footer class="py-4 bg-light mt-auto">
+       <div class="container-fluid px-4">
+           <div class="d-flex align-items-center justify-content-between small">
+               <div class="text-muted">Copyright &copy; Dress Mall 2024</div>
+           </div>
+       </div>
+   </footer>
 
 	<script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
 	<script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
