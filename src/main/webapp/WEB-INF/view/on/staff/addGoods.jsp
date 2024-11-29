@@ -105,16 +105,20 @@
 			$('#errTitle').text('상품이름을 입력해주세요.');
 			console.log("상품이름 미입력");
 			isValid = false;
+			$('#goodsTitle').addClass('has-error'); 
 		} else {
 			$('#errTitle').text(''); // 오류메시지 초기화
+			$('#goodsTitle').removeClass('has-error');
 		}
 		// 상품 상세정보 유효성 검사
 		if ($('#goodsMemo').val() == null || $('#goodsMemo').val() == '') {
 			$('#errMemo').text('상품 상세정보를 입력해주세요.');
 			console.log("상품설명 미입력");
 			isValid = false;
+			$('#goodsMemo').addClass('has-error'); 
 		} else {
 			$('#errMemo').text(''); // 오류메시지 초기화
+			$('#goodsMemo').removeClass('has-error'); 
 		}
 		// 재고 상태(라디오 버튼) 유효성 검사
 		if (!$('input[name="goodsState"]:checked').val()) {
@@ -130,14 +134,17 @@
 			$('#errPrice').text('가격을 입력해주세요.');
 			console.log("가격 유효성 오류");
 			isValid = false;
+			$('#goodsPrice').addClass('has-error'); 
 		} else {
 			$('#errPrice').text(''); // 오류메시지 초기화
+			$('#goodsPrice').removeClass('has-error'); 
 		}
 		// 카테고리 유효성 검사
 		if ($('#categoryNo').val() == null || $('#categoryNo').val() == '') {
 			$('#errCategory').text('카테고리를 선택해주세요.');
 			console.log("상품설명 미입력");
 			isValid = false;
+			
 		} else {
 			$('#errCategory').text(''); // 오류메시지 초기화
 		}

@@ -163,9 +163,24 @@
         <div class="row">
           <div class="col-md-12">
             <div class="nonloop-block-3 owl-carousel">
-              <div class="item">
-                
-              </div>
+	           	<c:forEach items="${boardList }" var="board">
+	           		<c:if test="${not empty board.boardContent}">
+		            	<form action="${pageContext.request.contextPath}/on/customer/removeBoard">
+					        <div class="board-box content text-center">
+					            <span>${board.boardContent}</span>
+					            <div class="block-4-text p-4">
+					                <input type="hidden" name="goodsNo" value="${board.goodsNo}">
+					                <input type="hidden" name="ordersNo" value="${board.ordersNo}">
+					                <!-- 세션에 저장된 customerMail과 board.customerMail이 같을 경우 삭제 버튼 표시 -->
+				                    <c:if test="${customerMail == board.customerMail}">
+				                        <button class="btn-main">삭제</button>
+				                    </c:if>
+					            </div>
+					        </div>
+		            	</form>
+				    </c:if>
+	              </c:forEach>
+            		
             </div>
           </div>
         </div>
