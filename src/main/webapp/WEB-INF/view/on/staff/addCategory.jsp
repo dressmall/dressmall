@@ -40,9 +40,11 @@
          // 미입력 유효성 체크
          if($('#categoryTitle').val() == null || $('#categoryTitle').val() == ''){
             $('#errMsg').text('카테고리를 입력해주세요.');
+            $('#categoryTitle').addClass('has-error');
          } else{
             console.log('submit...');
             $('#errMsg').text(''); // 오류메시지 초기화
+            $('#categoryTitle').removeClass('has-error');
             
          // AJAX로 폼 제출
  			$.ajax({

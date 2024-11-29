@@ -129,8 +129,10 @@
 			$('#errMemo').text('상품 상세정보를 입력해주세요.');
 			console.log("상품설명 미입력");
 			isValid = false;
+			$('#goodsMemo').addClass('has-error'); 
 		} else {
 			$('#errMemo').text(''); // 오류메시지 초기화
+			$('#goodsMemo').removeClass('has-error');
 		}
 		// 상품가격 유효성 검사
 		let price = $('#goodsPrice').val();
@@ -138,8 +140,10 @@
 			$('#errPrice').text('가격을 입력해주세요.');
 			console.log("가격 유효성 오류");
 			isValid = false;
+			$('#goodsPrice').addClass('has-error'); 
 		} else {
 			$('#errPrice').text(''); // 오류메시지 초기화
+			$('#goodsPrice').removeClass('has-error');
 		}
 
 		// 서버에서 전달받은 errFileMsg 값을 자바스크립트에서 사용
