@@ -25,45 +25,48 @@
   
   <div class="site-wrap">
     <header class="site-navbar" role="banner">
-      <div class="site-navbar-top">
-        <div class="container">
-          <div class="row align-items-center justify-content-end">
+  <div class="site-navbar-top">
+    <div class="container">
+      <div class="row align-items-center justify-content-between mt-3 mb-3">
 
-            <div class="col-12 mb-3 mb-md-0 col-md-4 order-1 order-md-2 text-center">
-              <div class="site-logo">
-                <a href="${pageContext.request.contextPath}/off/customer/main" class="js-logo-clone">Shoppers</a>
-              </div>
-            </div>
-
-            <div class="col-6 col-md-4 order-3 order-md-3 text-right">
-              <div class="site-top-icons">
-                <ul>
-                  	<li>
-                  		<!-- 로그인 -->
-                  		<a href="${pageContext.request.contextPath}/on/customer/logout">
-                  			<span>로그아웃</span>
-                  		</a>
-                  	</li> 
-                  	<li>
-	                  	<a href="${pageContext.request.contextPath}/on/customer/myPage"><span class="icon icon-person"></span>
-	                  	</a>
-                  	</li>
-                  	<li>
-                   		<a href="${pageContext.request.contextPath}/on/customer/cartList" class="site-cart">
-                     		<span class="icon icon-shopping_cart"></span>
-                     		<!-- 장바구니 담은 개수 표시 -->
-	                        <span class="count">${countCartList }</span>
-	                    </a>
-                 	 </li> 
-                  	<li class="d-inline-block d-md-none ml-md-0"><a href="#" class="site-menu-toggle js-menu-toggle"><span class="icon-menu"></span></a></li>
-                </ul>
-              </div> 
-            </div>
-
-          </div>
+        <!-- 로고 영역 -->
+        <div class="col-2 mb-3 mb-md-0 col-md-3 w-100">
+          <p class="site-logo">
+            <a href="${pageContext.request.contextPath}/on/customer/main" class="js-logo-clone">DressMALL</a>
+          </p>
         </div>
-      </div> 
-    </header>
+
+        <!-- 가운데 공백 -->
+        <div class="col-12 mb-3 mb-md-0 col-md-6 w-100">
+          
+        </div>
+
+        <!-- 로그인 및 장바구니 아이콘 영역 -->
+        <div class="col-2 col-md-2 order-3 order-md-3 text-right">
+          <div class="site-top-icons">
+            <ul>
+              <li>
+                <a href="${pageContext.request.contextPath}/on/customer/logout">
+                  <span>로그아웃</span>
+                </a>
+              </li>
+              <li><a href="${pageContext.request.contextPath}/on/customer/myPage"><span class="icon icon-person"></span></a></li> <!-- 마이페이지 -->
+              <li>
+                <a href="${pageContext.request.contextPath}/on/customer/cartList" class="site-cart">
+                  <span class="icon icon-shopping_cart"></span>
+                  <!-- 장바구니 담은 개수 표시 -->
+	           	   <span class="count">${countCartList}</span>
+                </a>
+              </li>
+              
+            </ul>
+          </div> 
+        </div>
+
+      </div>
+    </div>
+  </div> 
+</header>
     <form id="paymentForm" method="post" action="${pageContext.request.contextPath}/on/customer/paymentComplete">
     <div class="site-section">
       <div class="container">
@@ -127,14 +130,8 @@
     <footer class="site-footer border-top">
       <div class="container">
         <div class="row">
-        <div class="row pt-5 mt-5 text-center">
-          <div class="col-md-12">
-            <p>
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            Copyright &copy;<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All rights reserved dressmall 
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            </p>
-          </div>
+             <div class="d-flex align-items-center justify-content-between small">
+               <div class="text-muted">Copyright &copy; Dress Mall 2024</div>
         </div>
       </div>
      </div>
