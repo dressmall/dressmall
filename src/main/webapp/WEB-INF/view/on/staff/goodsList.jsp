@@ -23,13 +23,12 @@
 <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.html">Dress Mall_STAFF</a>
+            <a class="navbar-brand ps-3" href="${pageContext.request.contextPath}/on/staff/staffList">Dress Mall STAFF</a>
             <!-- Sidebar Toggle-->
-            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="${pageContext.request.contextPath}/on/staff/staffList"><i class="fas fa-bars"></i></button>
             <a href="${pageContext.request.contextPath}/on/staff/logout" class="btn btn-danger ms-auto me-4">
            		로그아웃
             </a>
-            
         </nav>
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
@@ -73,6 +72,12 @@
 			            </div>
 			            <!-- 상품 리스트 -->
 			            <div class="row">
+			            <c:if test="${goodsList.isEmpty()}">
+			              <div class="text-center">
+			              	상품이 없습니다.
+			              </div>
+			              </c:if>
+			            <c:if test="${!goodsList.isEmpty()}">
 			            	<c:forEach var="g" items="${goodsList}">
 				              <div class="col-sm-5 col-lg-3 mb-4" data-aos="fade-up">
 				                <div class="block-4 text-center border">
@@ -88,7 +93,7 @@
 				                  </figure>
 				                  <div class="block-4-text p-4">
 				                    <h5><a class="text-dark text-decoration-none" href="${pageContext.request.contextPath}/on/staff/goodsOne?goodsNo=${g.goodsNo}">${g.goodsTitle}</a></h5>
-				                    <p class="mb-0">${g.goodsMemo}</p>
+				                    <p class="mb-0 text-memo">${g.goodsMemo}</p>
 				                    <p class="text font-weight-bold">${g.goodsPrice}원</p>
 				                  </div>
 				                  <div class="block-4 p-4">
@@ -100,9 +105,10 @@
 				                </div>
 				              </div>
 			       			 </c:forEach>
-			             </div>
+			            </c:if>
+			            </div>
                         <!-- 페이징 -->
-                        <div class="text-center">
+                        <div class="text-center m-3 mb-5">
 							<c:if test="${currentPage > numPerPage}">
 								<a href="${pageContext.request.contextPath}/on/staff/goodsList?currentPage=${beginPagingNum - numPerPage}">이전</a>
 							</c:if>
