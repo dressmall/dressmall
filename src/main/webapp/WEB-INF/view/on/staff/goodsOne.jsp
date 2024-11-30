@@ -88,7 +88,13 @@
 						<div class="container mt-5">
 					        <div class="row">
 					          <div class="col-md-6">
-					            	<img src="${pageContext.request.contextPath}/upload/${goods.goodsFileName}.${goods.goodsFileExt}" class="img-fluid">
+					          	<c:if test="${empty goods.goodsFileName}">
+					          		<img src="${pageContext.request.contextPath}/upload/noImage.png" class="img-fluid">
+					          	</c:if>
+					          	<c:if test="${!empty goods.goodsFileName}">
+					          		<img src="${pageContext.request.contextPath}/upload/${goods.goodsFileName}.${goods.goodsFileExt}" class="img-fluid">
+					          	</c:if>
+					            	
 					          </div>
 					          <div class="col-md-6">
 						            <table class="table table-bordered ">
