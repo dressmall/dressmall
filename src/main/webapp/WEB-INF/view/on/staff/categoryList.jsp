@@ -22,7 +22,7 @@
 
 
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>카테고리 리스트</title>
 
 
 </head>
@@ -74,9 +74,7 @@
                         <h1 class="mt-5">카테고리</h1>
                         <!-- 추가 버튼 -->
                         <div class="d-flex justify-content-end mb-4">
-			                <a href="${pageContext.request.contextPath}/on/staff/addCategory" class="btn btn-main">
-			                    카테고리 추가
-			                </a>
+                        	<button class="btn-main btn" onclick="openPopupAddCategory()">카테고리 추가</button>
 			            </div>
                         <!-- 테이블 -->
                         <table class="table table-bordered ">
@@ -140,5 +138,27 @@
         <script src="${pageContext.request.contextPath}/js/scripts.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
         <script src="${pageContext.request.contextPath}/js/datatables-simple-demo.js"></script>
+        <script>
+     	// 카테고리추가 팝업
+      	function openPopupAddCategory() {
+    	  	  // 화면의 크기 (뷰포트 크기)
+    	  	  const screenWidth = window.innerWidth;
+    	  	  const screenHeight = window.innerHeight;
+    	
+    	  	  // 팝업 크기
+    	  	  const popupWidth = 400;
+    	  	  const popupHeight = 400;
+    	
+    	  	  // 중앙 위치 계산
+    	  	  const left = Math.max((screenWidth - popupWidth) / 2, 0);
+    	  	  const top = Math.max((screenHeight - popupHeight) / 2, 0);
+    	  	  
+    	      // 팝업창 옵션 설정
+    	      const url = '${pageContext.request.contextPath}/on/staff/addCategory'; // 호출할 JSP 경로
+    	      const name = '카테고리 추가'; // 팝업창 이름
+    	      const options = 'width=' + popupWidth + ',height=' + popupHeight + ',top=' + top + ',left=' + left + ',scrollbars=yes,resizable=no';
+    	      window.open(url, name, options);
+    	}
+        </script>
 </body>
 </html>

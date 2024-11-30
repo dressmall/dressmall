@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/aos.css">
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-    <title>goodsOne(회원)</title>
+    <title>goodsOne(비회원)</title>
 
 </head>
 <body>
@@ -33,10 +33,7 @@
 	          <div class="row align-items-center">
 	
 	            <div class="col-6 col-md-4 order-2 order-md-1 site-search-icon text-left">
-	              <form action="" class="site-block-top-search">
-	                <span class="icon icon-search2"></span>
-	                <input type="text" class="form-control border-0" placeholder="Search">
-	              </form>
+	              
 	            </div>
 	
 	            <div class="col-12 mb-3 mb-md-0 col-md-4 order-1 order-md-2 text-center">
@@ -50,19 +47,22 @@
 	                <ul>
 	                  	<li>
 	                  		<!-- 로그인 -->
-	                  		<a href="${pageContext.request.contextPath}/on/customer/logout">
-	                  			<span>로그아웃</span>
-	                  		</a>
+                  			<a href="${pageContext.request.contextPath}/off/customer/customerLogin">
+                  				<span>로그인</span>
+                  			</a>
 	                  	</li> 
-	                  	<li><a href="${pageContext.request.contextPath}/on/customer/myPage"><span class="icon icon-person"></span></a></li> <!-- 마이페이지 -->
 	                  	<li>
-	                   		<a href="${pageContext.request.contextPath}/on/customer/cartList" class="site-cart">
-	                     	<span class="icon icon-shopping_cart"></span>
-		                      <!-- 장바구니 담은 개수 표시 -->
-		                      <span class="count">${countCartList}</span>
+	                  	 	<!-- 비회원자가 마이페이지를 클릭했을 경우 일반회원 로그인 페이지로 넘어감 -->
+		                  	<a href="${pageContext.request.contextPath}/off/customer/customerLogin"><span class="icon icon-person"></span>
+		                  	</a>
+	                  	</li>
+	                  	<li>
+	                  		<!-- 비회원자가 장바구니를 클릭했을 경우 일반회원 로그인 페이지로 넘어감 -->
+	                   		<a href="${pageContext.request.contextPath}/off/customer/customerLogin" class="site-cart">
+	                     		<span class="icon icon-shopping_cart"></span>
 		                    </a>
-	                 	 </li> 
-	                  	<li class="d-inline-block d-md-none ml-md-0"><a href="#" class="site-menu-toggle js-menu-toggle"><span class="icon-menu"></span></a></li>
+	                 	</li> 
+	                  	
 	                </ul>
 	              </div> 
 	            </div>
@@ -75,7 +75,7 @@
 	    <div class="bg-light py-3">
 	      <div class="container">
 	        <div class="row">
-	          <div class="col-md-12 mb-0"><a href="${pageContext.request.contextPath}/on/customer/main">Home</a> 
+	          <div class="col-md-12 mb-0"><a href="${pageContext.request.contextPath}/off/customer/main">Home</a> 
 	          <span class="mx-2 mb-0">/</span> 
 	          <strong class="text-black">Shop</strong></div>
 	        </div>
@@ -110,42 +110,29 @@
                    	</c:if>
 	            </div>
 	            	            
-	            <!-- 장바구니 추가 버튼 -->
-	            <c:if test="${goods.goodsState == '재고있음'}">		            
-		            <form id="addCartForm" action="${pageContext.request.contextPath}/on/customer/addCart" method="post">
-				        <!-- 수량 +,- 버튼 -->
-			            <div class="mb-5 mt-3">
-			              	<div class="input-group mb-3" style="max-width: 120px;">
-				              <div class="input-group-prepend">
-				                <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
-				              </div>
-				              <input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-				              <div class="input-group-append">
-				                <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
-				              </div>
-			            	</div>
-			            </div>
-				        
-				        <!-- 숨겨진 입력 필드로 값 전송 -->
-				        <input type="hidden" name="customerMail" value="${customerMail}">
-				        <input type="hidden" name="goodsNo" value="${goodsNo}">
-				        <input type="hidden" name="cartAmount" value="1">
-				        <!-- Add to Cart 버튼 -->
-				        <button type="submit" class="buy-now btn btn-sm btn-primary">Add To Cart</button>
-				    </form>            
-	            </c:if>
+	            <!-- 수량 +,- 버튼 -->
+	            <div class="mb-5 mt-3">
+	              	<div class="input-group mb-3" style="max-width: 120px;">
+		              <div class="input-group-prepend">
+		                <button class="btn btn-outline-primary js-btn-minus disabled" type="button">&minus;</button>
+		              </div>
+		              <input type="text" class="form-control text-center" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+		              <div class="input-group-append">
+		                <button class="btn btn-outline-primary js-btn-plus disabled" type="button">&plus;</button>
+		              </div>
+	            	</div>
+	            </div>
 	            
-	            <!-- 버튼 비활성화 -->
-	            <c:if test="${goods.goodsState == '재고없음'}"> 
-		            <p>
-			            <a href="${pageContext.request.contextPath}/on/customer/cartList" 
-			            	class="buy-now btn btn-sm btn-primary disabled" 
-			            	tabindex="-1"
-       						aria-disabled="true">
-			            	Add To Cart
-			            </a>
-		            </p>	            
-	            </c:if>
+	            <!--  장바구니 추가 버튼 비활성화 -->
+	            <p>
+		            <a href="${pageContext.request.contextPath}/on/customer/cartList" 
+		            	class="buy-now btn btn-sm btn-primary disabled" 
+		            	tabindex="-1"
+      						aria-disabled="true">
+		            	Add To Cart
+		            </a>
+	            </p>
+	            
 			
 	          </div>
         </div>
@@ -163,24 +150,9 @@
         <div class="row">
           <div class="col-md-12">
             <div class="nonloop-block-3 owl-carousel">
-	           	<c:forEach items="${boardList }" var="board">
-	           		<c:if test="${not empty board.boardContent}">
-		            	<form action="${pageContext.request.contextPath}/on/customer/removeBoard">
-					        <div class="board-box content text-center">
-					            <span>${board.boardContent}</span>
-					            <div class="block-4-text p-4">
-					                <input type="hidden" name="goodsNo" value="${board.goodsNo}">
-					                <input type="hidden" name="ordersNo" value="${board.ordersNo}">
-					                <!-- 세션에 저장된 customerMail과 board.customerMail이 같을 경우 삭제 버튼 표시 -->
-				                    <c:if test="${customerMail == board.customerMail}">
-				                        <button class="btn-main">삭제</button>
-				                    </c:if>
-					            </div>
-					        </div>
-		            	</form>
-				    </c:if>
-	              </c:forEach>
-            		
+              <div class="item">
+                
+              </div>
             </div>
           </div>
         </div>

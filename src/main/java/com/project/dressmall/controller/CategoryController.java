@@ -89,14 +89,4 @@ public class CategoryController {
 		
 		return "on/staff/categoryList";
 	}
-	
-	
-	// 샘플 : 테스트후 삭제예정
-	@GetMapping("/on/staff/sample")
-	public String getMethodName() {
-		log.debug("testttttttttttttttttttt");
-		log.debug("dddd");
-		
-		return "on/staff/sample";
-	}
 }

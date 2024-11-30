@@ -4,11 +4,17 @@
 	<!-- goodsOne에 출력할 boardList -->
 	<select id="selectBoardList" parameterType="map" resultType="map">
 		SELECT
-			o.orders_no ordersNo
-			, o.goods_no goodsNo
-			, b.board_content boardContent
-		FROM orders o
-		LEFT OUTER JOIN board b  ON o.orders_no = b.orders_no
+		    c.customer_mail,
+		    a.address_no,
+		    p.payment_no,
+		    o.orders_no AS ordersNo,
+		    o.goods_no AS goodsNo,
+		    b.board_content AS boardContent
+		FROM customer c
+		LEFT OUTER JOIN address a ON c.customer_mail = a.customer_mail
+		LEFT OUTER JOIN payment p ON p.address_no = a.address_no
+		LEFT OUTER JOIN orders o ON o.payment_no = p.payment_no 
+		LEFT OUTER JOIN board b ON o.orders_no = b.orders_no
 		LEFT OUTER JOIN goods g ON o.goods_no = g.goods_no
 		WHERE g.goods_no = #{goodsNo}
 	</select>
@@ -22,12 +28,12 @@
 	    )
 	</select>
 	<!-- 후기 삭제 (박시현) -->
-	<delete id="deleteBoard" parameterType="com.project.dressmall.vo.Board">
+	<delete id="deleteBoard" parameterType="Integer">
 		DELETE FROM board 
-		WHERE orders_no = #{orderNo}
+		WHERE orders_no = #{ordersNo}
 	</delete>
 	<!-- 후기 추가 폼에 쓸 goods/orders정보 (박시현) -->
-	<select id="selectOrdersList" parameterType="map" resultType="map">
+	<select id="addBoardByOrdersList" parameterType="map" resultType="map">
 		SELECT
 		     o.orders_no ordersNo
 		    , o.goods_no goodsNo

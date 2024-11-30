@@ -25,66 +25,78 @@
 
 </head>
 <body>
-  
-  <div class="site-wrap">
-    <header class="site-navbar" role="banner">
-      <div class="site-navbar-top">
-        <div class="container">
-          <div class="row  align-items-center justify-content-end">
+  <header class="site-navbar" role="banner">
+  <div class="site-navbar-top">
+    <div class="container">
+      <div class="row align-items-center justify-content-between mt-3 mb-3">
 
-            <div class="col-12 mb-3 mb-md-0 col-md-4 order-1 order-md-2 text-center">
-              <div class="site-logo">
-                <a href="index.html" class="js-logo-clone">Shoppers</a>
-              </div>
-            </div>
-
-            <div class="col-6 col-md-4 order-3 order-md-3 text-right">
-              <div class="site-top-icons">
-                <ul>
-                  	<li>
-                  		<!-- 로그인 -->
-                  		<a href="${pageContext.request.contextPath}/on/customer/logout">
-                  			<span>로그아웃</span>
-                  		</a>
-                  	</li> 
-                  	<li><a href="${pageContext.request.contextPath}/on/customer/myPage"><span class="icon icon-person"></span></a></li> <!-- 마이페이지 -->
-                  	<li>
-                   		<a href="${pageContext.request.contextPath}/on/customer/cartList" class="site-cart">
-                     	<span class="icon icon-shopping_cart"></span>
-	                      <!-- 장바구니 담은 개수 표시 -->
-	                      <span class="count">${countCartList }</span>
-	                    </a>
-                 	 </li> 
-                  	<li class="d-inline-block d-md-none ml-md-0"><a href="#" class="site-menu-toggle js-menu-toggle"><span class="icon-menu"></span></a></li>
-                </ul>
-              </div> 
-            </div>
-
-          </div>
+        <!-- 로고 영역 -->
+        <div class="col-2 mb-3 mb-md-0 col-md-3 w-100">
+          <p class="site-logo">
+            <a href="${pageContext.request.contextPath}/on/customer/main" class="js-logo-clone">DressMALL</a>
+          </p>
         </div>
-      </div> 
-    </header>
-    <div class="site-section">
-      <div class="container">
-		<!-- 검색기능 -->
-		<div class="order-2 order-md-1 site-search-icon d-flex align-items-center justify-content-center">
-          <form id="formSearchWord" action="${pageContext.request.contextPath}/on/customer/main" class="site-block-top-search" method="get">
+
+        <!-- 검색 영역 (확장) -->
+        <div class="col-12 mb-3 mb-md-0 col-md-6 w-100"> <!-- col-6 -> col-8, col-md-5 -> col-md-6 변경 -->
+          <form id="formSearchWord" action="${pageContext.request.contextPath}/on/customer/main" class="site-block-top-search w-100" method="get">
+            <input type="hidden" name="categoryNo" value="${categoryNo }">
             <span class="icon icon-search2"></span>
             <input type="text" class="form-control border-0" placeholder="Search" name="searchWord" id="searchWord">
           </form>
         </div>
-        
-        
+
+        <!-- 로그인 및 장바구니 아이콘 영역 -->
+        <div class="col-2 col-md-2 order-3 order-md-3 text-right">
+          <div class="site-top-icons">
+            <ul>
+              <li>
+                <a href="${pageContext.request.contextPath}/on/customer/logout">
+                  <span>로그아웃</span>
+                </a>
+              </li>
+              <li><a href="${pageContext.request.contextPath}/on/customer/myPage"><span class="icon icon-person"></span></a></li> <!-- 마이페이지 -->
+              <li>
+                <a href="${pageContext.request.contextPath}/on/customer/cartList" class="site-cart">
+                  <span class="icon icon-shopping_cart"></span>
+                  <!-- 장바구니 담은 개수 표시 -->
+                  <span class="count">${countCartList}</span>
+                </a>
+              </li>
+              <li class="d-inline-block d-md-none ml-md-0">
+                <a href="#" class="site-menu-toggle js-menu-toggle"><span class="icon-menu"></span></a>
+              </li>
+            </ul>
+          </div> 
+        </div>
+
+      </div>
+    </div>
+  </div> 
+</header>
+  <div class="site-wrap">
+    
+    <div class="site-section">
+      <div class="container">
         <div class="row mb-5 mt-5">
           <div class="col-md-9 order-2">
 
             <div class="row">
-              <div class="col-md-12 mb-5">
-                <div class="float-md-left mb-4"><h2 class="text-black h5">Shop All</h2></div>
+              <div class="col-md-12">
+              <c:forEach var="c" items="${selectCategory}">
+              	<div class="float-md-left mb-4"><h2 class="text-black h5">${c.categoryTitle}</h2></div>
+              </c:forEach>
               </div>
             </div>
+            
             <div class="row mb-5">
 			  <!-- 상품 리스트 -->
+			  <c:if test="${main.isEmpty()}">
+              <div class="text-center">
+              	상품이 없습니다.
+              </div>
+              </c:if>
+              <c:if test="${!main.isEmpty()}">
 			  <c:forEach var="m" items="${main}">
 			  	<div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
 	               <div class="block-4 text-center border">
@@ -105,15 +117,16 @@
 	                   <c:if test="${m.goodsState == '재고없음'}">
 		                   <p class="text-danger font-weight-bold">품절</p>	                   
 	                   </c:if>
+	                   <c:if test="${m.goodsState == '재고있음'}">
+		                   <p >&nbsp;</p>	                   
+	                   </c:if>
 	                 </div>
 	               </div>
 	              </div>			  	
 			  </c:forEach>
-			  
-             
-              
-              
+			  </c:if>
             </div>
+            
             <!-- 페이지네이션 -->
             <div class="row" data-aos="fade-up">
               <div class="col-md-12 text-center">
@@ -185,12 +198,8 @@
                 </div>
               </div>
             </div>
-         
-			
-            
           </div>
-
-            <div class="col-md-3 order-1 mb-5 mb-md-0">
+           <div class="col-md-3 order-1 mb-5 mb-md-0">
             <div class="border p-4 rounded mb-4">
               <h3 class="mb-3 h6 text-uppercase text-black d-block">Categories</h3>
               <ul class="list-unstyled mb-0">
