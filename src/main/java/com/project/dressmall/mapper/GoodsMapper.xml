@@ -21,12 +21,12 @@
 		LEFT OUTER JOIN goods_category c
 		ON g.goods_no = c.goods_no
 		<where>	<!-- 동적 쿼리 -->
-			<if test="searchWord != null">
-				goods_title LIKE CONCAT('%', #{searchWord}, '%')			
-			</if>
-			<if test="categoryNo != null">
-				c.category_no = #{categoryNo}			
-			</if>
+			<if test="searchWord != null and searchWord != ''">
+	            goods_title LIKE CONCAT('%', #{searchWord}, '%')
+	        </if>
+	        <if test="categoryNo != null">
+	            AND c.category_no = #{categoryNo}
+	        </if>
 		</where>
 		ORDER BY goodsNo DESC
 		LIMIT #{beginRow}, #{rowPerPage};
@@ -62,16 +62,16 @@
 		INNER JOIN goods_category c
 		ON g.goods_no = c.goods_no
 		<where>
-			<if test="searchWord != null">
-				goods_title LIKE CONCAT('%', #{searchWord}, '%')		
-			</if>
-			<if test="categoryNo != null">
-				c.category_no = #{categoryNo}
-			</if>
-		</where>
-		<if test="categoryNo != null">
-	        GROUP BY c.category_no		
-		</if>
+			<if test="searchWord != null and searchWord != ''">
+	            goods_title LIKE CONCAT('%', #{searchWord}, '%')
+	        </if>
+	        <if test="categoryNo != null">
+	            AND c.category_no = #{categoryNo}
+	        </if>
+	    </where>
+	    <if test="categoryNo != null">
+	        GROUP BY c.category_no
+	    </if>
 	</select>
 
 	<!-- /on/staff/removeGoods : 상품 삭제. (김혜린) -->

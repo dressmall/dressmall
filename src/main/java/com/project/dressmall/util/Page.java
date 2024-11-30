@@ -16,6 +16,7 @@ public class Page {
 	
 	// 마지막 페이지 계산.
 	public Integer countLastPage() {
+		if (countTotalRow == null) return 0;
 		Integer lastPage = countTotalRow / rowPerPage;
 		if (countTotalRow % rowPerPage != 0) lastPage++;
 		return lastPage;

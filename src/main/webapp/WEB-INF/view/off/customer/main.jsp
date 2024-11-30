@@ -17,9 +17,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/jquery-ui.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/owl.carousel.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/owl.theme.default.min.css">
-
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/aos.css">
-
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <title>main(비회원)</title>
 
@@ -27,70 +25,76 @@
 <body>
   
   <div class="site-wrap">
-    <header class="site-navbar" role="banner">
-      <div class="site-navbar-top">
-        <div class="container">
-          <div class="row align-items-center justify-content-end">
+   <header class="site-navbar" role="banner">
+  <div class="site-navbar-top">
+    <div class="container">
+      <div class="row align-items-center justify-content-between mt-3 mb-3">
 
-            <div class="col-12 mb-3 mb-md-0 col-md-4 order-1 order-md-2 text-center">
-              <div class="site-logo">
-                <a href="${pageContext.request.contextPath}/off/customer/main" class="js-logo-clone">Shoppers</a>
-              </div>
-            </div>
-
-            <div class="col-6 col-md-4 order-3 order-md-3 text-right">
-              <div class="site-top-icons">
-                <ul>
-                  	<li>
-                  		<!-- 로그인 -->
-                  		<a href="${pageContext.request.contextPath}/off/customer/customerLogin">
-                  			<span>로그인</span>
-                  		</a>
-                  	</li> 
-                  	<li>
-                  	 	<!-- 비회원자가 마이페이지를 클릭했을 경우 일반회원 로그인 페이지로 넘어감 -->
-	                  	<a href="${pageContext.request.contextPath}/off/customer/customerLogin"><span class="icon icon-person"></span>
-	                  	</a>
-                  	</li>
-                  	<li>
-                  		<!-- 비회원자가 장바구니를 클릭했을 경우 일반회원 로그인 페이지로 넘어감 -->
-                   		<a href="${pageContext.request.contextPath}/off/customer/customerLogin" class="site-cart">
-                     		<span class="icon icon-shopping_cart"></span>
-	                    </a>
-                 	</li> 
-                  	
-                </ul>
-              </div> 
-            </div>
-
-          </div>
+        <!-- 로고 영역 -->
+        <div class="col-2 mb-3 mb-md-0 col-md-3 w-100">
+          <p class="site-logo">
+            <a href="${pageContext.request.contextPath}/on/customer/main" class="js-logo-clone">DressMALL</a>
+          </p>
         </div>
-      </div> 
-    </header>
 
-    <div class="site-section">
-      <div class="container">
-      	<!-- 검색기능 -->
-		<div class="order-2 order-md-1 site-search-icon d-flex align-items-center justify-content-center">
-          <form id="formSearchWord" action="${pageContext.request.contextPath}/off/customer/main" class="site-block-top-search" method="get">
+        <!-- 검색 영역 (확장) -->
+        <div class="col-12 mb-3 mb-md-0 col-md-6 w-100">
+          <form id="formSearchWord" action="${pageContext.request.contextPath}/off/customer/main" class="site-block-top-search w-100" method="get">
+            <input type="hidden" name="categoryNo" value="${categoryNo }">
             <span class="icon icon-search2"></span>
             <input type="text" class="form-control border-0" placeholder="Search" name="searchWord" id="searchWord">
           </form>
         </div>
-        
-        
+
+        <!-- 로그인 및 장바구니 아이콘 영역 -->
+        <div class="col-2 col-md-2 order-3 order-md-3 text-right">
+          <div class="site-top-icons">
+            <ul>
+              <li>
+                <a href="${pageContext.request.contextPath}/off/customer/customerLogin">
+                  <span>로그인</span>
+                </a>
+              </li>
+              <li><a href="${pageContext.request.contextPath}/off/customer/customerLogin"><span class="icon icon-person"></span></a></li>
+              <li>
+                <a href="${pageContext.request.contextPath}/off/customer/customerLogin" class="site-cart">
+                  <span class="icon icon-shopping_cart"></span>
+                </a>
+              </li>
+              <li class="d-inline-block d-md-none ml-md-0">
+                <a href="#" class="site-menu-toggle js-menu-toggle"><span class="icon-menu"></span></a>
+              </li>
+            </ul>
+          </div> 
+        </div>
+
+      </div>
+    </div>
+  </div> 
+</header>
+
+    <div class="site-section">
+      <div class="container">
         <div class="row mb-5 mt-5">
           <div class="col-md-9 order-2">
 			
             <div class="row">
-              <div class="col-md-12 mb-5">
-                <div class="float-md-left mb-4"><h2 class="text-black h5">Shop All</h2></div>
+              <div class="col-md-12">
+               <c:forEach var="c" items="${selectCategory}">
+              	<div class="float-md-left mb-4"><h2 class="text-black h5">${c.categoryTitle}</h2></div>
+               </c:forEach>
               </div>
             </div>
             
             <div class="row mb-5">
             <!-- 상품 리스트 -->
-			  <c:forEach var="m" items="${main}">
+              <c:if test="${main.isEmpty()}">
+              <div class="text-center">
+              	상품이 없습니다.
+              </div>
+              </c:if>
+              <c:if test="${!main.isEmpty()}">
+              	<c:forEach var="m" items="${main}">
 			  	<div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
 	               <div class="block-4 text-center border">
 	                 <figure class="block-4-image">
@@ -110,10 +114,15 @@
 	                   <c:if test="${m.goodsState == '재고없음'}">
 		                   <p class="text-danger font-weight-bold">품절</p>	                   
 	                   </c:if>
+	                   <c:if test="${m.goodsState == '재고있음'}">
+		                   <p >&nbsp;</p>	                   
+	                   </c:if>
 	                 </div>
 	               </div>
 	              </div>			  	
 			  </c:forEach>
+              </c:if>
+			  
             </div>
             
             <!-- 페이지네이션 -->

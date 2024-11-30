@@ -2,6 +2,7 @@ package com.project.dressmall.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -114,8 +115,20 @@ public class GoodsController {
 		
 		if(categoryNo == null || categoryNo == 0) {
 			map.put("categoryNo", null);
+			Category category = new Category();
+			category.setCategoryTitle("전체");
+			List<Category> selectCategory = new ArrayList<>();
+			selectCategory.add(category);
+			model.addAttribute("selectCategory", selectCategory);
 		} else {
-			map.put("categoryNo", categoryNo);			
+			map.put("categoryNo", categoryNo);	
+			model.addAttribute("categoryNo", categoryNo);
+			Map<String, Object> categoryMap = new HashMap<>();
+			categoryMap.put("categoryNo", categoryNo);
+			log.debug(TeamColor.JIN + categoryMap + TeamColor.RESET);
+			List<Category> selectCategory = categoryService.getCategoryList(categoryMap);
+			log.debug(TeamColor.JIN + selectCategory + TeamColor.RESET);
+			model.addAttribute("selectCategory", selectCategory);
 		}
 		
 		// 상품리스트 출력 
@@ -169,8 +182,20 @@ public class GoodsController {
 		
 		if(categoryNo == null || categoryNo == 0) {
 			map.put("categoryNo", null);
+			Category category = new Category();
+			category.setCategoryTitle("전체");
+			List<Category> selectCategory = new ArrayList<>();
+			selectCategory.add(category);
+			model.addAttribute("selectCategory", selectCategory);
 		} else {
-			map.put("categoryNo", categoryNo);			
+			map.put("categoryNo", categoryNo);	
+			model.addAttribute("categoryNo", categoryNo);
+			Map<String, Object> categoryMap = new HashMap<>();
+			categoryMap.put("categoryNo", categoryNo);
+			log.debug(TeamColor.JIN + categoryMap + TeamColor.RESET);
+			List<Category> selectCategory = categoryService.getCategoryList(categoryMap);
+			log.debug(TeamColor.JIN + selectCategory + TeamColor.RESET);
+			model.addAttribute("selectCategory", selectCategory);
 		}
 		
 		// 상품리스트 출력 

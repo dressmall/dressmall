@@ -46,6 +46,22 @@ body {
     margin: 5px 1px 3px 0px;
     border: 1px solid rgba(255, 90, 90, 1);
 }
+
+/* 메인페이지 상품목록 크기고정 css */
+  .block-4-image {
+    width: 100%;
+    height: 200px; /* 원하는 고정 높이 */
+    overflow: hidden;
+  }
+  .block-4-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 이미지 비율을 유지하며 컨테이너를 채움 */
+  }
+  .block-4-text p {
+    min-height: 20px; /* 높이를 고정하여 상하 크기 균일화 */
+  }
+
 /* input css */
 input {
 	border-radius: 4px;
