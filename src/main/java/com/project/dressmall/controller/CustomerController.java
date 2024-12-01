@@ -71,7 +71,8 @@ public class CustomerController {
 		model.addAttribute("customer", customer);
 		log.debug(TeamColor.JIN + "myPage 폼 호출" + TeamColor.RESET);
 		List<Map<String, Object>> cart = cartService.getCartList(customerMail);
-		model.addAttribute("countCartList", cart.get(0).get("countCartList"));
+		if (cart != null && !cart.isEmpty()) model.addAttribute("countCartList", cart.get(0).get("countCartList"));
+		else model.addAttribute("countCartList", "0");
 		return "on/customer/myPage";
 	}
 	

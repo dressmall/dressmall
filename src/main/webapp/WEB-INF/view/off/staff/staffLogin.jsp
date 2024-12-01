@@ -25,31 +25,43 @@
     <title>staff login</title>
 </head>
 <body>
-	<div class="loginBox">
-		<div class="loginBtnBox">
-			<button class="loginBtn active btn ">관리자</button>
-			<a class="loginBtn btn" href="${pageContext.request.contextPath}/off/customer/customerLogin">
-				<span>일반 회원</span>
-			</a>		
-		</div>
-		<form id="formStaffLogin" action="${pageContext.request.contextPath}/off/staff/staffLogin" method="post">
-			<div class="inputBox mb-3">
-				<div class="idBox">
-					<label for="staffId">staffId</label>
-					<input id="staffId" type="text" name="staffId" > 
+	<div class="site-wrap">
+		<header class="site-navbar" role="banner">
+			<div class="site-navbar-top">
+				<div class="container">
+        			<!-- 로고 영역 -->
+					<p class="site-logo text-center">
+						<a href="${pageContext.request.contextPath}/on/customer/main" class="js-logo-clone">DressMALL</a>
+					</p>
 				</div>
-				<span class="msg id-error">아이디를 입력해주세요</span>
-				<div class="pwBox mt-3">
-					<label for="staffPw" >staffPw</label>
-					<input type="password" id="staffPw" name="staffPw"> 
-				</div>			
-				<span class="msg pw-error">비밀번호는 4자 이상 입력해주세요</span>
+			</div> 
+		</header>
+		<div class="loginBox">
+			<div class="loginBtnBox">
+				<button class="loginBtn active btn ">관리자</button>
+				<a class="loginBtn btn" href="${pageContext.request.contextPath}/off/customer/customerLogin">
+					<span>일반 회원</span>
+				</a>		
 			</div>
-			<span class="fs-6 text-danger ">${msg }</span>
-			<div class="btnBox mt-2">
-				<button id="staffLoginBtn" class="btn-main btn" type="button">로그인</button>	
-			</div>
-		</form>
+			<form id="formStaffLogin" action="${pageContext.request.contextPath}/off/staff/staffLogin" method="post">
+				<div class="inputBox mb-3">
+					<div class="idBox">
+						<label for="staffId">Staff Id</label>
+						<input id="staffId" type="text" name="staffId" > 
+					</div>
+					<span class="msg id-error">아이디를 입력해주세요</span>
+					<div class="pwBox mt-3">
+						<label for="staffPw" >Staff Pw</label>
+						<input type="password" id="staffPw" name="staffPw"> 
+					</div>			
+					<span class="msg pw-error">비밀번호는 4자 이상 입력해주세요</span>
+				</div>
+				<span class="fs-6 text-danger ">${msg }</span>
+				<div class="btnBox mt-2">
+					<button id="staffLoginBtn" class="btn-main btn" type="button">로그인</button>	
+				</div>
+			</form>
+		</div>
 	</div>
 </body>
 	<script type="text/javascript">
@@ -81,5 +93,13 @@
 		        console.log("submit 성공");
 		    }		
 		});
+		
+		// Enter 키를 눌렀을 때 로그인
+	    $('#formStaffLogin').on('keydown', function(event) {
+	        if (event.keyCode === 13) { // Enter 키
+	            event.preventDefault(); // 기본 Enter 키 동작 방지
+	            $('#staffLoginBtn').click(); // 버튼 클릭 이벤트 트리거
+	        }
+	    });
 	</script>
 </html>

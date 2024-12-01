@@ -20,7 +20,7 @@
 </head>
 <body>
 	<div class="loginBox">
-		<form id="formaddAddress" action="${pageContext.request.contextPath}/on/customer/addAddress" method="post">
+		<form id="formaddAddress" action="${pageContext.request.contextPath}/on/customer/addAddress">
 			<div>
 				<h4>주소 추가</h4>
 			</div>
@@ -73,7 +73,15 @@
 				}
 			});
 		}
-
 	});
+	
+
+    // Enter 키를 눌렀을 때 로그인
+    $('#formaddAddress').on('keydown', function(event) {
+        if (event.keyCode === 13) { // Enter 키
+            event.preventDefault(); // 기본 Enter 키 동작 방지
+            $('#addressAddBtn').click(); // 버튼 클릭 이벤트 트리거
+        }
+    });
 </script>
 </html>

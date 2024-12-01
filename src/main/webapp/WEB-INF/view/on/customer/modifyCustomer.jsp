@@ -71,5 +71,13 @@
 			});
 		}
 	});
+	
+	// Enter 키를 눌렀을 때 로그인
+    $('#formModifyCustomer').on('keydown', function(event) {
+        if (event.keyCode === 13) { // Enter 키
+            event.preventDefault(); // 기본 Enter 키 동작 방지
+            $('#modifyCustomerBtn').click(); // 버튼 클릭 이벤트 트리거
+        }
+    });
 </script>
 </html>
