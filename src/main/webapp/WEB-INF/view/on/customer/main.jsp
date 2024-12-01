@@ -42,7 +42,7 @@
           <form id="formSearchWord" action="${pageContext.request.contextPath}/on/customer/main" class="site-block-top-search w-100" method="get">
             <input type="hidden" name="categoryNo" value="${categoryNo }">
             <span class="icon icon-search2"></span>
-            <input type="text" class="form-control border-0" placeholder="Search" name="searchWord" id="searchWord">
+            <input type="text" class="form-control border-0" placeholder="원하시는 상품을 검색해보세요." name="searchWord" id="searchWord">
           </form>
         </div>
 

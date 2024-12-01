@@ -58,7 +58,8 @@ public class OrdersController {
 		model.addAttribute("ordersList", ordersList);
 		
 		List<Map<String, Object>> cart = cartService.getCartList(customerMail.getCustomerMail());
-		model.addAttribute("countCartList", cart.get(0).get("countCartList"));
+		if (cart != null && !cart.isEmpty()) model.addAttribute("countCartList", cart.get(0).get("countCartList"));
+		else model.addAttribute("countCartList", "0");
 		
 		// ordersList에서 board.ordersNo이 있다면 리뷰등록 버튼이 안보이게 만듦 
 		for(Map<String, Object> orders : ordersList) {
