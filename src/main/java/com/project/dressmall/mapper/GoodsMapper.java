@@ -35,6 +35,9 @@ public interface GoodsMapper {
 	// /on/staff/modifyGoods : 상품수정페이지에서 상품정보 조회.(진수우)
 	Map<String, Object> selectGoodsOne(Integer goodsNum);
 	
+	// /on/staff/removeGoods : 관리자페이지 상품리스트에서 상품정보 수정. (진수우)
+	Integer updateGoodsByStaff(Integer goodsNo);
+	
 	// /on/staff/modifyGoods : 상품수정페이지에서 상품정보 수정.(진수우)
 	Integer updateGoods(Goods goods);
 }

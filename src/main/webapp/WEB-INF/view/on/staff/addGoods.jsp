@@ -106,6 +106,11 @@
 			console.log("상품이름 미입력");
 			isValid = false;
 			$('#goodsTitle').addClass('has-error'); 
+		} else if ($('#goodsTitle').val() === '삭제된 상품') {
+			$('#errTitle').text('\'삭제된 상품\'은 상품명으로 등록할 수 없습니다.');
+			console.log("금지된 상품이름 입력");
+			isValid = false;
+			$('#goodsTitle').addClass('has-error');
 		} else {
 			$('#errTitle').text(''); // 오류메시지 초기화
 			$('#goodsTitle').removeClass('has-error');

@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.project.dressmall.vo.Customer;
 import com.project.dressmall.vo.Orders;
-import com.project.dressmall.vo.Payment;
 
 @Mapper
 public interface OrdersMapper {

@@ -79,7 +79,8 @@
 			              </c:if>
 			            <c:if test="${!goodsList.isEmpty()}">
 			            	<c:forEach var="g" items="${goodsList}">
-				              <div class="col-sm-5 col-lg-3 mb-4" data-aos="fade-up">
+			            	  <c:if test="${g.goodsTitle != '삭제된 상품' }">
+			            	  	<div class="col-sm-5 col-lg-3 mb-4" data-aos="fade-up">
 				                <div class="block-4 text-center border">
 				                  <figure class="block-4-image">
 				                  	<c:if test="${empty g.goodsFileName}">
@@ -104,6 +105,7 @@
 				                  </div>
 				                </div>
 				              </div>
+			            	  </c:if>
 			       			 </c:forEach>
 			            </c:if>
 			            </div>
