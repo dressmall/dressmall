@@ -35,6 +35,16 @@
 	</div>
 </body>
 	<script>
+	window.onload = function() {
+		const targetVariable = '${loginStaff}'; // 모델 변수 바인딩
+        if (targetVariable == '') {
+            if (window.opener) {
+		        window.opener.location.reload(); // 부모 새로고침
+		    }
+		    window.close(); // 팝업 닫기
+        }
+	}
+	
       // 유효성 검사
       $('#btnAddCategory').click(function() {
          // 미입력 유효성 체크
@@ -72,6 +82,7 @@
            event.preventDefault(); // 기본 Enter 키 동작 방지
            $('#btnAddCategory').click(); // 버튼 클릭 이벤트 트리거
    }
+   });
    </script>
 
 </html>

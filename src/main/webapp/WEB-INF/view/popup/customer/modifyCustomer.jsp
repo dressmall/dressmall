@@ -16,42 +16,52 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <!-- 로그인 .css 추가 -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
-    <title>주소 수정</title>
+    <title>비밀번호 수정</title>
 </head>
 <body>
 	<div class="loginBox">
-		<form id="formaddAddress" action="${pageContext.request.contextPath}/on/customer/modifyAddress">
+		<form id="formModifyCustomer" action="${pageContext.request.contextPath}/on/customer/modifyCustomer">
 			<div>
-				<h4>주소 수정</h4>
+				<h4>회원 비밀번호수정</h4>
 			</div>
 			<div class="inputBox mb-2">
-				<div class="addressBox">
-					<div>상세주소</div>
-					<input type="hidden" name="addressNo" value="${address.addressNo }">
-					<input type="text" id=addressDetail name="addressDetail" value="${address.addressDetail}"> 
-					<span class="msg address-error"></span>			
+				<div class="pwBox">
+					<div>PW</div>
+					<input type="password" id="customerPw" name="customerPw"> 
+					<span class="msg pw-error">비밀번호는 4자 이상 입력해주세요.</span>			
 				</div>
 			</div>
 			<div class="btnBox mt-2">
-				<button type="button" id="addressAddBtn" class="btn-main btn">수정</button>	
+				<button type="button" id="modifyCustomerBtn" class="btn-main btn">수정</button>	
 			</div>
 		</form>
 	</div>
 </body>
-	<script >
-	// 유효성 검사
-	$('#addressAddBtn').click(function() {
+	<script>
+	window.onload = function() {
+		const targetVariable = '${loginCustomer}'; // 모델 변수 바인딩
+		console.log("test");
+        if (targetVariable == '') {
+            if (window.opener) {
+		        window.opener.location.reload(); // 부모 새로고침
+		    }
+		    window.close(); // 팝업 닫기
+        }
+	}
+	// 유효성 검사 및 폼 제출 (AJAX)
+	$('#modifyCustomerBtn').click(function() {
+		
 		let isVal = true;
 
 		// PW 유효성 검사
-		if ($('#addressDetail').val() == "") {
-			$('.address-error').show().text("주소를 입력해주세요.");
-			$('#addressDetail').addClass("errorInput");
-			console.log("addressDetail 에러");
+		if ($('#customerPw').length === 0 || $('#customerPw').val().length < 4) {
+			$('.pw-error').show().text("비밀번호는 4자 이상 입력해주세요");
+			$('#customerPw').addClass("errorInput");
+			console.log("customerPw 에러");
 			isVal = false;
 		} else {
-			$('.address-error').hide();
-			$('#staffPw').removeClass("errorInput");
+			$('.pw-error').hide();
+			$('#customerPw').removeClass("errorInput");
 		}
 
 		// 폼 제출
@@ -59,14 +69,11 @@
 			// AJAX로 폼 제출
 			$.ajax({
 				type: 'POST',
-				url: $('#formaddAddress').attr('action'),
-				data: $('#formaddAddress').serialize(),
+				url: $('#formModifyCustomer').attr('action'),
+				data: $('#formModifyCustomer').serialize(),
 				success: function(response) {
-					// 완료 후 부모 새로고침 및 팝업 닫기
-				    if (window.opener) {
-				        window.opener.location.reload(); // 부모 새로고침
-				    }
-				    window.close(); // 팝업 닫기
+					// 서버에서 응답 성공 후 팝업창 닫기
+					window.close();
 				},
 				error: function(xhr, status, error) {
 					// 에러가 발생하면 처리할 로직 (필요시)
@@ -77,10 +84,10 @@
 	});
 	
 	// Enter 키를 눌렀을 때 로그인
-    $('#formaddAddress').on('keydown', function(event) {
+    $('#formModifyCustomer').on('keydown', function(event) {
         if (event.keyCode === 13) { // Enter 키
             event.preventDefault(); // 기본 Enter 키 동작 방지
-            $('#addressAddBtn').click(); // 버튼 클릭 이벤트 트리거
+            $('#modifyCustomerBtn').click(); // 버튼 클릭 이벤트 트리거
         }
     });
 </script>

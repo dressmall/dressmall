@@ -155,7 +155,7 @@
 	           		<c:if test="${not empty board.boardContent}">
 		            	<form action="${pageContext.request.contextPath}/on/customer/removeBoard">
 					        <div class="board-box content text-center">
-					            <div class="site-section-heading text-center mb-3 pt-4">
+					            <div class="text-center mb-3 pt-4">
 									<h5>${board.customerMail}</h5>
 								</div>
 								<div class="overflow-auto" style="max-height: 50%; word-break: break-word;">

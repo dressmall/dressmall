@@ -44,12 +44,13 @@ public class AddressController {
 	}
 	
 	// 마이페이지에서 주소수정 폼 호출.(진수우)
-	@GetMapping("/on/customer/modifyAddress")
-	public String modifyAddress(Model model, Integer addressNo) {
+	@GetMapping("/popup/customer/modifyAddress")
+	public String modifyAddress(HttpSession session, Model model, Integer addressNo) {
 		Address address = addressService.getAddressOne(addressNo);
 		model.addAttribute("address", address);
+		model.addAttribute("loginCustomer", session.getAttribute("loginCustomer"));
 		log.debug(TeamColor.JIN + "modifyAddress.jsp 호출" + TeamColor.RESET);
-		return "on/customer/modifyAddress";
+		return "popup/customer/modifyAddress";
 	}
 	
 	// address 테이블 주소추가.(진수우)
@@ -68,9 +69,10 @@ public class AddressController {
 	}
 	
 	// 마이페이지에서 주소추가 폼 호출.(진수우)
-	@GetMapping("/on/customer/addAddress")
-	public String addAddress() {
+	@GetMapping("/popup/customer/addAddress")
+	public String addAddress(HttpSession session, Model model) {
+		model.addAttribute("loginCustomer", session.getAttribute("loginCustomer"));
 		log.debug(TeamColor.JIN + "addAddress.jsp 호출" + TeamColor.RESET);
-		return "on/customer/addAddress";
+		return "popup/customer/addAddress";
 	}
 }
