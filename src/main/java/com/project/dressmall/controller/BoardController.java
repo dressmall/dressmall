@@ -58,7 +58,11 @@ public class BoardController {
 		model.addAttribute("ordersNo",ordersNo);
 		String customerMail = ((Customer)session.getAttribute("loginCustomer")).getCustomerMail();
 		List<Map<String, Object>> cart = cartService.getCartList(customerMail);
-		model.addAttribute("countCartList", cart.get(0).get("countCartList"));
+		
+		// 장바구니 개수 표시
+		if (cart != null && !cart.isEmpty()) model.addAttribute("countCartList", cart.get(0).get("countCartList"));
+		else model.addAttribute("countCartList", "0");
+		
 		log.debug(TeamColor.PARK + "customerMail : " + customerMail + TeamColor.RESET);
 		
 		log.debug(TeamColor.PARK + "ordersNo : " + ordersNo + TeamColor.RESET);
