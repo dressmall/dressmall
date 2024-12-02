@@ -111,7 +111,7 @@
 							          				</a>
 							          			</c:if>		
 							          			<!-- 배송중일 경우 -->	          			
-							          			<c:if test="${o.paymentState == '배송중' }">
+							          			<c:if test="${o.paymentState == '배송중' && !o.review  }">
 							          				<a	href="${pageContext.request.contextPath}/on/customer/modifyOrders?paymentNo=${o.paymentNo }"
 							          					class="btn-main ms-3">구매확정</a>
 							          			</c:if>			 

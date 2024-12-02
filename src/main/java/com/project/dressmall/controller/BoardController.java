@@ -1,5 +1,6 @@
 package com.project.dressmall.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,11 +35,11 @@ public class BoardController {
 							, @RequestParam("ordersNo") Integer ordersNo
 							, @RequestParam("goodsNo") Integer goodsNo) {
 		
+		
 		Board board = new Board();
 		
 		board.setOrdersNo(ordersNo);
 		board.setBoardContent(boardContent);
-		
 		
 		boardService.insertBoard(board);
 		
@@ -71,13 +72,7 @@ public class BoardController {
 	public String deleteBoard(HttpSession session, Model model
 							,@RequestParam("ordersNo") Integer ordersNo
 							,@RequestParam("goodsNo") Integer goodsNo) {
-		
-	    String customerMail = ((Customer) session.getAttribute("loginCustomer")).getCustomerMail();
-	    model.addAttribute("customerMail", customerMail);
 
-	    // 삭제할 게시글 가져오기
-	    List<Map<String, Object>> boardList = boardService.selectBoardList(goodsNo);
-	    model.addAttribute("boardList", boardList);
 
 	    // 삭제 처리 (삭제 로직)
 	    Integer row = boardService.deleteBoard(ordersNo);

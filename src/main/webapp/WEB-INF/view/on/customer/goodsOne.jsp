@@ -172,8 +172,8 @@
 					                <input type="hidden" name="goodsNo" value="${board.goodsNo}">
 					                <input type="hidden" name="ordersNo" value="${board.ordersNo}">
 					                <!-- 세션에 저장된 customerMail과 board.customerMail이 같을 경우 삭제 버튼 표시 -->
-				                    <c:if test="${customerMail == board.customerMail}">
-				                        <button class="btn-main">삭제</button>
+				                    <c:if test="${board.isCustomer == true}">
+				                        <button class="btn-main" type="submit">삭제</button>
 				                    </c:if>
 					            </div>
 					        </div>

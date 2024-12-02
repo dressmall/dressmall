@@ -4,12 +4,12 @@
 	<!-- goodsOne에 출력할 boardList -->
 	<select id="selectBoardList" parameterType="map" resultType="map">
 		SELECT
-		    c.customer_mail,
-		    a.address_no,
-		    p.payment_no,
-		    o.orders_no AS ordersNo,
-		    o.goods_no AS goodsNo,
-		    b.board_content AS boardContent
+		    c.customer_mail customerMail
+		    , a.address_no addressNo
+		    , p.payment_no paymentNo
+		    , o.orders_no ordersNo
+		    , o.goods_no goodsNo
+		    , b.board_content boardContent
 		FROM customer c
 		LEFT OUTER JOIN address a ON c.customer_mail = a.customer_mail
 		LEFT OUTER JOIN payment p ON p.address_no = a.address_no

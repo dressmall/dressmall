@@ -75,8 +75,15 @@ public class GoodsController {
 		
 		// boardList 출력
 		List<Map<String, Object>> boardList = boardService.selectBoardList(goodsNo);
+		for (Map<String, Object> board : boardList) {
+	        // board의 customerMail 값과 세션의 customerMail을 비교하여 삭제 버튼 표시 여부 결정
+	        String boardCustomerMail = (String) board.get("customerMail");
+	        boolean isCustomer = customerMail != null && customerMail.equals(boardCustomerMail);
+	        log.debug(boardCustomerMail);
+	        board.put("isCustomer", isCustomer);  // isCustomer 값을 board에 추가
+	    }
 		model.addAttribute("boardList", boardList);
-		log.debug(TeamColor.PARK + "customerMail : " + customerMail + TeamColor.RESET);
+		log.debug("boardList : " + boardList);
 		
 		return "on/customer/goodsOne";
 	}
