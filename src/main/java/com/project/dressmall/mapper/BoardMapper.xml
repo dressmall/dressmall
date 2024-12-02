@@ -43,6 +43,7 @@
 		    , g.goods_state goodsState
 		    , g.goods_price goodsPrice
 		    , gf.goods_file_name goodsFileName
+		    , gf.goods_file_ext goodsFileExt
 		FROM orders o
 		LEFT OUTER JOIN goods g ON o.goods_no = g.goods_no
 		LEFT OUTER JOIN goods_file gf ON g.goods_no = gf.goods_no

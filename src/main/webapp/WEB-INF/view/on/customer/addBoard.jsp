@@ -98,7 +98,12 @@
 					          		<div class="d-flex align-items-center justify-content-start w-100 border content mb-3">
 					          			<!-- 리뷰를 등록할 제품사진과 상세정보(title, subtext, price) -->
 										<div class="img-box">
-											<img src="${pageContext.request.contextPath}/images/cloth_1.jpg" alt="Image placeholder" class="img-fluid">
+											<c:if test="${empty og.goodsFileName}">
+					                           <img src="${pageContext.request.contextPath}/upload/noImage.png" class="img-fluid">
+					                       	</c:if>
+					                       	<c:if test="${not empty og.goodsFileName}">		                        
+						                   		<img src="${pageContext.request.contextPath}/upload/${og.goodsFileName}.${og.goodsFileExt}" class="img-fluid">
+					                      	</c:if>
 										</div>
 										<div class="text-box d-flex flex-column ms-3">
 											<span>Title : ${og.goodsTitle }</span> 
