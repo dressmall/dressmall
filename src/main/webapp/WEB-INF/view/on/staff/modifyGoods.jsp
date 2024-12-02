@@ -175,11 +175,12 @@
 		}
 	});
 	
-	// Enter 키를 눌렀을 때 로그인
+	// Enter 키를 눌렀을 때 
 	   $('#formGoods').on('keydown', function(event) {
-	       if (event.keyCode === 13) { // Enter 키
+	       if (event.keyCode === 13 && event.target.tagName !== 'TEXTAREA') { // Enter 키
 	           event.preventDefault(); // 기본 Enter 키 동작 방지
 	           $('#btnModifyGoods').click(); // 버튼 클릭 이벤트 트리거
-	   }
+	   		}
+	   });
 </script>
 </html>
