@@ -33,10 +33,10 @@ public class CategoryController {
 	}
 	
 	// 카테고리 추가 : addCategory.jsp 호출
-	@GetMapping("/on/staff/addCategory")
-	public String addCategory(Model model) {
-		
-		return "on/staff/addCategory";
+	@GetMapping("/popup/staff/addCategory")
+	public String addCategory(HttpSession session, Model model) {
+		model.addAttribute("loginStaff", session.getAttribute("loginStaff"));
+		return "popup/staff/addCategory";
 	}
 	
 	// 카테고리 추가

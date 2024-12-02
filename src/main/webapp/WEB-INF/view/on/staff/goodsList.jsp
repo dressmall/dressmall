@@ -79,7 +79,8 @@
 			              </c:if>
 			            <c:if test="${!goodsList.isEmpty()}">
 			            	<c:forEach var="g" items="${goodsList}">
-				              <div class="col-sm-5 col-lg-3 mb-4" data-aos="fade-up">
+			            	  <c:if test="${g.goodsTitle != '삭제된 상품' }">
+			            	  	<div class="col-sm-5 col-lg-3 mb-4" data-aos="fade-up">
 				                <div class="block-4 text-center border">
 				                  <figure class="block-4-image">
 				                  	<c:if test="${empty g.goodsFileName}">
@@ -104,6 +105,7 @@
 				                  </div>
 				                </div>
 				              </div>
+			            	  </c:if>
 			       			 </c:forEach>
 			            </c:if>
 			            </div>
@@ -157,7 +159,7 @@
     	  	  const top = Math.max((screenHeight - popupHeight) / 2, 0);
     	  	  
     	      // 팝업창 옵션 설정
-    	      const url = '${pageContext.request.contextPath}/on/staff/addGoods'; // 호출할 JSP 경로
+    	      const url = '${pageContext.request.contextPath}/popup/staff/addGoods'; // 호출할 JSP 경로
     	      const name = '상품 등록'; // 팝업창 이름
     	      const options = 'width=' + popupWidth + ',height=' + popupHeight + ',top=' + top + ',left=' + left + ',scrollbars=yes,resizable=no';
     	      window.open(url, name, options);
@@ -178,7 +180,7 @@
     	  	  const top = Math.max((screenHeight - popupHeight) / 2, 0);
     	  	  
     	      // 팝업창 옵션 설정
-    	      const url = '${pageContext.request.contextPath}/on/staff/modifyGoods?goodsNo=' + goodsNo; // 호출할 JSP 경로
+    	      const url = '${pageContext.request.contextPath}/popup/staff/modifyGoods?goodsNo=' + goodsNo; // 호출할 JSP 경로
     	      const name = '상품 수정'; // 팝업창 이름
     	      const options = 'width=' + popupWidth + ',height=' + popupHeight + ',top=' + top + ',left=' + left + ',scrollbars=yes,resizable=no';
     	      window.open(url, name, options);

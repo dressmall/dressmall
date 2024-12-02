@@ -96,6 +96,16 @@
 	</div>
 </body>
 <script>
+window.onload = function() {
+	const targetVariable = '${loginStaff}'; // 모델 변수 바인딩
+    if (targetVariable == '') {
+        if (window.opener) {
+	        window.opener.location.reload(); // 부모 새로고침
+	    }
+	    window.close(); // 팝업 닫기
+    }
+}
+
 	// 유효성 체크
 	$('#btnAddGoods').click(function() {
 		let isValid = true;
@@ -106,6 +116,11 @@
 			console.log("상품이름 미입력");
 			isValid = false;
 			$('#goodsTitle').addClass('has-error'); 
+		} else if ($('#goodsTitle').val() === '삭제된 상품') {
+			$('#errTitle').text('\'삭제된 상품\'은 상품명으로 등록할 수 없습니다.');
+			console.log("금지된 상품이름 입력");
+			isValid = false;
+			$('#goodsTitle').addClass('has-error');
 		} else {
 			$('#errTitle').text(''); // 오류메시지 초기화
 			$('#goodsTitle').removeClass('has-error');
@@ -186,12 +201,12 @@
 		}
 	});
 	
-	// Enter 키를 눌렀을 때 로그인
-   $('#formGoods').on('keydown', function(event) {
-       if (event.keyCode === 13) { // Enter 키
-           event.preventDefault(); // 기본 Enter 키 동작 방지
-           $('#btnAddGoods').click(); // 버튼 클릭 이벤트 트리거
-   }
+	$('#formGoods').on('keydown', function(event) {
+	       if (event.keyCode === 13 && event.target.tagName !== 'TEXTAREA') { // Enter 키
+	           event.preventDefault(); // 기본 Enter 키 동작 방지
+	           $('#btnAddGoods').click(); // 버튼 클릭 이벤트 트리거
+	   		}
+	   });
 </script>
 
 </html>

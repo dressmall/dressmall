@@ -51,10 +51,11 @@ public class StaffController {
 		return "on/staff/staffList";
 	}
 	
-	@GetMapping("/on/staff/addStaff")
-	public String addStaff(String errMsg) {
+	@GetMapping("/popup/staff/addStaff")
+	public String addStaff(HttpSession session, Model model, String errMsg) {
+		model.addAttribute("loginStaff", session.getAttribute("loginStaff"));
 		log.debug(TeamColor.JIN + "addStaff.jsp 호출" + TeamColor.RESET);
-		return "on/staff/addStaff";
+		return "popup/staff/addStaff";
 	}
 	
 	@PostMapping("/on/staff/addStaff")

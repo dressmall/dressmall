@@ -95,6 +95,7 @@
               </c:if>
               <c:if test="${!main.isEmpty()}">
               	<c:forEach var="m" items="${main}">
+              	<c:if test="${m.goodsTitle != '삭제된 상품' }">
 			  	<div class="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">
 	               <div class="block-4 text-center border">
 	                 <figure class="block-4-image">
@@ -119,7 +120,8 @@
 	                   </c:if>
 	                 </div>
 	               </div>
-	              </div>			  	
+	              </div>
+	              </c:if>			  	
 			  </c:forEach>
               </c:if>
 			  
@@ -206,14 +208,14 @@
               <h3 class="mb-3 h6 text-uppercase text-black d-block">Categories</h3>
               <ul class="list-unstyled mb-0">
               	<li class="mb-1">
-              		<a href="${pageContext.request.contextPath}/off/customer/main?currentPage=${currentPage}" class="d-flex">
+              		<a href="${pageContext.request.contextPath}/off/customer/main" class="d-flex">
                 		<span>전체</span>
                 		<span class="text-black ml-auto">(${totalCount})</span>
 	                </a>
               	</li>
               	<c:forEach var="c" items="${categoryCountList}">
 	                <li class="mb-1">
-						<a href="${pageContext.request.contextPath}/off/customer/main?currentPage=${currentPage}&categoryNo=${c.categoryNo}" class="d-flex">
+						<a href="${pageContext.request.contextPath}/off/customer/main?categoryNo=${c.categoryNo}" class="d-flex">
 	                		<span>${c.categoryTitle}</span>
 	                		<span class="text-black ml-auto">(${c.count})</span>
 		                </a>

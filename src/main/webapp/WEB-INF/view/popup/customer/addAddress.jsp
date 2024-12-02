@@ -38,6 +38,16 @@
 	</div>
 </body>
 	<script >
+	window.onload = function() {
+		const targetVariable = '${loginCustomer}'; // 모델 변수 바인딩
+        if (targetVariable == '') {
+            if (window.opener) {
+		        window.opener.location.reload(); // 부모 새로고침
+		    }
+		    window.close(); // 팝업 닫기
+        }
+	}
+	
 	// 유효성 검사
 	$('#addressAddBtn').click(function() {
 		let isVal = true;

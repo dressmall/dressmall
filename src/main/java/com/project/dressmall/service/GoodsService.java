@@ -10,9 +10,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.project.dressmall.mapper.CartMapper;
 import com.project.dressmall.mapper.GoodsCategoryMapper;
 import com.project.dressmall.mapper.GoodsFileMapper;
 import com.project.dressmall.mapper.GoodsMapper;
+import com.project.dressmall.mapper.OrdersMapper;
 import com.project.dressmall.util.InputFile;
 import com.project.dressmall.util.TeamColor;
 import com.project.dressmall.vo.Goods;
@@ -29,6 +31,8 @@ public class GoodsService {
 	@Autowired GoodsMapper goodsMapper;
 	@Autowired GoodsFileMapper goodsFileMapper;
 	@Autowired GoodsCategoryMapper goodsCategoryMapper;
+	@Autowired CartMapper cartMapper;
+	@Autowired OrdersMapper ordersMapper;
 	
 	// /on/customer/main : 메인페이지 상품 리스트 출력.(김혜린)
 	public List<Map<String, Object>> getMain(Map<String, Object> paramMap) {
@@ -54,13 +58,15 @@ public class GoodsService {
 	
 	// /on/staff/removeGoods : 관리자페이지에서 상품 삭제. (김혜린)
 	public void removeGoods(Integer goodsNo, String path) {
+		// 모든 회원들의 장바구니에서 해당 목록 삭제.
+		cartMapper.deleteCartByGoods(goodsNo);
 		// 1) goods_category 삭제
 		goodsCategoryMapper.deleteGoodsCategoryByGoods(goodsNo);
 		// 2) goods_file 삭제
 		Map<String, Object> file = goodsMapper.selectGoodsOne(goodsNo); // 삭제할 goodsFile 물리적 파일이름 정보.
 		Integer row1 = goodsFileMapper.deleteGoodsFile((Integer)file.get("goodsFileNo"));
-		// 3) goods 삭제
-		Integer row2 = goodsMapper.deleteGoods(goodsNo);
+		// 3) goods 내용 변경
+		Integer row2 = goodsMapper.updateGoodsByStaff(goodsNo);
 		// 4) 물리적 파일 삭제
 		if (row1 == 1 && row2 == 1) { // 데이터베이스에서 goods_file 정보가 삭제되었다면 물리적 파일 삭제.
 			String fullname = path + (String)file.get("goodsFileName") + "." + (String)file.get("goodsFileExt");

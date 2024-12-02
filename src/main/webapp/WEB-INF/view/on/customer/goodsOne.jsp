@@ -28,49 +28,48 @@
 	<!-- header -->
 	<div class="site-wrap">
 	    <header class="site-navbar" role="banner">
-	      <div class="site-navbar-top">
-	        <div class="container">
-	          <div class="row align-items-center">
-	
-	            <div class="col-6 col-md-4 order-2 order-md-1 site-search-icon text-left">
-	              <form action="" class="site-block-top-search">
-	                <span class="icon icon-search2"></span>
-	                <input type="text" class="form-control border-0" placeholder="Search">
-	              </form>
-	            </div>
-	
-	            <div class="col-12 mb-3 mb-md-0 col-md-4 order-1 order-md-2 text-center">
-	              <div class="site-logo">
-	                <a href="${pageContext.request.contextPath}/off/customer/main" class="js-logo-clone">Shoppers</a>
-	              </div>
-	            </div>
-	
-	            <div class="col-6 col-md-4 order-3 order-md-3 text-right">
-	              <div class="site-top-icons">
-	                <ul>
-	                  	<li>
-	                  		<!-- 로그인 -->
-	                  		<a href="${pageContext.request.contextPath}/on/customer/logout">
-	                  			<span>로그아웃</span>
-	                  		</a>
-	                  	</li> 
-	                  	<li><a href="${pageContext.request.contextPath}/on/customer/myPage"><span class="icon icon-person"></span></a></li> <!-- 마이페이지 -->
-	                  	<li>
-	                   		<a href="${pageContext.request.contextPath}/on/customer/cartList" class="site-cart">
-	                     	<span class="icon icon-shopping_cart"></span>
-		                      <!-- 장바구니 담은 개수 표시 -->
-		                      <span class="count">${countCartList}</span>
-		                    </a>
-	                 	 </li> 
-	                  	<li class="d-inline-block d-md-none ml-md-0"><a href="#" class="site-menu-toggle js-menu-toggle"><span class="icon-menu"></span></a></li>
-	                </ul>
-	              </div> 
-	            </div>
-	
-	          </div>
-	        </div>
-	      </div> 
-	    </header>
+  <div class="site-navbar-top">
+    <div class="container">
+      <div class="row align-items-center justify-content-between mt-3 mb-3">
+
+        <!-- 로고 영역 -->
+        <div class="col-2 mb-3 mb-md-0 col-md-3 w-100">
+          <p class="site-logo">
+            <a href="${pageContext.request.contextPath}/on/customer/main" class="js-logo-clone">DressMALL</a>
+          </p>
+        </div>
+
+        <!-- 가운데 공백 -->
+        <div class="col-12 mb-3 mb-md-0 col-md-6 w-100">
+          
+        </div>
+
+        <!-- 로그인 및 장바구니 아이콘 영역 -->
+        <div class="col-2 col-md-2 order-3 order-md-3 text-right">
+          <div class="site-top-icons">
+            <ul>
+              <li>
+                <a href="${pageContext.request.contextPath}/on/customer/logout">
+                  <span>로그아웃</span>
+                </a>
+              </li>
+              <li><a href="${pageContext.request.contextPath}/on/customer/myPage"><span class="icon icon-person"></span></a></li> <!-- 마이페이지 -->
+              <li>
+                <a href="${pageContext.request.contextPath}/on/customer/cartList" class="site-cart">
+                  <span class="icon icon-shopping_cart"></span>
+                  <!-- 장바구니 담은 개수 표시 -->
+	           	   <span class="count">${countCartList}</span>
+                </a>
+              </li>
+              
+            </ul>
+          </div> 
+        </div>
+
+      </div>
+    </div>
+  </div> 
+</header>
 	
 	    <div class="bg-light py-3">
 	      <div class="container">
@@ -153,35 +152,44 @@
     </div>
 
     <div class="site-section block-3 site-blocks-2 bg-light">
-      <div class="container">
+      <div class="container-fluid">
         <div class="row justify-content-center">
           <div class="col-md-7 site-section-heading text-center pt-4">
             <h2>후기</h2>
           </div>
         </div>
         <!-- 후기 리스트 출력 -->
-        <div class="row">
-          <div class="col-md-12">
+        <div class="row justify-content-center">
+          <div class="col-md-10 text-center">
+            <c:if test="${boardList.isEmpty() }">
+            	<div class="text-center mt-5 mb-5">후기가 없습니다.</div>
+            </c:if>
+            <c:if test="${!boardList.isEmpty() }">
             <div class="nonloop-block-3 owl-carousel">
-	           	<c:forEach items="${boardList }" var="board">
+            	<c:forEach items="${boardList }" var="board">
 	           		<c:if test="${not empty board.boardContent}">
 		            	<form action="${pageContext.request.contextPath}/on/customer/removeBoard">
 					        <div class="board-box content text-center">
-					            <span>${board.boardContent}</span>
-					            <div class="block-4-text p-4">
+					        	<div class="text-center pt-2 mb-3">
+									<h5>${board.customerMail}</h5>
+								</div>
+								<div class="overflow-auto h-50 mb-3" style="max-height: 50%; word-break: break-word;">
+									 <span >${board.boardContent}</span>
+								</div>
+					            <div class="p-2">
 					                <input type="hidden" name="goodsNo" value="${board.goodsNo}">
 					                <input type="hidden" name="ordersNo" value="${board.ordersNo}">
 					                <!-- 세션에 저장된 customerMail과 board.customerMail이 같을 경우 삭제 버튼 표시 -->
-				                    <c:if test="${customerMail == board.customerMail}">
-				                        <button class="btn-main">삭제</button>
+				                    <c:if test="${board.isCustomer == true}">
+				                        <button class="btn-main" style="width:50%;" type="submit">삭제</button>
 				                    </c:if>
 					            </div>
 					        </div>
 		            	</form>
 				    </c:if>
-	              </c:forEach>
-            		
+	            </c:forEach>	
             </div>
+            </c:if>
           </div>
         </div>
       </div>

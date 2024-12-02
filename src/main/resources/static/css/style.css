@@ -102,6 +102,7 @@ input {
 .board-box {
 	box-sizing: border-box;
 	height: 300px;
+	width: 280px;
 	background-color: #fff;
     box-shadow: 4px 2px 10px rgba(140, 146, 160, 0.8);
 }
