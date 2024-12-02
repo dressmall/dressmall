@@ -204,14 +204,14 @@
               <h3 class="mb-3 h6 text-uppercase text-black d-block">Categories</h3>
               <ul class="list-unstyled mb-0">
               	<li class="mb-1">
-              		<a href="${pageContext.request.contextPath}/on/customer/main?currentPage=${currentPage}" class="d-flex">
+              		<a href="${pageContext.request.contextPath}/on/customer/main" class="d-flex">
                 		<span>전체</span>
                 		<span class="text-black ml-auto">(${totalCount})</span>
 	                </a>
               	</li>
               	<c:forEach var="c" items="${categoryCountList}">
 	                <li class="mb-1">
-						<a href="${pageContext.request.contextPath}/on/customer/main?currentPage=${currentPage}&categoryNo=${c.categoryNo}" class="d-flex">
+						<a href="${pageContext.request.contextPath}/on/customer/main?categoryNo=${c.categoryNo}" class="d-flex">
 	                		<span>${c.categoryTitle}</span>
 	                		<span class="text-black ml-auto">(${c.count})</span>
 		                </a>
