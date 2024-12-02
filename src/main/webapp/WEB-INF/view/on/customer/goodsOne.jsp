@@ -179,8 +179,7 @@
 					        </div>
 		            	</form>
 				    </c:if>
-	              </c:forEach>
-            		
+	            </c:forEach>	
             </div>
           </div>
         </div>
