@@ -128,8 +128,7 @@
 							          					<img src="${pageContext.request.contextPath}/upload/noImage.png" class="img-fluid" style="width: 150px; height: 150px; object-fit: cover;">			          				 	
 						          				 	</c:if>
 						          					<c:if test="${o.goodsFileName != null}">
-									          			${o.goodsFileName }
-									          			.${o.goodsFileExt }
+									          			<img src="${pageContext.request.contextPath}/upload/${o.goodsFileName}.${o.goodsExt}" class="img-fluid" style="width: 150px; height: 150px; object-fit: cover;">
 						          					</c:if>	          			
 						          				</div>
 						          				<div class="text-box d-flex flex-column">
