@@ -30,13 +30,24 @@ public class PaymentController {
 	@Autowired CustomerService customerService;
 	@Autowired CartService cartService;
 	
+	// 결제 완료 폼 호출. (진수우)
+	@GetMapping("/on/customer/thankyou")
+	public String thankyou(HttpSession session, Model model) {
+		// 장바구니에 담긴 항목 수 가져오기
+		String customerMail = ((Customer)session.getAttribute("loginCustomer")).getCustomerMail();
+		List<Map<String, Object>> cart = cartService.getCartList(customerMail);
+		if (cart != null && !cart.isEmpty()) model.addAttribute("countCartList", cart.get(0).get("countCartList"));
+		else model.addAttribute("countCartList", "0");
+		return "on/customer/thankyou";
+	}
+	
 	// 결제 수행.(진수우)
 	@PostMapping("/on/customer/paymentComplete")
 	public String paymentComplete(HttpSession session, Payment payment, @RequestParam(value = "cartNo", required = false) List<Integer> cartNo) {
 		log.debug(TeamColor.JIN + cartNo + TeamColor.RESET);
 		log.debug(TeamColor.JIN + payment + TeamColor.RESET);
 		paymentService.paymentProcess(payment, cartNo);
-		return "redirect:/on/customer/ordersList";
+		return "redirect:/on/customer/thankyou";
 	}
 	
 	// 결제 페이지 폼호출.(진수우)

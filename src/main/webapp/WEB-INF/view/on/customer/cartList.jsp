@@ -100,7 +100,7 @@
 		        	<c:if test="${!cart.isEmpty()}">
 		        		<c:forEach var="c" items="${cart}">
 			        		<tr>
-				        		<td class="text-center"><input type="checkbox" name="goodsChoice" id="goodsChoice" value="${c.cartNo }"></td>
+				        		<td class="text-center"><input type="checkbox" name="goodsChoice" id="goodsChoice" value="${c.cartNo }" data-price="${c.goodsTotalPrice}" onclick="calculateSum()"></td>
 				        		<td>
 				        			<c:if test="${empty c.goodsFileName}">
 			                            <img src="${pageContext.request.contextPath}/upload/noImage.png" class="img-fluid" style="width: 150px; height: 150px; object-fit: cover;">
@@ -125,7 +125,7 @@
       	 	<div class="col-3">
       	 		<table class="table table-bordered mr-3 sticky-top bg-light">
 		        	<tr>
-		        		<th class="text-center">Cart Total Price</th>
+		        		<th class="text-center">All Item Price</th>
 		        	</tr>
 		        	<c:if test="${cart.isEmpty()}">
 			        	<tr>
@@ -137,10 +137,17 @@
 			        		<td>${cart[0].totalPrice}원</td>
 			        	</tr>
 			        </c:if>
+			        <tr>
+		        		<th class="text-center">Selected Item Price</th>
+		        	</tr>
+		        	<tr>
+		        		<td><div id="sumResult">0원</div></td>
+		        	</tr>
 		        	<tr>
 		        		<td><button class="btn btn-main w-100" type="button" id="cartButton">결제</button></td>
 		        	</tr>
 		        </table>
+		        <h2 id="sumResult"></h2>
       	 	</div>
       	</div>
       </div>
@@ -157,7 +164,20 @@
      </div>
     </footer>
   </div>
+  
+  <script>
+  function calculateSum() {
+      let checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+      let sum = 0;
 
+      checkboxes.forEach(checkbox => {
+          sum += parseFloat(checkbox.dataset.price);
+      });
+
+      //document.getElementById("sumResult").innerText = "선택된 상품 가격 : " + sum;
+      document.getElementById("sumResult").innerText = sum + "원";
+  }
+  </script>
   <script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
   <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
   <script src="${pageContext.request.contextPath}/js/popper.min.js"></script>

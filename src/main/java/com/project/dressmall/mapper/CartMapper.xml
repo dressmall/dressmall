@@ -13,11 +13,6 @@
 			, #{goodsNo}
 			, #{cartAmount})	
 	</insert>
-
-	<!-- 고객페이지에서 장바구니에 담긴 항목 수 출력 (진수우) -->
-	<select id="countCartList">
-		SELECT
-	</select>
 	
 	<!-- /on/customer/paymentList : 결제페이지에서 장바구니에서 체크한 항목만 출력 (진수우) -->
 	<select id="selectCartListOne" parameterType="Integer" resultType="map">
