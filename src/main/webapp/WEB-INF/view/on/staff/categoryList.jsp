@@ -153,7 +153,7 @@
     	  	  const top = Math.max((screenHeight - popupHeight) / 2, 0);
     	  	  
     	      // 팝업창 옵션 설정
-    	      const url = '${pageContext.request.contextPath}/on/staff/addCategory'; // 호출할 JSP 경로
+    	      const url = '${pageContext.request.contextPath}/popup/staff/addCategory'; // 호출할 JSP 경로
     	      const name = '카테고리 추가'; // 팝업창 이름
     	      const options = 'width=' + popupWidth + ',height=' + popupHeight + ',top=' + top + ',left=' + left + ',scrollbars=yes,resizable=no';
     	      window.open(url, name, options);

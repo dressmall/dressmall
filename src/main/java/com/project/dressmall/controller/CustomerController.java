@@ -37,10 +37,11 @@ public class CustomerController {
 	}
 	
 	// 마이페이지에서 회원 비밀번호 수정 폼 호출.(진수우)
-	@GetMapping("/on/customer/modifyCustomer")
-	public String modifyCustomer() {
+	@GetMapping("/popup/customer/modifyCustomer")
+	public String modifyCustomer(Model model, HttpSession session) {
+		model.addAttribute("loginCustomer", session.getAttribute("loginCustomer"));
 		log.debug(TeamColor.JIN + "modifyCustomer.jsp 호출" + TeamColor.RESET);
-		return "on/customer/modifyCustomer";
+		return "popup/customer/modifyCustomer";
 	}
 	
 	// 회원가입 액션(박시현)

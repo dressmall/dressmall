@@ -76,16 +76,26 @@
       	 		<div class="border p-4 overflow-auto">
 	      	 		<table class="table table-bordered">
 			        	<c:forEach var="c" items="${customer}" varStatus="status">
-						    <tr>
-						        <td>${c.addressDetail}</td>
-						        <td>
-						            <input type="radio" name="addressNo" value="${c.addressNo}" <c:if test="${status.index == 0}">checked</c:if>>
-						        </td>
-						    </tr>
+			        		<c:if test="${c.addressNo == null}">
+							    등록된 주소가 없습니다.
+			        		</c:if>
+			        		<c:if test="${c.addressNo != null}">
+			        			<tr>
+							        <td>${c.addressDetail}</td>
+							        <td>
+							            <input type="radio" id="addressNo" name="addressNo" value="${c.addressNo}" <c:if test="${status.index == 0}">checked</c:if>>
+							        </td>
+							    </tr>	
+			        		</c:if>
 						</c:forEach>
 			        </table>
+			        <!-- 주소추가 버튼 -->
+	            	<div class="btnBox mt-3 d-flex justify-content-end">
+						<button type="button" class="btn-main btn w-100 mt-3" onclick="openPopupAddAddress()">주소 추가</button>
+				 	</div>
 		        </div>
       	 	</div>
+      	 	
       	 	<div class="col-6">
       	 		<h5>Your Order</h5>
       	 		<div class="border p-4 overflow-auto">
@@ -117,7 +127,8 @@
 					    <label for="payPay" class="ms-1">페이</label>
 					  </div>
 					</div>
-					<button class="btn btn-main w-100 mt-3" type="submit">결제</button>
+					<button id="btnPayment" class="btn btn-main w-100 mt-3" type="button">결제</button>
+					<span class="msg d-block mt-3" id="errMsg"></span>
 			     </div>
 			     
       	 	</div>
@@ -137,7 +148,41 @@
      </div>
     </footer>
   </div>
-
+	<script>
+  	 	// 주소추가 팝업
+	 	function openPopupAddAddress() {
+		  	  // 화면의 크기 (뷰포트 크기)
+		  	  const screenWidth = window.innerWidth;
+		  	  const screenHeight = window.innerHeight;
+		
+		  	  // 팝업 크기
+		  	  const popupWidth = 400;
+		  	  const popupHeight = 400;
+		
+		  	  // 중앙 위치 계산
+		  	  const left = Math.max((screenWidth - popupWidth) / 2, 0);
+		  	  const top = Math.max((screenHeight - popupHeight) / 2, 0);
+		  	  
+		      // 팝업창 옵션 설정
+		      const url = '${pageContext.request.contextPath}/on/customer/addAddress'; // 호출할 JSP 경로
+		      const name = '주소 추가'; // 팝업창 이름
+		      const options = 'width=' + popupWidth + ',height=' + popupHeight + ',top=' + top + ',left=' + left + ',scrollbars=yes,resizable=no';
+		      window.open(url, name, options);
+		}
+  	 	
+		 // 유효성 검사
+    	 $('#btnPayment').click(function() {
+	         // 미입력 유효성 체크
+	         if($('#addressNo').val() == null || $('#addressNo').val() == ''){
+	            $('#errMsg').text('주소를 추가해주세요.');
+	         } else{
+	            console.log('submit...');
+	            $('#paymentForm').submit();	
+	            $('#errMsg').text(''); // 오류메시지 초기화
+	         }
+		});
+	</script>
+	
   <script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
   <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
   <script src="${pageContext.request.contextPath}/js/popper.min.js"></script>

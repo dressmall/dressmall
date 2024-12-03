@@ -110,6 +110,16 @@
 	
 </body>
 <script>
+window.onload = function() {
+	const targetVariable = '${loginStaff}'; // 모델 변수 바인딩
+    if (targetVariable == '') {
+        if (window.opener) {
+	        window.opener.location.reload(); // 부모 새로고침
+	    }
+	    window.close(); // 팝업 닫기
+    }
+}
+
 	// 유효성 체크
 	$('#btnModifyGoods').click(function() {
 		let isValid = true;

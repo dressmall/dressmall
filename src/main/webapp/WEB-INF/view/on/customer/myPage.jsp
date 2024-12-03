@@ -159,10 +159,11 @@
   <script>
   	// 비밀번호 변경 팝업
   	function openPopupModifyCustomer() {
+  		  
 	  	  // 화면의 크기 (뷰포트 크기)
 	  	  const screenWidth = window.innerWidth;
 	  	  const screenHeight = window.innerHeight;
-	
+
 	  	  // 팝업 크기
 	  	  const popupWidth = 400;
 	  	  const popupHeight = 400;
@@ -172,7 +173,7 @@
 	  	  const top = Math.max((screenHeight - popupHeight) / 2, 0);
 	  	  
 	      // 팝업창 옵션 설정
-	      const url = '${pageContext.request.contextPath}/on/customer/modifyCustomer'; // 호출할 JSP 경로
+	      const url = '${pageContext.request.contextPath}/popup/customer/modifyCustomer'; // 호출할 JSP 경로
 	      const name = '비밀번호 변경'; // 팝업창 이름
 	      const options = 'width=' + popupWidth + ',height=' + popupHeight + ',top=' + top + ',left=' + left + ',scrollbars=yes,resizable=no';
 	      window.open(url, name, options);
@@ -193,7 +194,7 @@
 	  	  const top = Math.max((screenHeight - popupHeight) / 2, 0);
 	  	  
 	      // 팝업창 옵션 설정
-	      const url = '${pageContext.request.contextPath}/on/customer/modifyAddress?addressNo=' + addressNo; // 호출할 JSP 경로
+	      const url = '${pageContext.request.contextPath}/popup/customer/modifyAddress?addressNo=' + addressNo; // 호출할 JSP 경로
 	      const name = '주소 수정'; // 팝업창 이름
 	      const options = 'width=' + popupWidth + ',height=' + popupHeight + ',top=' + top + ',left=' + left + ',scrollbars=yes,resizable=no';
 	      window.open(url, name, options);
@@ -214,7 +215,7 @@
 	  	  const top = Math.max((screenHeight - popupHeight) / 2, 0);
 	  	  
 	      // 팝업창 옵션 설정
-	      const url = '${pageContext.request.contextPath}/on/customer/addAddress'; // 호출할 JSP 경로
+	      const url = '${pageContext.request.contextPath}/popup/customer/addAddress'; // 호출할 JSP 경로
 	      const name = '주소 추가'; // 팝업창 이름
 	      const options = 'width=' + popupWidth + ',height=' + popupHeight + ',top=' + top + ',left=' + left + ',scrollbars=yes,resizable=no';
 	      window.open(url, name, options);

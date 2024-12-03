@@ -248,15 +248,16 @@ public class GoodsController {
 	}
 	
 	// modifyGoods.jsp 호출.(진수우)
-	@GetMapping("/on/staff/modifyGoods")
-	public String modifyGoods(Model model, Integer goodsNo) {
+	@GetMapping("/popup/staff/modifyGoods")
+	public String modifyGoods(HttpSession session, Model model, Integer goodsNo) {
 		// 데이터베이스에서 상품 정보 가져오기.
 		Map<String, Object> goods = goodsService.getGoodsOne(goodsNo);
 		model.addAttribute("goods", goods);
 		List<Category> categoryList = categoryService.getCategoryListByGoods();
 		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("goodsNo", goodsNo);
-		return "on/staff/modifyGoods";
+		model.addAttribute("loginStaff", session.getAttribute("loginStaff"));
+		return "popup/staff/modifyGoods";
 	}
 	
 	// goods 수정. (진수우)
@@ -281,13 +282,13 @@ public class GoodsController {
 	}
 	
 	// goods 추가 : addGoods.jsp 호출.(김혜린)
-	@GetMapping("/on/staff/addGoods")
-	public String addGoods(Model model, String errMsg) {
+	@GetMapping("/popup/staff/addGoods")
+	public String addGoods(HttpSession session, Model model, String errMsg) {
 		// 카테고리 리스트 출력(카테고리 선택시 필요)
 		List<Category> categoryList = categoryService.getCategoryListByGoods();
 		model.addAttribute("categoryList", categoryList);
-		
-		return "on/staff/addGoods";
+		model.addAttribute("loginStaff", session.getAttribute("loginStaff"));
+		return "popup/staff/addGoods";
 	}
 	
 	// goods 추가.(김혜린, 진수우)

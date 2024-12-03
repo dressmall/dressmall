@@ -152,31 +152,36 @@
     </div>
 
     <div class="site-section block-3 site-blocks-2 bg-light">
-      <div class="container">
+      <div class="container-fluid">
         <div class="row justify-content-center">
           <div class="col-md-7 site-section-heading text-center pt-4">
             <h2>후기</h2>
           </div>
         </div>
         <!-- 후기 리스트 출력 -->
-        <div class="row">
-          <div class="col-md-12">
+        <div class="row justify-content-center">
+          <div class="col-md-10 text-center">
             <c:if test="${boardList.isEmpty() }">
             	<div class="text-center mt-5 mb-5">후기가 없습니다.</div>
             </c:if>
             <c:if test="${!boardList.isEmpty() }">
-            <div class="nonloop-block-3 owl-carousel bg-white">
+            <div class="nonloop-block-3 owl-carousel">
             	<c:forEach items="${boardList }" var="board">
 	           		<c:if test="${not empty board.boardContent}">
 		            	<form action="${pageContext.request.contextPath}/on/customer/removeBoard">
 					        <div class="board-box content text-center">
-					            <span>${board.boardContent}</span>
-					            <div class="block-4-text p-4">
+					        	<div class="text-center pt-2 mb-3">
+									<h5>${board.customerMail}</h5>
+								</div>
+								<div class="overflow-auto h-50 mb-3" style="max-height: 50%; word-break: break-word;">
+									 <span >${board.boardContent}</span>
+								</div>
+					            <div class="p-2">
 					                <input type="hidden" name="goodsNo" value="${board.goodsNo}">
 					                <input type="hidden" name="ordersNo" value="${board.ordersNo}">
 					                <!-- 세션에 저장된 customerMail과 board.customerMail이 같을 경우 삭제 버튼 표시 -->
 				                    <c:if test="${board.isCustomer == true}">
-				                        <button class="btn-main" type="submit">삭제</button>
+				                        <button class="btn-main" style="width:50%;" type="submit">삭제</button>
 				                    </c:if>
 					            </div>
 					        </div>

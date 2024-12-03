@@ -44,10 +44,16 @@
 	</div>
 </body>
 	<script>
-		// 서버에서 전달된 staffList를 JavaScript로 전달
-    	
-	</script>
-	<script >
+	window.onload = function() {
+		const targetVariable = '${loginStaff}'; // 모델 변수 바인딩
+        if (targetVariable == '') {
+            if (window.opener) {
+		        window.opener.location.reload(); // 부모 새로고침
+		    }
+		    window.close(); // 팝업 닫기
+        }
+	}
+	
 	// 유효성 검사
 	$('#staffAddBtn').click(function() {
 		let isVal = true;
@@ -101,5 +107,6 @@
 	           event.preventDefault(); // 기본 Enter 키 동작 방지
 	           $('#staffAddBtn').click(); // 버튼 클릭 이벤트 트리거
 	   }
+	   });
 </script>
 </html>
