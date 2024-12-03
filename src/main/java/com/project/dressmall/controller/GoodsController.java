@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.project.dressmall.service.BoardService;
 import com.project.dressmall.service.CartService;
 import com.project.dressmall.service.CategoryService;
+import com.project.dressmall.service.DataService;
 import com.project.dressmall.service.GoodsService;
 import com.project.dressmall.util.Page;
 import com.project.dressmall.util.TeamColor;
@@ -35,6 +36,7 @@ public class GoodsController {
 	@Autowired CategoryService categoryService;
 	@Autowired CartService cartService;
 	@Autowired BoardService boardService;
+	@Autowired DataService dataService;
 	
 	// ----------------------------- 고객 -------------------------------------------------
 	
@@ -92,7 +94,7 @@ public class GoodsController {
 	@GetMapping("/off/customer/main")
 	public String offMain(HttpSession session, Model model
 					, @RequestParam(defaultValue="1") Integer currentPage
-					, @RequestParam(defaultValue="9") Integer rowPerPage
+					, @RequestParam(defaultValue="12") Integer rowPerPage
 					, @RequestParam(required = false) String searchWord
 					, @RequestParam(required = false) Integer categoryNo) {
 		log.debug(TeamColor.KIM + "searchWord: "+ searchWord + TeamColor.RESET);
@@ -150,7 +152,10 @@ public class GoodsController {
 		// 카테고리 : 전체 상품 개수 가져오기
 		Integer totalCount = goodsService.countGoodsList();
 		model.addAttribute("totalCount", totalCount);
-		
+		// 인기상품 가져오기
+		List<Map<String, Object>> popularGoods = dataService.getPopularGoods();
+		model.addAttribute("popularGoods", popularGoods);
+		model.addAttribute("searchWord", searchWord);
 
 		return "off/customer/main";
 	}
@@ -159,7 +164,7 @@ public class GoodsController {
 	@GetMapping("/on/customer/main")
 	public String onMain(HttpSession session, Model model
 					, @RequestParam(defaultValue="1") Integer currentPage
-					, @RequestParam(defaultValue="9") Integer rowPerPage
+					, @RequestParam(defaultValue="12") Integer rowPerPage
 					, @RequestParam(required = false) String searchWord
 					, @RequestParam(required = false) Integer categoryNo) {
 		log.debug(TeamColor.KIM + "searchWord: "+ searchWord + TeamColor.RESET);
@@ -189,20 +194,9 @@ public class GoodsController {
 		
 		if(categoryNo == null || categoryNo == 0) {
 			map.put("categoryNo", null);
-			Category category = new Category();
-			category.setCategoryTitle("전체");
-			List<Category> selectCategory = new ArrayList<>();
-			selectCategory.add(category);
-			model.addAttribute("selectCategory", selectCategory);
 		} else {
 			map.put("categoryNo", categoryNo);	
 			model.addAttribute("categoryNo", categoryNo);
-			Map<String, Object> categoryMap = new HashMap<>();
-			categoryMap.put("categoryNo", categoryNo);
-			log.debug(TeamColor.JIN + categoryMap + TeamColor.RESET);
-			List<Category> selectCategory = categoryService.getCategoryList(categoryMap);
-			log.debug(TeamColor.JIN + selectCategory + TeamColor.RESET);
-			model.addAttribute("selectCategory", selectCategory);
 		}
 		
 		// 상품리스트 출력 
@@ -217,11 +211,17 @@ public class GoodsController {
 		// 카테고리 : 전체 상품 개수 가져오기
 		Integer totalCount = goodsService.countGoodsList();
 		model.addAttribute("totalCount", totalCount);
-		
+		// 장바구니에 담긴 항목 수 가져오기
 		String customerMail = ((Customer)session.getAttribute("loginCustomer")).getCustomerMail();
 		List<Map<String, Object>> cart = cartService.getCartList(customerMail);
 		if (cart != null && !cart.isEmpty()) model.addAttribute("countCartList", cart.get(0).get("countCartList"));
 		else model.addAttribute("countCartList", "0");
+		// 인기상품 가져오기
+		List<Map<String, Object>> popularGoods = dataService.getPopularGoods();
+		model.addAttribute("popularGoods", popularGoods);
+		model.addAttribute("searchWord", searchWord);
+		
+		
 
 		return "on/customer/main";
 	}
