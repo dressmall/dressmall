@@ -26,7 +26,7 @@ public class OrdersController {
 	@Autowired CartService cartService;
 	@Autowired BoardService boardService;
 	
-	// // 구매확정 클릭시 배송완료로 update
+	// 구매확정 클릭시 배송완료로 update
 	@GetMapping("/on/customer/modifyOrders")
 	public String modifyOrdersByPayment(@RequestParam Integer paymentNo) {
 		ordersService.updateOrdersByPayment(paymentNo);

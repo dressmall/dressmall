@@ -111,7 +111,7 @@
 		          <div class=" order-1 m-2 mb-md-0 w-50">
 		          <h5>주소리스트</h5>
 		            <div class="border p-5 rounded mb-4">
-		              <div class="scroll-box">
+		              <div class="scroll-box address-box">
 		              <table class="table">
 		              	<c:forEach var="c" items="${customer}">
 		              		<tr>
