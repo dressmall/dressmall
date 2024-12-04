@@ -3,7 +3,7 @@
 <mapper namespace="com.project.dressmall.mapper.CartMapper">
 	
 	<!-- /on/customer/addCart : 장바구니 추가.(김혜린) -->
-	<insert id="insertCart" parameterType="com.project.dressmall.vo.Cart">
+	<insert id="insertCart" parameterType="com.project.dressmall.vo.Cart" useGeneratedKeys="true" keyProperty="cartNo">
 		INSERT INTO cart(
 			customer_mail
 			, goods_no

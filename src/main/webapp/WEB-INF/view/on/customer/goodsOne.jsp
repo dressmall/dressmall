@@ -131,7 +131,13 @@
 				        <input type="hidden" name="cartAmount" value="1">
 				        <!-- Add to Cart 버튼 -->
 				        <button type="submit" class="buy-now btn btn-sm btn-primary">Add To Cart</button>
-				    </form>            
+				    </form>
+				    <form class="mt-3" id="paymentForm" action="${pageContext.request.contextPath}/on/customer/paymentList" method="post">
+				    	<input type="hidden" name="customerMail" value="${customerMail}">
+				    	<input type="hidden" name="goodsNo" value="${goodsNo}">
+				        <input type="hidden" name="cartAmount" value="1">
+				        <button type="submit" class="buy-now btn btn-sm btn-primary">Buy Now</button>
+				    </form>         
 	            </c:if>
 	            
 	            <!-- 버튼 비활성화 -->
