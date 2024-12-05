@@ -95,6 +95,9 @@
 	                                  	<c:if test="${p.paymentState.equals('결제완료')}">
 	                                  		<a class="btn btn-main w-100" href="${pageContext.request.contextPath}/on/staff/updatePayment?paymentNo=${p.paymentNo}&currentPage=${currentPage}">완료처리</a>
 	                                  	</c:if>
+	                                  	<c:if test="${p.paymentState.equals('배송완료')}">
+	                                  		<button class="btn btn-secondary w-100" disabled>완료처리</button>
+	                                  	</c:if>
 	                                  </td>
 	                             	 </tr>
 	                          	</c:forEach>

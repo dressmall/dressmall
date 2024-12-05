@@ -126,12 +126,13 @@
 					          			
 			          					<c:forEach items="${ordersList }" var="o">
 			          						<c:if test="${o.paymentNo == p.paymentNo}">
+			          						
 						          			<div>
 							          			<div class="orders-box content border d-flex align-items-center justify-content-between mb-2">
 							          				<div class="img-box">
 							          					<input type="hidden" name="ordersNo" value="${o.ordersNo }">
 							          				 	<c:if test="${o.goodsFileName == null}">
-								          					<img src="${pageContext.request.contextPath}/upload/noImage.png" class="img-fluid" style="width: 150px; height: 150px; object-fit: cover;">			          				 	
+								          					<img href="" src="${pageContext.request.contextPath}/upload/noImage.png" class="img-fluid" style="width: 150px; height: 150px; object-fit: cover;">			          				 	
 							          				 	</c:if>
 							          					<c:if test="${o.goodsFileName != null}">
 										          			<img src="${pageContext.request.contextPath}/upload/${o.goodsFileName}.${o.goodsExt}" class="img-fluid" style="width: 150px; height: 150px; object-fit: cover;">
