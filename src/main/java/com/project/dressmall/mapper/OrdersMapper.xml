@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.dressmall.mapper.OrdersMapper">
+
+	<!-- /on/customer/removeOrders : 고객페이지에서 주문취소할 때 주문상품이 1개인 경우 결제정보 완전삭제를 위한 카운트 (진수우) -->
+	<select id="countOrders" parameterType="Integer" resultType="Integer">
+		SELECT COUNT(*)
+		FROM orders
+		WHERE payment_no = #{paymentNo};
+	</select>
+	
 	<!-- /on/customer/paymentComplete : 결제페이지에서 결제할 때 order 정보 추가 (진수우) -->
 	<insert id="insertOrder" parameterType="com.project.dressmall.vo.Orders">
 		INSERT INTO orders(
@@ -24,14 +32,12 @@
 
 	<!-- ordersList에서 주문취소 클릭 시 삭제(박시현) -->
 	<delete id="deleteOrders" parameterType="Integer">
-	    DELETE o, p
-			FROM orders o
-			JOIN payment p ON o.payment_no = p.payment_no
-		WHERE o.orders_no = #{ordersNo} AND p.payment_no = #{paymentNo}
+	    DELETE FROM orders
+		WHERE orders_no = #{ordersNo}
 	</delete>
 
 	<!-- ordersList 출력(박시현) -->
-	<select id="selectOrdersList" parameterType="com.project.dressmall.vo.Customer" resultType="map">
+	<select id="selectOrdersList" parameterType="String" resultType="map">
 		SELECT
 		    a.address_no addressNo
 		    , a.customer_mail customerMail
@@ -42,6 +48,7 @@
 		    , o.orders_no ordersNo
 		    , o.goods_no  goodsNo
 		    , o.orders_amount ordersAmount
+		    , o.create_date createDate
 		    , g.goods_title goodsTitle
 		    , g.goods_memo goodsMemo
 		    , g.goods_price goodsPrice
@@ -53,5 +60,6 @@
 		LEFT OUTER JOIN goods g ON o.goods_no = g.goods_no
 		LEFT OUTER JOIN goods_file gf ON g.goods_no = gf.goods_no
 		WHERE a.customer_mail = #{customerMail}
+		ORDER BY createDate DESC;
 	</select>
 </mapper>

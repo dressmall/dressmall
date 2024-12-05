@@ -9,6 +9,12 @@ import com.project.dressmall.vo.Payment;
 
 @Mapper
 public interface PaymentMapper {
+	// /on/customer/removeOrders : 고객페이지에서 품목종류가 1개인 제품 삭제 시 결제정보 삭제. (진수우)
+	Integer deletePayment(Integer paymentNo);
+	
+	// /on/customer/ordersList : 고객페이지에서 결제내역 페이지 결제내역 출력. (진수우)
+	List<Payment> selectPaymentListCustomer(String customerMail);
+	
 	// /on/customer/paymentComplete : 결제페이지에서 결제처리.(진수우)
 	Integer insertPayment(Payment payment);
 	

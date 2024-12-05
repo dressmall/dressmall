@@ -2,6 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.dressmall.mapper.PaymentMapper">
 
+<!-- /on/customer/removeOrders : 고객페이지에서 품목종류가 1개인 제품 삭제 시 결제정보 삭제 (진수우) -->
+<delete id="deletePayment" parameterType="Integer">
+	DELETE FROM payment WHERE payment_no = #{paymentNo};
+</delete>
+
+<!-- /on/customer/ordersList : 고객페이지에서 결제내역 페이지 결제내역 출력 (진수우) -->
+<select id="selectPaymentListCustomer" parameterType="String" resultType="com.project.dressmall.vo.Payment">
+	SELECT 
+		p.payment_no paymentNo
+		, p.payment_price paymentPrice
+		, p.payment_method paymentMethod
+		, p.payment_state paymentState
+	FROM payment p
+	LEFT OUTER JOIN address a ON p.address_no = a.address_no
+	WHERE a.customer_mail = #{customerMail}
+	ORDER BY paymentNo DESC;
+</select>
+
 <!-- /on/customer/paymentComplete : 결제페이지에서 결제처리 (진수우) -->
 <insert id="insertPayment" parameterType="com.project.dressmall.vo.Payment" useGeneratedKeys="true" keyProperty="paymentNo">
 	INSERT INTO payment(

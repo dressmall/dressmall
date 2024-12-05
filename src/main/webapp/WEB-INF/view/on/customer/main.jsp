@@ -94,6 +94,10 @@
                   </div>
                   <div class="row">
                     <!-- 인기상품 블록 -->
+                    <c:if test="${popularGoods.isEmpty() }">
+                    	<div class="text-center">인기상품이 없습니다.</div>
+                    </c:if>
+                    <c:if test="${!popularGoods.isEmpty() }">
                     <c:forEach var="p" items="${popularGoods}" varStatus="status">
                     <div class="col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade" data-aos-delay="${status.index * 150}">
                       <a class="block-2-item" href="${pageContext.request.contextPath}/on/customer/goodsOne?goodsNo=${p.goodsNo}">
@@ -106,6 +110,7 @@
                       </a>
                     </div>
                     </c:forEach>
+                    </c:if>
                   </div>
                 </div>
               </div>

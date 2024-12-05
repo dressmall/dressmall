@@ -100,7 +100,7 @@
 		        	<c:if test="${!cart.isEmpty()}">
 		        		<c:forEach var="c" items="${cart}">
 			        		<tr>
-				        		<td class="text-center"><input type="checkbox" name="goodsChoice" id="goodsChoice" value="${c.cartNo }" data-price="${c.goodsTotalPrice}" onclick="calculateSum()"></td>
+				        		<td class="text-center"><input type="checkbox" name="goodsChoice" id="goodsChoice" class="itemCheckbox" value="${c.cartNo }" data-price="${c.goodsTotalPrice}" onclick="calculateSum()"></td>
 				        		<td>
 				        			<c:if test="${empty c.goodsFileName}">
 			                            <img src="${pageContext.request.contextPath}/upload/noImage.png" class="img-fluid" style="width: 150px; height: 150px; object-fit: cover;">
@@ -174,9 +174,18 @@
           sum += parseFloat(checkbox.dataset.price);
       });
 
-      //document.getElementById("sumResult").innerText = "선택된 상품 가격 : " + sum;
       document.getElementById("sumResult").innerText = sum + "원";
   }
+  
+  $('#cartButton').click(function() {
+      // 체크박스가 하나라도 선택되지 않으면 경고 메시지 출력
+      if ($('input[name="goodsChoice"]:checked').length === 0) {
+          alert('상품을 선택해주세요.');
+      } else {
+    	  console.log(goodsChoice);
+    	  $('#cartForm').submit();
+      }
+  });
   </script>
   <script src="${pageContext.request.contextPath}/js/jquery-3.3.1.min.js"></script>
   <script src="${pageContext.request.contextPath}/js/jquery-ui.js"></script>
@@ -186,18 +195,6 @@
   <script src="${pageContext.request.contextPath}/js/jquery.magnific-popup.min.js"></script>
   <script src="${pageContext.request.contextPath}/js/aos.js"></script>
   <script src="${pageContext.request.contextPath}/js/main.js"></script>
-  <script>
- 	  $('#cartButton').click(function() {
-	      // 체크박스가 하나라도 선택되지 않으면 경고 메시지 출력
-	      if ($('input[name="goodsChoice"]:checked').length === 0) {
-	          alert('상품을 선택해주세요.');
-	      } else {
-	    	  console.log(goodsChoice);
-	    	  $('#cartForm').submit();
-	      }
-	  });
-  </script>
-    
   </body>
 
 </html>

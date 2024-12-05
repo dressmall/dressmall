@@ -149,6 +149,20 @@ input {
 .scroll-box::-webkit-scrollbar {
     width: 10px;  
 }
+
+/* 스크롤 커스텀 */
+.scroll-box::-webkit-scrollbar-thumb {
+    background: #7971EA;
+    border-radius: 10px; 
+}
+
+.scroll-box::-webkit-scrollbar-track {
+    background: #D6D6D6;  
+}
+/* 주소리스트(회원정보box랑 길이 맞춤) */
+.address-box {
+	max-height: 188px;
+}
 /* 후기 리스트 박스 */
 .board-box {
 	box-sizing: border-box;
@@ -156,15 +170,6 @@ input {
 	width: 280px;
 	background-color: #fff;
     box-shadow: 4px 2px 10px rgba(140, 146, 160, 0.8);
-}
-
-.scroll-box::-webkit-scrollbar-thumb {
-    background: #7971EA;
-    border-radius: 10px; 
-}
-
-.ordersList-box::-webkit-scrollbar-track {
-    background: #D6D6D6;  
 }
 ::-moz-selection {
   background: #000;
