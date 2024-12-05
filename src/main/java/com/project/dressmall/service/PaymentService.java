@@ -25,6 +25,11 @@ public class PaymentService {
 	@Autowired OrdersMapper ordersMapper;
 	@Autowired CartMapper cartMapper;
 	
+	// /on/customer/ordersList : 고객페이지에서 결제내역 페이지 결제내역 출력. (진수우)
+	public List<Payment> getPaymentListCustomer(String customerMail) {
+		return paymentMapper.selectPaymentListCustomer(customerMail);
+	}
+		
 	// /on/customer/paymentComplete : 결제페이지에서 결제처리.(진수우)
 	public void paymentProcess(Payment payment, List<Integer> cartNo) {
 		Integer paymentRow = paymentMapper.insertPayment(payment); // payment 테이블에 결제정보 insert.

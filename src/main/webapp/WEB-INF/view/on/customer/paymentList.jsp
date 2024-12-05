@@ -79,7 +79,7 @@
 			        		<c:if test="${c.addressNo == null}">
 							    등록된 주소가 없습니다.
 			        		</c:if>
-			        		<c:if test="${c.addressNo != null}">
+			        		<c:if test="${c.addressNo != null && c.addressDetail != '삭제된 주소'}">
 			        			<tr>
 							        <td>${c.addressDetail}</td>
 							        <td>
@@ -164,7 +164,7 @@
 		  	  const top = Math.max((screenHeight - popupHeight) / 2, 0);
 		  	  
 		      // 팝업창 옵션 설정
-		      const url = '${pageContext.request.contextPath}/on/customer/addAddress'; // 호출할 JSP 경로
+		      const url = '${pageContext.request.contextPath}/popup/customer/addAddress'; // 호출할 JSP 경로
 		      const name = '주소 추가'; // 팝업창 이름
 		      const options = 'width=' + popupWidth + ',height=' + popupHeight + ',top=' + top + ',left=' + left + ',scrollbars=yes,resizable=no';
 		      window.open(url, name, options);

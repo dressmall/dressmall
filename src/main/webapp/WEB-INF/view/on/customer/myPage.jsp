@@ -118,7 +118,7 @@
 		              			<c:if test="${c.addressDetail == null }">
 				              	  등록된 주소가 없습니다.
 				                </c:if>
-				                <c:if test="${c.addressDetail != null }">
+				                <c:if test="${c.addressDetail != null && c.addressDetail != '삭제된 주소' }">
 				              	  <td style="word-break: keep-all;">${c.addressDetail}</td>
 			              		  <td style="vertical-align:middle"><button class="btn-main btn" onclick="openPopupModifyAddress(${c.addressNo})">수정</button></td>
 			              		  <td style="vertical-align:middle"><a type="button" class="btn-main btn w-100" href="${pageContext.request.contextPath}/on/customer/removeAddress?addressNo=${c.addressNo}">삭제</a></td>
