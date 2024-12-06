@@ -79,7 +79,7 @@ public class PaymentController {
 		if (goodsChoice != null) goodsNoList = goodsChoice;
 		else if (cart != null) {
 			// 결제중 페이지를 닫아도 편하게 다시 결제할 수 있도록 하기 위해 cart 테이블에 결제정보 넣어놓기.
-			cartService.addCart(cart);
+			cartService.addCart(cart, customerMail);
 			// 바로 결제하기 위해 구매할 상품 cartNo값 배열에 추가.(기존코드 재활용)
 			goodsNoList.add(cart.getCartNo());
 		}
