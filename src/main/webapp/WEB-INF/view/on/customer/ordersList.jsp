@@ -148,7 +148,7 @@
 							          					<a class="btn-main" href="${pageContext.request.contextPath}/on/customer/addBoard?ordersNo=${o.ordersNo}">리뷰등록</a>
 							          				</c:if>
 							          				<c:if test="${o.paymentState == '배송완료' && o.review}">
-							          					<button class="btn-disa" disabled>리뷰등록</button>
+							          					<button class="btn-disa" disabled style="word-break: keep-all;">리뷰등록</button>
 							          				</c:if>
 							          			</div>
 							          		</div>
