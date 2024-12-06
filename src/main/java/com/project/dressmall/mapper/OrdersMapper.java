@@ -11,6 +11,9 @@ import com.project.dressmall.vo.Orders;
 @Mapper
 public interface OrdersMapper {
 	
+	// selectOrdersOne 출력 (진수우)
+	Map<String, Object> selectOrdersOne(Integer ordersNo);
+	
 	// /on/customer/removeOrders : 고객페이지에서 주문취소할 때 주문상품이 1개인 경우 결제정보 완전삭제를 위한 카운트.(진수우)
 	Integer countOrders(Integer paymentNo);
 	

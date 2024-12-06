@@ -25,6 +25,17 @@ public class PaymentService {
 	@Autowired OrdersMapper ordersMapper;
 	@Autowired CartMapper cartMapper;
 	
+	// /on/customer/removeOrders : 고객페이지에서 주문취소하면 payment 테이블의 취소하기 전 가격을 조회 (진수우)
+	public Integer getPaymentOne(Integer paymentNo) {
+		return paymentMapper.selectPaymentOne(paymentNo);
+	}
+	
+	// /on/customer/removeOrders : 고객페이지에서 주문취소하면 payment 테이블의 결제정보를 수정 (진수우)
+	public Integer updatePaymentByOrders(Map<String, Object> param) {
+		return paymentMapper.updatePaymentByOrders(param);
+	}
+	
+	
 	// /on/customer/ordersList : 고객페이지에서 결제내역 페이지 결제내역 출력. (진수우)
 	public List<Payment> getPaymentListCustomer(String customerMail) {
 		return paymentMapper.selectPaymentListCustomer(customerMail);

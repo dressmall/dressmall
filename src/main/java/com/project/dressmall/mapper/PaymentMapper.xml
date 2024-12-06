@@ -2,6 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.project.dressmall.mapper.PaymentMapper">
 
+<!-- /on/customer/removeOrders : 고객페이지에서 주문취소하면 payment 테이블의 취소하기 전 가격을 조회 (진수우) -->
+<select id="selectPaymentOne" parameterType="Integer" resultType="Integer">
+	SELECT payment_price FROM payment WHERE payment_no = #{paymentNo};
+</select>
+
+<!-- /on/customer/removeOrders : 고객페이지에서 주문취소하면 payment 테이블의 결제정보를 수정 (진수우) -->
+<update id="updatePaymentByOrders" parameterType="map">
+	UPDATE payment SET payment_price = #{paymentPrice}
+	WHERE payment_no = #{paymentNo};
+</update>
+
 <!-- /on/customer/removeOrders : 고객페이지에서 품목종류가 1개인 제품 삭제 시 결제정보 삭제 (진수우) -->
 <delete id="deletePayment" parameterType="Integer">
 	DELETE FROM payment WHERE payment_no = #{paymentNo};

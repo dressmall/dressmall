@@ -18,6 +18,11 @@ public class OrdersService {
 	@Autowired OrdersMapper ordersMapper;
 	@Autowired PaymentMapper paymentMapper;
 	
+	// selectOrdersOne 출력 (진수우)
+	public Map<String, Object> getOrdersOne(Integer ordersNo) {
+		return ordersMapper.selectOrdersOne(ordersNo);
+	}
+	
 	// on/customer/modifyOrders 
 	public Integer updateOrdersByPayment(Integer paymentNo) {
 		return ordersMapper.updateOrdersByPayment(paymentNo);
