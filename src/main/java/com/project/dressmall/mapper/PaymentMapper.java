@@ -9,6 +9,13 @@ import com.project.dressmall.vo.Payment;
 
 @Mapper
 public interface PaymentMapper {
+	
+	// /on/customer/removeOrders : 고객페이지에서 주문취소하면 payment 테이블의 취소하기 전 가격을 조회 (진수우)
+	Integer selectPaymentOne(Integer paymentNo);
+	
+	// /on/customer/removeOrders : 고객페이지에서 주문취소하면 payment 테이블의 결제정보를 수정. (진수우)
+	Integer updatePaymentByOrders(Map<String, Object> param);
+	
 	// /on/customer/removeOrders : 고객페이지에서 품목종류가 1개인 제품 삭제 시 결제정보 삭제. (진수우)
 	Integer deletePayment(Integer paymentNo);
 	

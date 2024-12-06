@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.project.dressmall.mapper.OrdersMapper;
 import com.project.dressmall.mapper.PaymentMapper;
 import com.project.dressmall.service.BoardService;
 import com.project.dressmall.service.CartService;
@@ -34,7 +35,21 @@ public class OrdersController {
 	// 선택된 제품 주문취소 처리.(진수우, 박시현)
 	@PostMapping("/on/customer/removeOrders")
 	public String removeOrders(HttpSession session, Model model, @RequestParam(value = "selectGoods", required = false) List<Integer> ordersNo, Integer paymentNo) {
+		// 취소를 원하는 제품의 총가격 구하기.
+		Integer total = 0;
+		for (Integer orders : ordersNo) {
+			Map<String, Object> result = ordersService.getOrdersOne(orders);
+			total += paymentService.getPaymentOne(paymentNo) - (Integer)result.get("goodsPrice") * (Integer)result.get("ordersAmount");
+		}
+		// payment 테이블에서 삭제된 품목의 가격을 뺀 가격으로 총 결제가격을 업데이트.
+		Map<String, Object> param = new HashMap<>();
+		param.put("paymentPrice", total);
+		param.put("paymentNo", paymentNo);
+		paymentService.updatePaymentByOrders(param);
+		
+		// order 테이블에서 선택한 품목 삭제.
 		ordersService.deleteOrders(ordersNo, paymentNo);
+		
 		return "redirect:/on/customer/ordersList";
 	}
 		

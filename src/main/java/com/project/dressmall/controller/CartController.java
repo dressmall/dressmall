@@ -29,8 +29,8 @@ public class CartController {
 	@PostMapping("/on/customer/addCart")
 	public String addCart(HttpSession session, Model model, Cart cart) {
 		log.debug(TeamColor.KIM + "cart: "+ cart + TeamColor.RESET);
-		cartService.addCart(cart);
-		
+		String customerMail = ((Customer)session.getAttribute("loginCustomer")).getCustomerMail();
+		cartService.addCart(cart, customerMail);
 		return "redirect:/on/customer/cartList";
 	}
 	

@@ -10,6 +10,12 @@ import com.project.dressmall.vo.Cart;
 @Mapper
 public interface CartMapper {
 	
+	// <!-- /on/customer/addCart : 같은 품목이 있다면 장바구니에서 해당 품목 개수 변경. (진수우) -->
+	Integer updateCart(Map<String, Object> param);
+	
+	// /on/customer/addCart : 장바구니에서 해당 품목 카운트. (진수우)
+	Integer countCartList(Map<String, Object> param);
+	
 	// /on/customer/addCart : 장바구니 추가.(김혜린)
 	Integer insertCart(Cart cart);
 	
