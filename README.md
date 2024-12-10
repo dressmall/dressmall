@@ -5,7 +5,6 @@
 - 프로젝트 기간 : 2024/11/18 - 2024/12/05
 <br>
 
-
 ## **✨ 주요 기능**
 
 ### 🛒 사용자 기능
@@ -17,11 +16,12 @@
 - 📊 **인기 상품** : 누적 주문수량이 가장 많은 상품을 메인페이지 상단에 노출.
   
 ### 🛠️ 관리자 기능
-- 📝 **상품 관리**: 상품 등록(이미지는 대표이미지만 등록가능), 수정, 삭제 기능 제공.
-- 📦 **주문 관리**: 사용자 주문 확인 및 배송처리로 등록가능하며, 
-- 📊 **판매 대시보드**: 판매 데이터를 한눈에 확인.
+- 📝 **상품 관리** : 상품 등록(이미지는 대표이미지만 등록가능), 수정, 삭제 기능 제공.
+- 📦 **주문 관리** : 사용자 주문 확인 가능, 배송처리로 등록가능.
+- 📊 **카테고리 관리** : 카테고리 등록, 삭제 기능 제공.
+- 👤 **회원 관리** : 모든 회원 리스트 확인 가능.
+- 👨‍💼 **스태프 관리** : 모든 스태프 리스트 확인 가능.
 <br>
-
 
 ## 🛠️ 사용 기술
 
@@ -34,7 +34,6 @@
 | 🤝 **협업 및 디자인** | ![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white) ![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white) |
 | 🔧 **개발 도구**   | ![STS](https://img.shields.io/badge/Spring%20Tool%20Suite-6DB33F?style=for-the-badge&logo=spring&logoColor=white) |
 <br>
-
 
 ## 💾 데이터베이스 구조
 <img width="660" alt="image" src="https://github.com/user-attachments/assets/dbf8ba82-ca80-47d8-9438-15af677e8d1b">
